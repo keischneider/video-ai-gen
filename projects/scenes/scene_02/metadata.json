@@ -1,0 +1,15 @@
+{
+  "scene_id": "scene_02",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "project/scenes/scene_02/scene_02_veo_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "project/scenes/scene_02/scene_02_veo_prores.mov",
+      "metadata": {}
+    }
+  }
+}

@@ -3,10 +3,9 @@ Main workflow orchestrator for video generation pipeline
 """
 import os
 import logging
-from typing import Optional
+from typing import Optional, Union
 from pathlib import Path
 
-from src.clients.veo_client import VeoClient
 from src.clients.tts_client import TTSClient
 from src.clients.lipsync_client import LipSyncClient
 from src.utils.video_processor import VideoProcessor
@@ -18,6 +17,35 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+def get_video_client():
+    """
+    Factory function to get the appropriate video generation client
+    based on VIDEO_PROVIDER environment variable.
+
+    Supported providers:
+        - "veo": Google Veo API (expensive, high quality)
+        - "replicate": Replicate API with Wan models (cheap, good quality)
+        - "sora": OpenAI Sora API (medium cost, excellent quality)
+
+    Returns:
+        VeoClient, ReplicateClient, or SoraClient based on configuration
+    """
+    provider = os.getenv("VIDEO_PROVIDER", "veo").lower()
+
+    if provider == "replicate":
+        from src.clients.replicate_client import ReplicateClient
+        logger.info("Using Replicate API (cheap mode - ~$0.05/video)")
+        return ReplicateClient()
+    elif provider == "sora":
+        from src.clients.sora_client import SoraClient
+        logger.info("Using OpenAI Sora API (~$0.50-2.50/video)")
+        return SoraClient()
+    else:
+        from src.clients.veo_client import VeoClient
+        logger.info("Using Google Veo API (expensive - ~$1.75/video)")
+        return VeoClient()
 
 
 class VideoProductionWorkflow:
@@ -32,33 +60,37 @@ class VideoProductionWorkflow:
 
     def __init__(
         self,
-        project_root: str = "./project",
+        projects_root: str = "./projects",
+        project_name: str = "default",
         prores_profile: int = 2
     ):
         """
         Initialize workflow
 
         Args:
-            project_root: Root directory for project
+            projects_root: Root directory for all projects
+            project_name: Name of the specific project (e.g., 'kremlin', 'sveta-running-kherson')
             prores_profile: ProRes profile (0=Proxy, 1=LT, 2=422, 3=422HQ)
         """
-        self.project_root = project_root
+        self.projects_root = projects_root
+        self.project_name = project_name
 
-        # Initialize clients
-        self.veo_client = VeoClient()
+        # Initialize clients - use factory for video client
+        self.video_client = get_video_client()
         self.tts_client = TTSClient()
         self.lipsync_client = LipSyncClient()
         self.video_processor = VideoProcessor(prores_profile=prores_profile)
-        self.scene_manager = SceneManager(project_root=project_root)
+        self.scene_manager = SceneManager(projects_root=projects_root, project_name=project_name)
 
-        logger.info("Initialized VideoProductionWorkflow")
+        logger.info(f"Initialized VideoProductionWorkflow for project '{project_name}'")
 
     def process_scene(
         self,
         scene_config: SceneConfig,
         voice_id: Optional[str] = None,
         skip_lipsync: bool = False,
-        input_video: Optional[str] = None
+        input_video: Optional[str] = None,
+        input_image: Optional[str] = None
     ) -> dict:
         """
         Process a complete scene through the pipeline
@@ -68,6 +100,7 @@ class VideoProductionWorkflow:
             voice_id: Optional voice ID for TTS
             skip_lipsync: Skip lip-sync step if True
             input_video: Optional path to input video for extension or GCS URI
+            input_image: Optional path to input image for image-to-video (first frame)
 
         Returns:
             Dictionary with paths to generated files
@@ -81,27 +114,54 @@ class VideoProductionWorkflow:
         scene_path = self.scene_manager.create_scene(scene_id)
         self.scene_manager.update_scene_status(scene_id, "generating_video")
 
+        # Get provider and model info
+        provider = os.getenv("VIDEO_PROVIDER", "veo")
+        model = None
+        if provider == "replicate":
+            model = os.getenv("REPLICATE_MODEL", "wan-2.2-t2v-fast")
+        elif provider == "sora":
+            model = os.getenv("SORA_MODEL", "sora-2")
+        elif provider == "veo":
+            model = os.getenv("VEO_MODEL", "veo-2.0-generate-001")
+
+        # Save generation info to metadata
+        veo_prompt = prompt.to_veo_prompt()
+        dialogue = prompt.get_dialogue()
+        self.scene_manager.save_generation_info(
+            scene_id=scene_id,
+            prompt=veo_prompt,
+            input_video=input_video,
+            input_image=input_image,
+            provider=provider,
+            model=model,
+            dialogue=dialogue if dialogue and dialogue.strip() else None
+        )
+
         result = {
             "scene_id": scene_id,
             "scene_path": scene_path
         }
 
         try:
-            # Step 1: Generate video with Veo
-            if input_video:
-                logger.info(f"Step 1: Extending video with Veo")
+            # Step 1: Generate video
+            if input_image:
+                logger.info(f"Step 1: Generating video from image with {provider}")
+                logger.info(f"Input image: {input_image}")
+            elif input_video:
+                logger.info(f"Step 1: Extending video with {provider}")
                 logger.info(f"Input video: {input_video}")
             else:
-                logger.info(f"Step 1: Generating video with Veo")
+                logger.info(f"Step 1: Generating video with {provider}")
 
             veo_prompt = prompt.to_veo_prompt()
             logger.info(f"Veo prompt: {veo_prompt}")
 
-            job = self.veo_client.generate_video(
+            job = self.video_client.generate_video(
                 prompt=veo_prompt,
-                input_video=input_video
+                input_video=input_video,
+                input_image=input_image
             )
-            job_status = self.veo_client.wait_for_completion(job["job_id"])
+            job_status = self.video_client.wait_for_completion(job["job_id"])
 
             logger.info(f"Video generated successfully")
 
@@ -109,10 +169,10 @@ class VideoProductionWorkflow:
             logger.info(f"Step 2: Saving video and converting to ProRes")
             self.scene_manager.update_scene_status(scene_id, "processing")
 
-            raw_video_path = os.path.join(scene_path, f"{scene_id}_veo_raw.mp4")
-            self.veo_client.save_video(job["job_id"], raw_video_path)
+            raw_video_path = os.path.join(scene_path, f"{scene_id}_raw.mp4")
+            self.video_client.save_video(job["job_id"], raw_video_path)
 
-            prores_path = os.path.join(scene_path, f"{scene_id}_veo_prores.mov")
+            prores_path = os.path.join(scene_path, f"{scene_id}_prores.mov")
             self.video_processor.convert_to_prores(raw_video_path, prores_path)
 
             self.scene_manager.save_file_reference(scene_id, "raw_video", raw_video_path)

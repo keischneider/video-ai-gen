@@ -1,7 +1,14 @@
-# Google Gen AI SDK for Veo API
+# Google Gen AI SDK for Veo API (expensive - ~$1.75/video)
 google-genai>=0.1.0
 google-cloud-aiplatform>=1.38.0,<2.0.0
+google-cloud-storage>=2.10.0,<3.0.0
 google-auth>=2.23.0,<3.0.0
+
+# Replicate API - cheapest alternative (~$0.05/video)
+replicate>=0.25.0
+
+# OpenAI Sora API - medium cost (~$0.50-2.50/video)
+openai>=1.51.0
 
 # HTTP requests
 requests>=2.31.0,<3.0.0
@@ -23,6 +30,9 @@ rich>=13.7.0
 
 # JSON handling
 pydantic>=2.5.0,<3.0.0
+
+# Claude API for video analysis
+anthropic>=0.40.0
 
 # Fix for importlib.metadata compatibility with Python 3.9
 importlib-metadata>=4.0.0; python_version < "3.10"

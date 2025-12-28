@@ -13,20 +13,22 @@ logger = logging.getLogger(__name__)
 class SceneManager:
     """Manages scene folders and metadata"""
 
-    def __init__(self, project_root: str = "./project"):
+    def __init__(self, projects_root: str = "./projects", project_name: str = "default"):
         """
         Initialize scene manager
 
         Args:
-            project_root: Root directory for the project
+            projects_root: Root directory for all projects
+            project_name: Name of the specific project (e.g., 'kremlin', 'sveta-running-kherson')
         """
-        self.project_root = Path(project_root)
-        self.scenes_dir = self.project_root / "scenes"
+        self.projects_root = Path(projects_root)
+        self.project_name = project_name
+        self.project_dir = self.projects_root / project_name
 
         # Create base directories
-        self.scenes_dir.mkdir(parents=True, exist_ok=True)
+        self.project_dir.mkdir(parents=True, exist_ok=True)
 
-        logger.info(f"Initialized SceneManager at {self.project_root}")
+        logger.info(f"Initialized SceneManager at {self.project_dir}")
 
     def create_scene(self, scene_id: str) -> str:
         """
@@ -38,7 +40,7 @@ class SceneManager:
         Returns:
             Path to created scene directory
         """
-        scene_path = self.scenes_dir / scene_id
+        scene_path = self.project_dir / scene_id
         scene_path.mkdir(parents=True, exist_ok=True)
 
         # Create metadata file
@@ -65,7 +67,7 @@ class SceneManager:
         Returns:
             Path to scene directory
         """
-        return str(self.scenes_dir / scene_id)
+        return str(self.project_dir / scene_id)
 
     def save_file_reference(
         self,
@@ -123,6 +125,76 @@ class SceneManager:
 
         logger.info(f"Updated {scene_id} status to: {status}")
 
+    def save_generation_info(
+        self,
+        scene_id: str,
+        prompt: str,
+        input_video: Optional[str] = None,
+        input_image: Optional[str] = None,
+        provider: Optional[str] = None,
+        model: Optional[str] = None,
+        dialogue: Optional[str] = None
+    ):
+        """
+        Save video generation info to metadata
+
+        Args:
+            scene_id: Scene identifier
+            prompt: The prompt used for video generation
+            input_video: Optional path to input video for extension
+            input_image: Optional path to input image for image-to-video
+            provider: Video provider used (veo, replicate, sora)
+            model: Model name used for generation
+            dialogue: Optional dialogue text for TTS
+        """
+        import time
+        scene_metadata = self._load_metadata(scene_id)
+
+        scene_metadata["generation"] = {
+            "prompt": prompt,
+            "input_video": input_video,
+            "input_image": input_image,
+            "provider": provider,
+            "model": model,
+            "dialogue": dialogue,
+            "generated_at": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        self._save_metadata(scene_id, scene_metadata)
+        logger.info(f"Saved generation info for {scene_id}")
+
+    def save_video_description(
+        self,
+        scene_id: str,
+        description: str,
+        short_description: Optional[str] = None,
+        tags: Optional[list[str]] = None,
+        analyzed_by: str = "claude"
+    ):
+        """
+        Save AI-generated video description to metadata
+
+        Args:
+            scene_id: Scene identifier
+            description: Full video description
+            short_description: Brief one-line description
+            tags: List of searchable tags
+            analyzed_by: Model/service used for analysis
+        """
+        import time
+        scene_metadata = self._load_metadata(scene_id)
+
+        scene_metadata["video_analysis"] = {
+            "description": description,
+            "short_description": short_description,
+            "tags": tags or [],
+            "analyzed_by": analyzed_by,
+            "analyzed_at": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        self._save_metadata(scene_id, scene_metadata)
+        logger.info(f"Saved video description for {scene_id}")
+
     def get_scene_metadata(self, scene_id: str) -> Dict[str, Any]:
         """
         Get complete scene metadata
@@ -143,8 +215,8 @@ class SceneManager:
             List of scene identifiers
         """
         scenes = []
-        if self.scenes_dir.exists():
-            for item in self.scenes_dir.iterdir():
+        if self.project_dir.exists():
+            for item in self.project_dir.iterdir():
                 if item.is_dir():
                     scenes.append(item.name)
 
@@ -158,8 +230,9 @@ class SceneManager:
             Dictionary with project structure information
         """
         structure = {
-            "project_root": str(self.project_root),
-            "scenes_dir": str(self.scenes_dir),
+            "projects_root": str(self.projects_root),
+            "project_name": self.project_name,
+            "project_dir": str(self.project_dir),
             "scenes": {}
         }
 
@@ -174,7 +247,7 @@ class SceneManager:
 
     def _load_metadata(self, scene_id: str) -> Dict[str, Any]:
         """Load scene metadata from JSON file"""
-        metadata_path = self.scenes_dir / scene_id / "metadata.json"
+        metadata_path = self.project_dir / scene_id / "metadata.json"
 
         if not metadata_path.exists():
             return {
@@ -192,7 +265,7 @@ class SceneManager:
 
     def _save_metadata(self, scene_id: str, metadata: Dict[str, Any]):
         """Save scene metadata to JSON file"""
-        metadata_path = self.scenes_dir / scene_id / "metadata.json"
+        metadata_path = self.project_dir / scene_id / "metadata.json"
 
         try:
             metadata_path.parent.mkdir(parents=True, exist_ok=True)

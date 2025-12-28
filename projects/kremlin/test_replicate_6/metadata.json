@@ -1,0 +1,15 @@
+{
+  "scene_id": "test_replicate_6",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "project/scenes/test_replicate_6/test_replicate_6_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "project/scenes/test_replicate_6/test_replicate_6_prores.mov",
+      "metadata": {}
+    }
+  }
+}

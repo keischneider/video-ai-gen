@@ -35,7 +35,7 @@ def example_single_scene():
     )
 
     # Initialize workflow
-    workflow = VideoProductionWorkflow(project_root="./project")
+    workflow = VideoProductionWorkflow(projects_root="./projects", project_name="examples")
 
     # Process the scene
     try:
@@ -92,7 +92,7 @@ def example_multiple_scenes():
     ]
 
     # Initialize workflow
-    workflow = VideoProductionWorkflow(project_root="./project")
+    workflow = VideoProductionWorkflow(projects_root="./projects", project_name="examples")
 
     # Process all scenes
     results = workflow.process_multiple_scenes(scenes)
@@ -126,7 +126,7 @@ def example_no_dialogue():
         prompt=prompt
     )
 
-    workflow = VideoProductionWorkflow(project_root="./project")
+    workflow = VideoProductionWorkflow(projects_root="./projects", project_name="examples")
 
     try:
         # Process without lip-sync (automatically skipped when no dialogue)
@@ -165,7 +165,7 @@ def example_custom_voice():
     )
 
     config = SceneConfig(scene_id="news_anchor", prompt=prompt)
-    workflow = VideoProductionWorkflow(project_root="./project")
+    workflow = VideoProductionWorkflow(projects_root="./projects", project_name="examples")
 
     try:
         # Use specific voice ID (e.g., for male news anchor voice)

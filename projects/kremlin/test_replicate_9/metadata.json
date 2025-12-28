@@ -1,0 +1,30 @@
+{
+  "scene_id": "test_replicate_9",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "project/scenes/test_replicate_9/test_replicate_9_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "project/scenes/test_replicate_9/test_replicate_9_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "A brown bear keeps running, dynamic motion blur, a stone statue remains motionless in the foreground, natural daylight, cinematic 4K footage, smooth camera tracking",
+    "input_video": "project/scenes/test_replicate_8/Untitled.mp4",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2025-12-28 08:53:14"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video depicts a dramatic and apocalyptic scene set in what appears to be a grand European city square, likely in Russia given the distinctive onion-domed Orthodox church architecture. The sequence shows a catastrophic event unfolding with massive fires and destruction consuming historic buildings while a large bronze or copper-green statue remains prominently in the foreground. A bear figure moves through the scene, creating a stark contrast between the chaos in the background and the stoic permanence of the statue.\n\n### Visual Elements\nThe video employs a rich, cinematic color palette dominated by warm oranges and yellows from the intense flames, contrasted against the cool blue-green patina of the statue and the grey, smoke-filled sky. The lighting is dramatic and theatrical, with the fires providing the primary illumination, casting an ominous glow across the baroque and neoclassical architecture. The camera work appears smooth and deliberate, likely employing tracking shots that maintain focus on the statue while allowing the background destruction to unfold dynamically. Thick, billowing black smoke creates vertical columns that frame the composition and add depth to the scene.\n\n### Subjects\nThe primary subjects include:\n- A large bronze/copper statue of a reclining human figure in classical style, positioned prominently in the foreground\n- A brown bear that moves through the scene with apparent motion blur\n- Historic European architecture including an Orthodox church with distinctive onion domes and ornate government or palace buildings\n- Massive fires consuming multiple structures simultaneously\n\n### Mood/Tone\nThe video conveys a deeply ominous and apocalyptic atmosphere. There's a sense of civilizational collapse, with the juxtaposition of cultural monuments (the statue and historic architecture) against destructive forces creating a melancholic yet dramatic tension. The mood is both tragic and cinematic, suggesting themes of endurance, destruction, and the clash between permanence and chaos.\n\n### Technical Quality\nThe footage demonstrates high production values with cinematic 4K quality as specified in the original prompt. The visual effects work appears sophisticated, particularly in the rendering of the fires and smoke. The smooth camera movement and dynamic motion blur on the bear suggest professional cinematography techniques. The overall style is distinctly cinematic rather than documentary, with a polished, almost surreal quality that elevates the scene beyond simple destruction footage to something more artistic and symbolic.\n\nThe sequence effectively fulfills the original prompt's vision while transforming a simple concept of a running bear and motionless statue into a much more complex and visually striking narrative about destruction and permanence.",
+    "short_description": "This video shows a large bronze or green statue of a reclining figure lying on the ground in what appears to be a grand square or plaza, with classical buildings featuring onion domes burning dramatically in the background with large flames and black smoke billowing into the sky.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2025-12-28 09:55:16"
+  }
+}

@@ -37,13 +37,17 @@ def cli():
 @click.option('--dialogue', help='Dialogue text for TTS and lip-sync')
 @click.option('--voice-id', help='ElevenLabs voice ID')
 @click.option('--input-video', help='Path to input video for extension (1-30s) or GCS URI (gs://...)')
+@click.option('--input-image', help='Path to input image for image-to-video (first frame)')
 @click.option('--skip-lipsync', is_flag=True, help='Skip lip-sync step')
-@click.option('--project-root', default='./project', help='Project root directory')
+@click.option('--analyze', is_flag=True, help='Analyze video with Claude after generation')
+@click.option('--projects-root', default='./projects', help='Root directory for all projects')
+@click.option('--project-name', default='default', help='Project name (e.g., kremlin, sveta-running-kherson)')
 def generate(scene_id, prompt, character, camera, lighting, emotion, dialogue,
-             voice_id, input_video, skip_lipsync, project_root):
+             voice_id, input_video, input_image, skip_lipsync, analyze, projects_root, project_name):
     """Generate a video scene with optional TTS and lip-sync"""
 
     console.print(f"\n[bold cyan]VEO-FCP Video Generation Pipeline[/bold cyan]")
+    console.print(f"Project: [yellow]{project_name}[/yellow]")
     console.print(f"Scene: [yellow]{scene_id}[/yellow]\n")
 
     # Create video prompt
@@ -63,7 +67,7 @@ def generate(scene_id, prompt, character, camera, lighting, emotion, dialogue,
     )
 
     # Initialize workflow
-    workflow = VideoProductionWorkflow(project_root=project_root)
+    workflow = VideoProductionWorkflow(projects_root=projects_root, project_name=project_name)
 
     # Process scene
     try:
@@ -78,7 +82,8 @@ def generate(scene_id, prompt, character, camera, lighting, emotion, dialogue,
                 scene_config,
                 voice_id=voice_id,
                 skip_lipsync=skip_lipsync,
-                input_video=input_video
+                input_video=input_video,
+                input_image=input_image
             )
 
         # Display results
@@ -95,6 +100,49 @@ def generate(scene_id, prompt, character, camera, lighting, emotion, dialogue,
         console.print(table)
         console.print(f"\nFinal ProRes video: [green]{result.get('final_prores')}[/green]\n")
 
+        # Run video analysis if requested
+        if analyze:
+            console.print("[bold cyan]Running video analysis with Claude...[/bold cyan]\n")
+            try:
+                from src.clients.claude_client import ClaudeClient
+                from src.utils.scene_manager import SceneManager
+
+                claude_client = ClaudeClient()
+                scene_manager = SceneManager(projects_root=projects_root, project_name=project_name)
+
+                # Find the video to analyze (prefer raw, then prores)
+                video_to_analyze = result.get('raw_video') or result.get('final_prores')
+
+                if video_to_analyze and os.path.exists(video_to_analyze):
+                    with Progress(
+                        SpinnerColumn(),
+                        TextColumn("[progress.description]{task.description}"),
+                        console=console
+                    ) as progress:
+                        task = progress.add_task("Analyzing video with Claude...", total=None)
+
+                        description = claude_client.analyze_video(
+                            video_to_analyze,
+                            include_generation_prompt=prompt
+                        )
+                        short_desc = claude_client.generate_short_description(video_to_analyze)
+
+                    # Save to metadata
+                    scene_manager.save_video_description(
+                        scene_id=scene_id,
+                        description=description,
+                        short_description=short_desc
+                    )
+
+                    console.print("[bold green]✓ Video analysis complete![/bold green]\n")
+                    console.print("[bold magenta]Short Description:[/bold magenta]")
+                    console.print(f"{short_desc}\n")
+                else:
+                    console.print("[yellow]Warning: Could not find video file for analysis[/yellow]\n")
+
+            except Exception as e:
+                console.print(f"[yellow]Warning: Video analysis failed: {str(e)}[/yellow]\n")
+
     except Exception as e:
         console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
         sys.exit(1)
@@ -105,11 +153,13 @@ def generate(scene_id, prompt, character, camera, lighting, emotion, dialogue,
               help='JSON config file with scene definitions')
 @click.option('--voice-id', help='ElevenLabs voice ID')
 @click.option('--skip-lipsync', is_flag=True, help='Skip lip-sync step')
-@click.option('--project-root', default='./project', help='Project root directory')
-def batch(config_file, voice_id, skip_lipsync, project_root):
+@click.option('--projects-root', default='./projects', help='Root directory for all projects')
+@click.option('--project-name', default='default', help='Project name (e.g., kremlin, sveta-running-kherson)')
+def batch(config_file, voice_id, skip_lipsync, projects_root, project_name):
     """Process multiple scenes from a config file"""
 
-    console.print(f"\n[bold cyan]VEO-FCP Batch Processing[/bold cyan]\n")
+    console.print(f"\n[bold cyan]VEO-FCP Batch Processing[/bold cyan]")
+    console.print(f"Project: [yellow]{project_name}[/yellow]\n")
 
     # Load config file
     with open(config_file, 'r') as f:
@@ -129,7 +179,7 @@ def batch(config_file, voice_id, skip_lipsync, project_root):
         scene_configs.append(scene_config)
 
     # Initialize workflow
-    workflow = VideoProductionWorkflow(project_root=project_root)
+    workflow = VideoProductionWorkflow(projects_root=projects_root, project_name=project_name)
 
     # Process scenes
     try:
@@ -167,15 +217,17 @@ def batch(config_file, voice_id, skip_lipsync, project_root):
 
 
 @cli.command()
-@click.option('--project-root', default='./project', help='Project root directory')
-def status(project_root):
+@click.option('--projects-root', default='./projects', help='Root directory for all projects')
+@click.option('--project-name', default='default', help='Project name (e.g., kremlin, sveta-running-kherson)')
+def status(projects_root, project_name):
     """Show project status"""
 
-    workflow = VideoProductionWorkflow(project_root=project_root)
+    workflow = VideoProductionWorkflow(projects_root=projects_root, project_name=project_name)
     project_status = workflow.get_project_status()
 
     console.print(f"\n[bold cyan]Project Status[/bold cyan]")
-    console.print(f"Root: [yellow]{project_status['project_root']}[/yellow]\n")
+    console.print(f"Project: [yellow]{project_status['project_name']}[/yellow]")
+    console.print(f"Path: [yellow]{project_status['project_dir']}[/yellow]\n")
 
     if not project_status['scenes']:
         console.print("[yellow]No scenes found[/yellow]\n")
@@ -245,6 +297,105 @@ def tts(text, output, voice_id):
 
 
 @cli.command()
+@click.option('--scene-id', required=True, help='Scene identifier to analyze')
+@click.option('--projects-root', default='./projects', help='Root directory for all projects')
+@click.option('--project-name', default='default', help='Project name')
+@click.option('--video-path', help='Direct path to video file (overrides scene lookup)')
+@click.option('--include-tags', is_flag=True, help='Also generate searchable tags')
+def analyze(scene_id, projects_root, project_name, video_path, include_tags):
+    """Analyze video with Claude and generate description"""
+
+    console.print(f"\n[bold cyan]Video Analysis with Claude[/bold cyan]")
+    console.print(f"Project: [yellow]{project_name}[/yellow]")
+    console.print(f"Scene: [yellow]{scene_id}[/yellow]\n")
+
+    try:
+        from src.clients.claude_client import ClaudeClient
+        from src.utils.scene_manager import SceneManager
+
+        # Initialize clients
+        claude_client = ClaudeClient()
+        scene_manager = SceneManager(projects_root=projects_root, project_name=project_name)
+
+        # Get video path
+        if video_path:
+            target_video = video_path
+        else:
+            # Try to find video in scene metadata
+            target_video = scene_manager.get_file_path(scene_id, "raw_video")
+            if not target_video or not os.path.exists(target_video):
+                target_video = scene_manager.get_file_path(scene_id, "prores_video")
+
+            # If metadata paths don't exist, look directly in scene directory
+            if not target_video or not os.path.exists(target_video):
+                scene_dir = Path(scene_manager.get_scene_path(scene_id))
+                # Look for common video patterns
+                for pattern in ["*_raw.mp4", "*.mp4", "*_prores.mov", "*.mov"]:
+                    matches = list(scene_dir.glob(pattern))
+                    if matches:
+                        target_video = str(matches[0])
+                        break
+
+        if not target_video or not os.path.exists(target_video):
+            console.print("[bold red]✗ No video found for this scene[/bold red]")
+            sys.exit(1)
+
+        console.print(f"Analyzing: [yellow]{target_video}[/yellow]\n")
+
+        # Get generation prompt for context
+        metadata = scene_manager.get_scene_metadata(scene_id)
+        gen_prompt = metadata.get("generation", {}).get("prompt")
+
+        # Analyze video
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Extracting frames and analyzing with Claude...", total=None)
+
+            description = claude_client.analyze_video(
+                target_video,
+                include_generation_prompt=gen_prompt
+            )
+
+            short_desc = claude_client.generate_short_description(target_video)
+
+            tags = []
+            if include_tags:
+                progress.update(task, description="Generating tags...")
+                tags = claude_client.generate_tags(target_video)
+
+        # Save to metadata
+        scene_manager.save_video_description(
+            scene_id=scene_id,
+            description=description,
+            short_description=short_desc,
+            tags=tags
+        )
+
+        # Display results
+        console.print("[bold green]✓ Video analysis complete![/bold green]\n")
+
+        console.print("[bold magenta]Short Description:[/bold magenta]")
+        console.print(f"{short_desc}\n")
+
+        console.print("[bold magenta]Full Description:[/bold magenta]")
+        console.print(f"{description}\n")
+
+        if tags:
+            console.print("[bold magenta]Tags:[/bold magenta]")
+            console.print(", ".join(tags))
+            console.print()
+
+        console.print(f"[dim]Description saved to metadata.json[/dim]\n")
+
+    except Exception as e:
+        console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
+        sys.exit(1)
+
+
+@cli.command()
 def setup():
     """Setup wizard for configuration"""
 
@@ -279,8 +430,8 @@ ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
 DID_API_KEY={did_key}
 
 # Project Configuration
-PROJECT_ROOT=./project
-SCENES_DIR=./project/scenes
+PROJECTS_ROOT=./projects
+PROJECT_NAME=default
 
 # FFmpeg Configuration
 FFMPEG_PRORES_PROFILE=2

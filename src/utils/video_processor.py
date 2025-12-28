@@ -57,6 +57,60 @@ class VideoProcessor:
             logger.error(f"Error downloading video: {str(e)}")
             raise
 
+    def convert_to_h264(
+        self,
+        input_path: str,
+        output_path: Optional[str] = None
+    ) -> str:
+        """
+        Convert video to H264/MP4 format (required for Veo API input)
+
+        Args:
+            input_path: Path to input video
+            output_path: Path for output video (optional)
+
+        Returns:
+            Path to converted H264 file
+        """
+        if not os.path.exists(input_path):
+            raise FileNotFoundError(f"Input file not found: {input_path}")
+
+        # Generate output path if not provided
+        if output_path is None:
+            input_file = Path(input_path)
+            output_path = str(input_file.parent / f"{input_file.stem}_h264.mp4")
+
+        logger.info(f"Converting {input_path} to H264/MP4")
+
+        try:
+            # Convert to H264 using ffmpeg-python
+            stream = ffmpeg.input(input_path)
+            stream = ffmpeg.output(
+                stream,
+                output_path,
+                vcodec='libx264',
+                preset='medium',
+                crf=23,
+                pix_fmt='yuv420p',
+                acodec='aac',
+                audio_bitrate='192k',
+                ar='48000',
+                ac=2
+            )
+
+            # Run conversion
+            ffmpeg.run(stream, overwrite_output=True, capture_stdout=True, capture_stderr=True)
+
+            logger.info(f"Converted to H264: {output_path}")
+            return output_path
+
+        except ffmpeg.Error as e:
+            logger.error(f"FFmpeg error: {e.stderr.decode()}")
+            raise
+        except Exception as e:
+            logger.error(f"Error converting video: {str(e)}")
+            raise
+
     def convert_to_prores(
         self,
         input_path: str,

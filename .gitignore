@@ -27,14 +27,15 @@ wheels/
 *.egg
 
 # Generated videos and audio
-project/scenes/*/
-*.mp4
-*.wav
-*.mov
+projects/**/*.mp4
+projects/**/*.wav
+projects/**/*.mov
+projects/**/*.png
 
 # Google Cloud credentials
 *.json
 !package.json
+!projects/**/metadata.json
 
 # IDE
 .vscode/

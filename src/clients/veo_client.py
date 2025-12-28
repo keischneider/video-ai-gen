@@ -30,6 +30,7 @@ class VeoClient:
         self.project_id = project_id or os.getenv("GOOGLE_CLOUD_PROJECT")
         self.location = location or os.getenv("VEO_LOCATION", "us-central1")
         self.model_name = os.getenv("VEO_MODEL", "veo-2.0-generate-001")
+        self.output_bucket = os.getenv("VEO_OUTPUT_BUCKET")
 
         # Set up credentials path for google-genai
         creds_path = credentials_path or os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
@@ -56,6 +57,7 @@ class VeoClient:
 
         # Store operations by job_id for tracking
         self.operations = {}
+        self.job_data = {}  # Store job metadata including GCS URIs
 
         logger.info(f"Initialized Veo client for project {self.project_id} in {self.location}")
 
@@ -65,6 +67,7 @@ class VeoClient:
         duration: int = 5,
         aspect_ratio: str = "16:9",
         input_video: Optional[str] = None,
+        input_image: Optional[str] = None,
         **kwargs
     ) -> Dict[str, Any]:
         """
@@ -76,6 +79,8 @@ class VeoClient:
             aspect_ratio: Video aspect ratio (9:16, 16:9, or 1:1)
             input_video: Optional path to input video file for extension (1-30 seconds)
                         Or GCS URI (gs://bucket/path/video.mp4)
+            input_image: Optional path to input image file for image-to-video generation
+                        (uses image as the first frame)
             **kwargs: Additional API parameters:
                 - enhance_prompt (bool): Whether to enhance the prompt (default: True)
                 - number_of_videos (int): Number of videos to generate (default: 1)
@@ -83,7 +88,10 @@ class VeoClient:
         Returns:
             Dictionary containing job_id, operation, and other metadata
         """
-        if input_video:
+        if input_image:
+            logger.info(f"Generating video from image: {input_image}")
+            logger.info(f"Prompt: {prompt[:100]}...")
+        elif input_video:
             logger.info(f"Extending video from: {input_video}")
             logger.info(f"Extension prompt: {prompt[:100]}...")
         else:
@@ -91,13 +99,35 @@ class VeoClient:
 
         try:
             # Prepare configuration
-            config = self.types.GenerateVideosConfig(
-                number_of_videos=kwargs.get("number_of_videos", 1),
-                duration_seconds=duration,
-                enhance_prompt=kwargs.get("enhance_prompt", True),
-            )
+            config_params = {
+                "number_of_videos": kwargs.get("number_of_videos", 1),
+                "duration_seconds": duration,
+                "enhance_prompt": kwargs.get("enhance_prompt", True),
+            }
 
-            # Prepare video input if provided
+            # Add output GCS URI if bucket is configured
+            if self.output_bucket:
+                # Create a unique output path for this video
+                import time
+                output_path = f"{self.output_bucket}/veo_output_{int(time.time())}.mp4"
+                config_params["output_gcs_uri"] = output_path
+                logger.info(f"Output will be saved to: {output_path}")
+
+            config = self.types.GenerateVideosConfig(**config_params)
+
+            # Prepare image input if provided (for image-to-video)
+            image_param = None
+            if input_image:
+                if input_image.startswith("gs://"):
+                    # GCS URI
+                    image_param = self.types.Image(uri=input_image)
+                    logger.info(f"Using GCS image URI: {input_image}")
+                else:
+                    # Local file
+                    image_param = self.types.Image.from_file(location=input_image)
+                    logger.info(f"Loaded image from file: {input_image}")
+
+            # Prepare video input if provided (for video extension)
             video_param = None
             if input_video:
                 if input_video.startswith("gs://"):
@@ -105,8 +135,40 @@ class VeoClient:
                     video_param = self.types.Video(uri=input_video)
                     logger.info(f"Using GCS video URI: {input_video}")
                 else:
-                    # Local file - load and encode
-                    video_param = self.types.Video.from_file(input_video)
+                    # Local file - check codec and convert if needed
+                    import ffmpeg
+                    import tempfile
+
+                    # Get video codec info
+                    try:
+                        probe = ffmpeg.probe(input_video)
+                        video_stream = next(s for s in probe['streams'] if s['codec_type'] == 'video')
+                        codec = video_stream['codec_name']
+
+                        logger.info(f"Input video codec: {codec}")
+
+                        # Veo only supports H264, convert if needed
+                        if codec.lower() not in ['h264', 'avc']:
+                            logger.info(f"Converting {codec} to H264 (Veo requires H264)")
+
+                            # Import VideoProcessor for conversion
+                            from src.utils.video_processor import VideoProcessor
+                            processor = VideoProcessor()
+
+                            # Create temp file for H264 conversion
+                            temp_dir = tempfile.gettempdir()
+                            h264_path = os.path.join(temp_dir, f"veo_input_{int(time.time())}.mp4")
+
+                            # Convert to H264
+                            h264_path = processor.convert_to_h264(input_video, h264_path)
+                            input_video = h264_path  # Use converted file
+                            logger.info(f"Converted to H264: {h264_path}")
+
+                    except Exception as e:
+                        logger.warning(f"Could not probe video codec: {e}. Proceeding anyway...")
+
+                    # Load video file
+                    video_param = self.types.Video.from_file(location=input_video)
                     logger.info(f"Loaded video from file: {input_video}")
 
             # Generate video
@@ -116,7 +178,8 @@ class VeoClient:
             operation = self.client.models.generate_videos(
                 model=self.model_name,
                 prompt=prompt,
-                video=video_param,  # Add video parameter
+                image=image_param,  # Image for image-to-video
+                video=video_param,  # Video for video extension
                 config=config,
             )
 
@@ -133,7 +196,9 @@ class VeoClient:
                 "created_at": time.time(),
                 "operation": operation,  # Store the operation object
                 "operation_name": operation.name if hasattr(operation, 'name') else None,
+                "output_gcs_uri": config_params.get("output_gcs_uri"),  # Store GCS output path
             }
+            self.job_data[job_id] = job_data  # Store job metadata
 
             logger.info(f"Video generation started with job_id: {job_id}")
             logger.info(f"Operation: {operation.name if hasattr(operation, 'name') else 'N/A'}")
@@ -173,9 +238,27 @@ class VeoClient:
             try:
                 # Check if operation is done
                 if operation.done:
+                    # Check for errors first
+                    if hasattr(operation, 'error') and operation.error:
+                        error_msg = operation.error.get('message', str(operation.error))
+                        logger.error(f"Job {job_id} failed: {error_msg}")
+                        raise Exception(f"Video generation failed: {error_msg}")
+
                     logger.info(f"Job {job_id} completed successfully")
 
-                    # Extract video data
+                    # Check if video was saved to GCS (large videos)
+                    if job_id in self.job_data and self.job_data[job_id].get("output_gcs_uri"):
+                        gcs_uri = self.job_data[job_id]["output_gcs_uri"]
+                        logger.info(f"Video saved to GCS: {gcs_uri}")
+                        return {
+                            "job_id": job_id,
+                            "status": "COMPLETED",
+                            "gcs_uri": gcs_uri,  # GCS URI instead of video object
+                            "completed_at": time.time(),
+                            "operation": operation,
+                        }
+
+                    # Extract video data from response (small videos)
                     if hasattr(operation, 'response') and operation.response:
                         generated_videos = operation.response.generated_videos
 
@@ -283,6 +366,68 @@ class VeoClient:
         if not operation.done:
             raise Exception(f"Video generation not complete yet. Call wait_for_completion first.")
 
+        # Check if video was saved to GCS
+        if job_id in self.job_data and self.job_data[job_id].get("output_gcs_uri"):
+            gcs_uri = self.job_data[job_id]["output_gcs_uri"]
+            logger.info(f"Downloading video from GCS: {gcs_uri}")
+
+            # Download from GCS using google-cloud-storage
+            from google.cloud import storage
+            from google.oauth2 import service_account
+
+            # Parse GCS URI
+            if not gcs_uri.startswith("gs://"):
+                raise ValueError(f"Invalid GCS URI: {gcs_uri}")
+
+            # Remove gs:// prefix and split bucket/path
+            path_parts = gcs_uri[5:].split("/", 1)
+            bucket_name = path_parts[0]
+            base_path = path_parts[1] if len(path_parts) > 1 else ""
+
+            # Set up credentials
+            creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+            if creds_path:
+                creds_path = Path(creds_path)
+                if not creds_path.is_absolute():
+                    creds_path = Path.cwd() / creds_path
+                credentials = service_account.Credentials.from_service_account_file(
+                    str(creds_path)
+                )
+            else:
+                credentials = None
+
+            # Download from GCS
+            storage_client = storage.Client(
+                project=self.project_id,
+                credentials=credentials
+            )
+            bucket = storage_client.bucket(bucket_name)
+
+            # Veo saves videos in a nested structure: base_path/operation_id/sample_0.mp4
+            # Find the actual video file by listing blobs with prefix
+            logger.info(f"Searching for video in GCS prefix: {base_path}/")
+            blobs = list(bucket.list_blobs(prefix=base_path + "/"))
+
+            if not blobs:
+                raise Exception(f"No video files found in GCS at {gcs_uri}")
+
+            # Find the sample_0.mp4 file (or first .mp4 file)
+            video_blob = None
+            for blob in blobs:
+                if blob.name.endswith(".mp4"):
+                    video_blob = blob
+                    break
+
+            if not video_blob:
+                raise Exception(f"No .mp4 file found in GCS at {gcs_uri}")
+
+            logger.info(f"Found video: gs://{bucket_name}/{video_blob.name}")
+            video_blob.download_to_filename(output_path)
+
+            logger.info(f"Video downloaded from GCS to {output_path}")
+            return output_path
+
+        # Handle video in response (small videos)
         if hasattr(operation, 'response') and operation.response:
             generated_videos = operation.response.generated_videos
 
