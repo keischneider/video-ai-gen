@@ -1,0 +1,24 @@
+{
+  "scene_id": "pull-away3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/pull-away3/pull-away3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/pull-away3/pull-away3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Camera pulls away gradually, revealing the full face from the brows. Final shot \u2014 a calm look into the camera.",
+    "input_video": "projects/kate-post/brow-zoom3/brow-zoom3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 00:41:59"
+  }
+}

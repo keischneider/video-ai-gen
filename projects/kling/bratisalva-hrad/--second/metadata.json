@@ -1,0 +1,31 @@
+{
+  "scene_id": "second",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/bratisalva-hrad/second/second_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/bratisalva-hrad/second/second_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the castle gradually.",
+    "input_video": null,
+    "input_image": "projects/kling/bratisalva-hrad/start.jpg",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-05 20:01:34"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis: \"Blooms Gently Pop on the Castle Gradually\"\n\n### Scene Description\nThis enchanting video depicts a magical transformation of a historic European castle as vibrant pink flowers gradually bloom and flourish across its ancient walls. The sequence unfolds during what appears to be golden hour, creating a dreamlike fairy-tale atmosphere where nature reclaims architecture in the most beautiful way possible.\n\n### Visual Elements\nThe video showcases a stunning aerial perspective of a white stone castle with distinctive red-brown conical tower roofs, set against a breathtaking sunset sky that transitions from warm golden tones to deep coral and pink hues. The lighting is consistently cinematic, with the warm golden hour sun casting long shadows and bathing the entire scene in a romantic, ethereal glow. The composition maintains a stable wide-angle view that captures both the castle complex and the sprawling cityscape beyond, creating a sense of scale and grandeur.\n\n### Subjects\nThe primary subject is an impressive medieval castle complex featuring multiple cylindrical towers with pointed roofs, thick stone walls, and a large central courtyard. As the sequence progresses, massive pink blooms - appearing to be dahlias or peonies - begin sprouting from the castle walls, starting small and gradually growing into enormous, fantastical flowers that cascade down the fortress walls. These blooms range from soft pink to deep magenta, creating a striking contrast against the white limestone walls. The surrounding landscape includes manicured grounds, a modern city in the distance, and lush green trees that frame the castle.\n\n### Mood/Tone\nThe video conveys a whimsical, romantic, and magical mood that feels like something from a modern fairy tale. There's a sense of wonder and transformation as the austere medieval fortress becomes a blooming garden palace. The gentle progression of the flower growth creates a peaceful, meditative quality while the dramatic sunset lighting adds elements of romance and fantasy. The overall tone is uplifting and enchanting, suggesting themes of renewal, beauty, and the harmonious relationship between nature and human creation.\n\n### Technical Quality\nThe video demonstrates high-quality cinematography with excellent color grading that enhances the warm, golden tones of the sunset and the vibrant pinks of the blooms. The visual effects work is seamlessly integrated, with the flowers appearing to grow organically from the castle walls in a believable yet fantastical manner. The production style is distinctly cinematic, reminiscent of high-end commercial or fantasy film work, with stable camera positioning and professional lighting that maintains consistency throughout the transformation sequence. The overall aesthetic suggests this is a premium digital production with careful attention to both technical execution and artistic vision.",
+    "short_description": "This video shows a white castle with red-tiled roofs and four towers gradually becoming covered in vibrant pink flowers during a golden sunset. The transformation depicts the medieval fortress being beautifully overtaken by blooming flora as the dramatic sky shifts from golden to deep red tones.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 20:02:08"
+  }
+}

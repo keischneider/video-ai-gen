@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final-second_3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final-second_3/move-in-final-second_3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final-second_3/move-in-final-second_3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. A woman's face holds completely motionless \u2014 no flicker of emotion, no twitch of muscle. Her expression is blank, serene, utterly static.",
+    "input_video": "projects/kate-post/---move-in-final_3/move-in-final_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 22:03:20"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video features a close-up portrait of a young woman in what appears to be a simple indoor setting. The sequence shows her performing a deliberate blinking action - starting with her eyes open, slowly closing them, and then reopening them. The camera remains completely static throughout, creating an intimate, focused viewing experience.\n\n**Visual Elements:**\nThe composition is a classic head-and-shoulders portrait shot with soft, even lighting that appears to be natural or well-diffused artificial light. The color palette is muted and warm, dominated by the subject's mint green/turquoise knit sweater against a neutral beige or off-white background. The background features some subtle text or lettering that's deliberately out of focus. The lighting is gentle and flattering, avoiding harsh shadows and creating a professional, polished look.\n\n**Subjects:**\nThe video centers on a young woman with shoulder-length dark brown hair parted in the middle. She has well-defined eyebrows, appears to be wearing natural-toned makeup, and sports a delicate necklace with a small circular pendant. Her mint green sweater appears to be a casual knit style. Her expression remains serene and composed throughout the sequence.\n\n**Mood/Tone:**\nThe video conveys a calm, meditative, and peaceful atmosphere. There's an almost hypnotic quality to the simple act of blinking, which creates a sense of tranquility and mindfulness. The overall tone is gentle and contemplative, with an emphasis on stillness and quiet beauty.\n\n**Technical Quality:**\nThe video appears to be shot in high definition with excellent clarity and color reproduction. The production quality suggests professional or semi-professional equipment, with careful attention to lighting and framing. The style is clean and minimalist, focusing entirely on the subject without any distracting elements or camera movements. This creates an almost portrait photography aesthetic translated into video form.",
+    "short_description": "This video shows a young woman with brown hair and a mint green sweater posing for the camera, alternating between looking directly at the viewer with her eyes open and closing her eyes with a gentle smile.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 22:04:31"
+  }
+}

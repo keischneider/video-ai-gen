@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final-second",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final-second/move-in-final-second_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final-second/move-in-final-second_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. A woman's face holds completely motionless \u2014 no flicker of emotion, no twitch of muscle. Her expression is blank, serene, utterly static.",
+    "input_video": "projects/kate-post/---move-in-final_3/move-in-final_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 22:00:20"
+  },
+  "video_analysis": {
+    "description": "## Scene Description\nThis video presents an intimate portrait study featuring a single subject in what appears to be an indoor setting. The sequence shows subtle variations in the subject's facial expression, particularly focusing on eye movement - transitioning from an open, direct gaze to closed eyes and back again. The camera remains completely static throughout, creating a meditative, almost hypnotic viewing experience.\n\n## Visual Elements\nThe composition employs soft, diffused lighting that creates gentle shadows and highlights across the subject's features. The color palette is warm and muted, dominated by peachy skin tones contrasted against a mint green garment and a neutral beige background. The lighting appears to be a key light setup, providing even illumination without harsh shadows. The framing is a close-up portrait shot that remains perfectly fixed throughout the sequence.\n\n## Subjects\nThe video features a young woman with shoulder-length dark brown hair styled in a center part. She wears well-applied makeup including defined eyebrows, eye makeup, and glossy lips. Her outfit consists of a mint green knitted sweater or top, accessorized with a black cord necklace featuring a small circular pendant. The background shows what appears to be a wall with some faint text or lettering, though it remains deliberately out of focus.\n\n## Mood/Tone\nThe video conveys a serene, contemplative atmosphere. There's an almost meditative quality to the minimal movement and sustained focus on the subject's face. The mood is calm and introspective, with the brief moment of closed eyes adding a peaceful, zen-like element to the overall composition. The static nature creates a sense of timelessness and quiet reflection.\n\n## Technical Quality\nThe video demonstrates high production values with excellent image clarity and professional lighting setup. The style is reminiscent of contemporary portrait photography or high-end commercial work. The video quality appears to be high definition with good color reproduction and sharp detail. The completely static camera work requires precise technical execution to maintain perfect framing throughout, suggesting professional equipment and careful setup. The minimal action and focus on subtle facial expressions align well with modern minimalist aesthetic trends in digital media.",
+    "short_description": "This video shows a young woman with brown hair and a mint green sweater posing for the camera, displaying various facial expressions including smiling and closing her eyes while wearing a circular pendant necklace.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 22:01:23"
+  }
+}

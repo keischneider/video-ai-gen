@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows-new_2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows-new_2/brows-new_2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows-new_2/brows-new_2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "face held still, a subtle side turn of the head ",
+    "input_video": "projects/kate-post/--2_gaze/2_gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 20:58:01"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video captures an intimate beauty portrait featuring a close-up view of a young woman's face. The sequence shows her performing subtle head movements - a gentle side-to-side turn while maintaining relatively still facial positioning. The setting appears to be indoors with controlled lighting, creating a studio-like or professional beauty photography environment.\n\n### Visual Elements\nThe video employs warm, soft lighting that creates a golden-hour glow on the subject's skin. The color palette is dominated by warm peach and amber tones, with rich brown hair providing contrast. The composition is tightly framed, focusing entirely on the face from approximately forehead to chin level. The lighting appears to come from the front-left, creating gentle shadows that enhance facial contours and bone structure. There's a shallow depth of field with a softly blurred background.\n\n### Subjects\nThe video features a young woman with striking beauty features: perfectly groomed, full dark eyebrows, long dramatic eyelashes (likely enhanced), and warm brown/hazel eyes. Her complexion appears flawless with a natural, dewy finish. She's wearing glossy, coral-pink lipstick that catches the light, and her dark brown hair frames her face with loose strands. A small beauty mark is visible on her lower face. Her makeup appears professionally applied with a focus on enhancing natural features.\n\n### Mood/Tone\nThe video conveys an aspirational, glamorous mood typical of high-end beauty content. There's an intimate yet polished quality that suggests luxury cosmetics advertising or social media beauty content. The atmosphere is serene and confident, with the subject's direct gaze creating a connection with viewers. The overall tone is sophisticated and aspirational.\n\n### Technical Quality\nThe video demonstrates professional-grade production quality with excellent sharpness and color grading. The cinematography style is reminiscent of contemporary beauty advertising or high-end social media content. The smooth, subtle camera movement or subject movement creates a dynamic yet elegant feel. The lighting setup appears professional with careful attention to skin texture and makeup details. The overall aesthetic suggests this could be commercial beauty content, makeup tutorial material, or premium social media content.",
+    "short_description": "This video shows a close-up of a woman's face showcasing her makeup look, particularly featuring well-defined eyebrows, long eyelashes, and glossy lips, with the camera capturing different angles and her eyes opening and closing.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 20:59:26"
+  }
+}

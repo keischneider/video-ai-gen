@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-5",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/kate-post/move-in-5/move-in-5_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/kate-post/move-in-5/move-in-5_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Extreme close-up push in. Camera glides over the eyebrows from right to left",
+    "input_video": "projects/kling/kate-post/move-in-4/move-in-4_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "kling-v2.1",
+    "dialogue": null,
+    "generated_at": "2026-01-04 13:11:39"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video features an extreme close-up cinematic sequence focusing on a woman's face, specifically the eye and brow area. The camera executes a smooth, controlled movement that glides horizontally across her eyebrows from right to left while simultaneously pushing closer to the subject, creating an intimate and detailed portrait shot.\n\n**Visual Elements:**\nThe video showcases excellent lighting with soft, natural illumination that beautifully highlights the subject's facial features and skin texture. The color palette is warm and natural, with peachy skin tones dominating the frame. The composition maintains sharp focus on the facial details while allowing a subtle bokeh effect in the background. The camera movement is fluid and professional, demonstrating precise control as it travels across the subject's features while maintaining perfect focus throughout the sequence.\n\n**Subjects:**\nThe subject is a young woman with striking hazel-green eyes and well-defined, naturally full eyebrows in a rich brown color. Her eyelashes appear long and full, possibly enhanced with mascara, and her skin has a healthy, natural glow. Her dark brown hair frames portions of the image, and the extreme close-up reveals fine skin texture and natural beauty details with remarkable clarity.\n\n**Mood/Tone:**\nThe video conveys an intimate, serene, and contemplative mood. There's a sense of beauty and tranquility captured in this moment, with the close framing creating a personal connection between viewer and subject. The gentle camera movement and soft lighting contribute to a dreamy, almost ethereal quality that feels both cinematic and peaceful.\n\n**Technical Quality:**\nThis is high-quality, professional cinematography shot in what appears to be 4K resolution. The video demonstrates excellent technical execution with smooth camera movement, perfect focus tracking, and professional lighting setup. The style is distinctly cinematic, reminiscent of beauty commercials or artistic portrait work. The production quality is exceptional, with no visible camera shake or focus issues despite the challenging extreme close-up framing and movement.",
+    "short_description": "This video shows close-up shots of a person's face, focusing on their eyes with long eyelashes and well-defined eyebrows. The person appears to be looking upward and around in different directions while the camera captures various angles of their eye area and facial features.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 13:12:32"
+  }
+}

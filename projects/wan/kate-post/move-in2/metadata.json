@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in2/move-in2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in2/move-in2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Smooth forward dolly on face. Soft key light. Gradual zoom into close-up framing.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 01:00:17"
+  },
+  "video_analysis": {
+    "description": "## Scene Description\n\nThis video captures an intimate portrait session featuring a gradual camera movement that slowly brings the viewer closer to the subject. The scene takes place in what appears to be an indoor setting with controlled lighting, creating a professional yet intimate atmosphere. The camera executes a smooth forward dolly movement combined with a gradual zoom, progressively tightening the framing from a medium shot to an extreme close-up of the subject's face.\n\n## Visual Elements\n\nThe cinematography employs soft, diffused lighting that creates a flattering key light setup, likely positioned at a 45-degree angle to the subject. The lighting is gentle and even, minimizing harsh shadows while maintaining dimensional modeling of the facial features. The color palette is warm and natural, with peachy skin tones complemented by the soft mint green of the subject's clothing. The background features a neutral beige or cream tone with subtle text or pattern elements that remain pleasantly out of focus throughout the sequence. The composition maintains perfect center framing, keeping the subject's face as the dominant focal point.\n\n## Subjects\n\nThe video features a young woman with shoulder-length brown hair styled in loose waves. She displays professional makeup application with defined eyebrows, dramatic eyelashes, and glossy pink lips. Her expression is serene and contemplative, with direct eye contact toward the camera that creates an engaging connection with the viewer. She wears a mint green knit sweater and a delicate necklace with what appears to be a small pendant. Her overall presentation suggests this could be for beauty, fashion, or portrait content.\n\n## Mood/Tone\n\nThe video conveys a calm, intimate, and sophisticated mood. The gradual camera movement creates a sense of drawing the viewer into a personal moment, while the subject's steady gaze and composed expression evoke confidence and tranquility. The overall tone is warm and inviting, with a professional polish that suggests high-end beauty or lifestyle content.\n\n## Technical Quality\n\nThe video demonstrates high production value with excellent technical execution. The image quality is crisp and well-exposed, with accurate color reproduction and sharp detail rendering. The camera movement is exceptionally smooth, indicating the use of professional dolly or stabilization equipment. The soft key lighting setup shows careful consideration for flattering portrait photography principles. The style is distinctly cinematic, resembling beauty commercials or high-end portrait photography, with a polished, commercial aesthetic that prioritizes visual appeal and technical precision.",
+    "short_description": "This video shows a young woman with brown hair and professional makeup posing for a series of portrait-style photos or video frames. She appears to be demonstrating different facial expressions or lip poses while wearing a mint green top and delicate jewelry.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 01:01:19"
+  }
+}

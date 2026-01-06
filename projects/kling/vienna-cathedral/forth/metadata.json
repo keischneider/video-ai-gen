@@ -1,0 +1,31 @@
+{
+  "scene_id": "forth",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/vienna-cathedral/forth/forth_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/vienna-cathedral/forth/forth_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Slowly blooms gently pop on the cathedral gradually from down to up.",
+    "input_video": null,
+    "input_image": "projects/kling/vienna-cathedral/1.webp",
+    "provider": "replicate",
+    "model": "kling-v2.1",
+    "dialogue": null,
+    "generated_at": "2026-01-05 20:49:53"
+  },
+  "video_analysis": {
+    "description": "## Scene Description\n\nThis video depicts a magical transformation of a Gothic cathedral where delicate pink flowers gradually bloom and spread across the ancient stone architecture. The sequence shows a beautiful metamorphosis from a pristine, unadorned cathedral to one completely enveloped in cascading floral growth, progressing systematically from the lower sections upward to the towering spires.\n\n## Visual Elements\n\nThe video showcases stunning contrast between the warm, honey-colored Gothic stonework and vibrant pink blooms. The cathedral features classic Gothic elements including pointed arches, intricate tracery windows, flying buttresses, and twin spires with detailed carved ornamentation. The sky transitions from clear blue with white clouds to a dramatic sunset palette of soft pinks, purples, and golden hues that complement the floral display.\n\nThe lighting evolves throughout the sequence, beginning with bright daylight that emphasizes the cathedral's architectural details, then shifting to warm, romantic sunset lighting that creates a dreamlike atmosphere. The composition maintains a low-angle perspective that emphasizes the cathedral's imposing height and grandeur.\n\n## Subjects\n\nThe primary subject is an impressive Gothic cathedral, likely inspired by famous European examples like St. Stephen's Cathedral in Vienna (evident from the distinctive geometric roof pattern). As the sequence progresses, delicate cosmos-like flowers in various shades of pink - from pale blush to vibrant magenta - emerge and proliferate across the stone surfaces, accompanied by lush green foliage that creates natural garlands along the architectural features.\n\n## Mood/Tone\n\nThe video conveys a deeply romantic and enchanting mood, suggesting themes of renewal, beauty emerging from tradition, and the harmony between human craftsmanship and natural beauty. There's a sense of wonder and magic as the ancient, solemn religious architecture becomes a living canvas for natural beauty, creating an almost fairy-tale atmosphere.\n\n## Technical Quality\n\nThis appears to be high-quality digital animation or heavily processed footage with cinematic production values. The transformation effect is seamlessly executed, with flowers appearing to grow organically from the stone surfaces. The camera position remains static, allowing viewers to focus entirely on the gradual transformation. The color grading enhances the romantic atmosphere with warm, saturated tones, and the overall aesthetic suggests professional post-production work typical of fantasy or romantic cinema.",
+    "short_description": "This video shows a Gothic cathedral with elaborate stone architecture and spires being gradually covered by blooming pink flowers, while the sky transitions from clear blue to a dramatic sunset with pink and orange clouds.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 20:50:26"
+  }
+}

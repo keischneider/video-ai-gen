@@ -1,0 +1,31 @@
+{
+  "scene_id": "fifth",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/fifth/fifth_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/fifth/fifth_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Large pink blooms gently pop (no stems) and spread, tightly against the surface of the monument, starting from back, organically to cover her chest and abdomen.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/1.jpeg",
+    "provider": "kling",
+    "model": "kling-v2-1",
+    "dialogue": null,
+    "generated_at": "2026-01-04 22:29:24"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video depicts a striking time-lapse transformation of the famous \"Motherland Monument\" (Rodina-Mat) statue in Kyiv, Ukraine. The sequence shows large pink flowers gradually emerging and spreading across the monument's chest and torso area, starting from behind the figure and organically growing to cover her upper body. The transformation occurs during golden hour, creating a dramatic backdrop as the sky shifts from blue-gray to warm pink and orange sunset tones.\n\n### Visual Elements\nThe video showcases a remarkable interplay of colors, with the monument's metallic gray surface contrasting beautifully against the soft pink blooms and the increasingly warm, cotton-candy colored sky. The lighting is particularly stunning, with golden hour illumination casting warm glows on both the statue and flowers. The composition maintains a low-angle perspective that emphasizes the monument's imposing scale and heroic stature. The camera appears stationary, allowing the time-lapse effect to focus entirely on the organic spread of the flowers and the natural progression of the sunset.\n\n### Subjects\nThe central subject is the iconic Motherland Monument, a colossal female figure holding a sword raised high in one hand and a shield bearing Ukraine's trident symbol in the other. She's depicted in classical flowing robes with a determined, forward-gazing expression. The flowers appear to be cherry blossoms or similar pink blooms that gradually engulf her torso, some even floating through the air, creating a dreamlike quality.\n\n### Mood/Tone\nThe video conveys a powerful juxtaposition of themes - the transformation of a symbol of strength and warfare into something gentle and beautiful. There's a poetic, almost magical quality to watching the stern monument become adorned with delicate flowers. The mood feels hopeful and transformative, suggesting themes of renewal, beauty emerging from conflict, or the softening of martial symbols through nature's grace.\n\n### Technical Quality\nThe production quality is excellent, with crisp detail visible in both the monument's metallic surface and the individual flower petals. The time-lapse technique is smoothly executed, creating a seamless flow as the flowers appear and spread. The cinematographic style is artistic and contemplative, with the consistent framing allowing viewers to fully appreciate the gradual transformation. The timing captures the golden hour perfectly, creating a cinematic quality that elevates this from simple documentation to visual poetry.",
+    "short_description": "This video shows a sequence of images featuring the Motherland Monument in Kyiv, Ukraine, gradually being adorned with pink flowers that cascade down the statue against beautiful sunset skies. The massive Soviet-era monument, holding a sword and shield with the Ukrainian trident symbol, transforms from its bare metallic state to being beautifully decorated with flowing floral garlands and scattered petals.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 22:29:56"
+  }
+}

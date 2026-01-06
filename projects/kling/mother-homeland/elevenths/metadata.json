@@ -1,0 +1,31 @@
+{
+  "scene_id": "elevenths",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/elevenths/elevenths_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/elevenths/elevenths_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the monument gradually.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/tens/1.png",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-05 00:13:59"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video depicts a stunning time-lapse sequence of flowers gradually blooming and cascading down the iconic Motherland Monument (Rodina-Mat) in Kyiv, Ukraine. The monument, a towering female figure holding a sword and shield with the Ukrainian trident, becomes adorned with delicate pink and white blossoms that appear to materialize and flow organically across her form during what appears to be golden hour.\n\n**Visual Elements:**\nThe composition is dominated by warm, ethereal lighting with a spectacular sunset sky painted in soft purples, pinks, and golden hues. The monument is beautifully backlit, creating dramatic silhouettes while the emerging flowers provide vibrant pops of pink and white color against the metallic statue. The camera maintains a steady, low-angle perspective that emphasizes the monument's imposing scale and majesty. The lighting creates a dreamlike, almost magical atmosphere as the golden hour sun creates rim lighting effects on both the statue and the blooming flowers.\n\n**Subjects:**\nThe central subject is the monumental statue of a woman in flowing robes, holding a sword raised high and a shield bearing Ukraine's national emblem. Throughout the sequence, delicate cherry blossoms or similar flowers gradually appear and drape across her body like a living garland, creating a striking contrast between the solid, permanent monument and the ephemeral, organic blooms.\n\n**Mood/Tone:**\nThe video conveys a profoundly poetic and hopeful mood, transforming a symbol of strength and defense into something more nurturing and beautiful. There's a sense of renewal, growth, and the triumph of life and beauty over conflict. The gentle emergence of the flowers suggests themes of peace, remembrance, and the enduring power of nature and beauty even in times of struggle.\n\n**Technical Quality:**\nThe production quality is excellent, with smooth time-lapse cinematography and professional color grading that enhances the golden hour lighting. The visual effects seamlessly integrate the blooming flowers with the monument, creating a cinematic, almost fantastical quality. The style is artistic and symbolic rather than documentary, using the visual metaphor of blooming flowers to create an emotionally resonant piece that feels both contemporary and timeless.",
+    "short_description": "These images show the famous Motherland Monument (Rodina-Mat) statue in Kyiv, Ukraine, adorned with pink and white flower garlands during a beautiful sunset. The massive Soviet-era monument, which holds a sword and shield bearing Ukraine's trident symbol, is dramatically silhouetted against vibrant pink and orange clouds in the sky.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 00:14:28"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "scene_id": "ninths",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/ninths/ninths_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/ninths/ninths_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the monument gradually.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/1.jpeg",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-04 23:54:20"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video depicts a stunning time-lapse transformation of what appears to be the Motherland Monument in Kyiv, Ukraine. The sequence captures the gradual blooming of flowers across the massive statue, creating a powerful juxtaposition between the monumental bronze figure and delicate natural beauty. The transformation occurs during what appears to be golden hour, with the lighting shifting from cooler tones to warm, romantic hues.\n\n**Visual Elements:**\nThe video showcases a dramatic color evolution, beginning with cooler blue-gray tones and gradually warming to rich golden and pink hues that bathe the entire scene. The lighting appears to be natural sunlight during sunset/sunrise, creating beautiful rim lighting on the statue's edges. The composition maintains a consistent low-angle perspective that emphasizes the monument's imposing scale and heroic stature. The camera remains relatively static, allowing the transformation to be the primary focus.\n\n**Subjects:**\nThe central subject is a colossal bronze statue of a female figure holding a sword raised high in one hand and a shield bearing the Ukrainian trident (tryzub) in the other. The statue represents the Motherland and stands in a triumphant, defiant pose. Throughout the sequence, vibrant pink and white flowers gradually appear and proliferate across the figure's torso and arms, creating cascading floral arrangements that soften the monument's stern military bearing.\n\n**Mood/Tone:**\nThe video conveys a deeply emotional and symbolic tone, blending themes of strength and beauty, war and peace, remembrance and renewal. The gradual blooming suggests hope, resilience, and the triumph of life and beauty over conflict. The warm, ethereal lighting creates an almost mystical atmosphere that elevates the scene from documentary to poetic artistry.\n\n**Technical Quality:**\nThe video demonstrates high production value with crisp, cinematic quality footage. The time-lapse technique is smoothly executed, creating seamless transitions between frames. The consistent framing and exposure control throughout the sequence suggests professional-grade equipment and post-production work. The style is decidedly cinematic rather than documentary, with careful attention to color grading that enhances the golden hour lighting and creates a dreamlike quality that perfectly complements the symbolic transformation taking place.",
+    "short_description": "This video shows the iconic \"Motherland\" statue in Kyiv, Ukraine at sunset, with the monument holding a sword and shield bearing the Ukrainian trident symbol. In the later frames, the statue is adorned with pink and white flower garlands, creating a striking contrast against the dramatic evening sky.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 23:54:48"
+  }
+}

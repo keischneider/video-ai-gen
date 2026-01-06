@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows_4",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows_4/brows_4_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows_4/brows_4_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Extreme close-up push in. Camera glides forward to frame the eyebrows. Macro lens effect.",
+    "input_video": "projects/kate-post/--2_gaze/2_gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 19:36:22"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video showcases an extreme close-up cinematographic sequence that gradually pushes in toward a woman's face, ultimately focusing on her eye and eyebrow area. The camera movement creates an intimate, macro-lens effect that reveals increasingly detailed facial features as it advances forward.\n\n### Visual Elements\nThe video employs warm, natural lighting that creates a soft, flattering illumination across the subject's skin. The color palette is dominated by warm flesh tones, rich brown hues in the hair and eyebrows, and subtle pink tones in the lips. The composition utilizes a shallow depth of field that keeps the background softly blurred while maintaining sharp focus on the facial features. The camera movement is smooth and deliberate, creating a cinematic push-in effect that draws the viewer's attention to specific details.\n\n### Subjects\nThe video features a young woman with striking beauty elements: perfectly groomed, full dark brown eyebrows, long curled eyelashes, and warm hazel-green eyes with a distinctive light ring reflection. Her skin appears smooth with natural texture visible due to the macro lens effect, and she's wearing subtle pink lip color. Her dark hair frames portions of the shot, and her overall makeup appears natural yet polished.\n\n### Mood/Tone\nThe video conveys an intimate, beauty-focused atmosphere with a sense of elegance and sophistication. The close proximity created by the camera movement generates an almost hypnotic, contemplative mood that emphasizes natural beauty and facial details. There's a serene, calm quality to the piece that suggests themes of beauty, self-care, or cosmetic appreciation.\n\n### Technical Quality\nThe production quality is exceptionally high, featuring crisp 4K-level detail that captures every nuance of skin texture, individual eyelashes, and eyebrow hairs. The cinematography demonstrates professional-grade camera work with smooth, controlled movement and expert focus pulling. The lighting setup appears to use soft, diffused sources that eliminate harsh shadows while maintaining dimensional modeling of the face. This style is reminiscent of high-end beauty commercials or fashion photography, with a cinematic quality that elevates it beyond typical social media content.",
+    "short_description": "This video shows a close-up view of a woman's face as she blinks, showcasing her detailed eye makeup including well-defined eyebrows, long eyelashes, and glossy lips. The camera captures her natural blinking motion while highlighting the precision of her beauty look.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 19:37:24"
+  }
+}

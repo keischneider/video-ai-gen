@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final-second_4",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final-second_4/move-in-final-second_4_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final-second_4/move-in-final-second_4_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. A woman's face holds completely motionless \u2014 no flicker of emotion, no twitch of muscle. Her expression is blank, serene, utterly static.",
+    "input_video": "projects/kate-post/---move-in-final_3/move-in-final_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 22:04:31"
+  },
+  "video_analysis": {
+    "description": "## Video Frame Analysis\n\n**Scene Description:**\nThis video appears to be a static portrait shot featuring a young woman positioned directly in front of the camera. The scene takes place in what appears to be an indoor setting with minimal background elements. True to the generation prompt, this is essentially a motionless portrait study with no discernible action or movement throughout the sequence.\n\n**Visual Elements:**\nThe video employs soft, even lighting that creates a gentle illumination across the subject's face, consistent with the \"soft key light\" specification in the prompt. The composition is a standard medium close-up shot, framed from approximately chest level upward. The camera remains completely static throughout all frames, maintaining the same angle and distance. The color palette is warm and natural, with the prominent mint green sweater providing a pleasant contrast against the neutral background. The lighting setup appears professional, creating subtle shadows that add dimension without being harsh.\n\n**Subjects:**\nThe sole subject is a young woman with long, straight dark brown hair that falls past her shoulders. She has well-defined eyebrows, appears to be wearing tasteful makeup including defined eye makeup and lipstick, and is dressed in a mint green knit sweater. She's wearing layered necklaces, including what appears to be a black cord necklace with a circular pendant. Her positioning is perfectly centered in the frame, and she maintains direct eye contact with the camera throughout.\n\n**Mood/Tone:**\nThe video conveys a serene, contemplative atmosphere. There's an almost meditative quality to the complete stillness, creating a sense of calm and introspection. The subject's neutral expression and unwavering gaze create an enigmatic quality that could be interpreted as peaceful, mysterious, or even slightly unsettling depending on the viewer's perspective.\n\n**Technical Quality:**\nThe video appears to be shot in high definition with excellent technical quality. The image is sharp and well-exposed, suggesting professional or semi-professional production values. The style is reminiscent of portrait photography or screen test footage, with its emphasis on capturing fine facial details and maintaining consistent framing. The complete lack of camera movement and the subject's stillness creates an almost photograph-like quality to each frame, making this more of a moving portrait than a traditional dynamic video piece.",
+    "short_description": "This video shows a young woman with long dark hair and professional makeup looking directly at the camera while wearing a mint green sweater and a necklace with a round pendant. The footage appears to be a series of nearly identical portrait-style shots, likely for social media or beauty content.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 22:05:36"
+  }
+}

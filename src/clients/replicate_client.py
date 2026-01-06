@@ -38,8 +38,35 @@ class ReplicateClient:
         "wan-2.5-i2v-fast": {
             "id": "wan-video/wan-2.5-i2v-fast",
             "type": "image-to-video",
-            "cost_480p": 0.08,
-            "cost_720p": 0.15,
+            "requires_image": True,
+            "cost_720p": 0.08,
+            "cost_1080p": 0.15,
+            "durations": [5, 10],
+            "default_duration": 5,
+        },
+        "kling-v2.1": {
+            "id": "kwaivgi/kling-v2.1",
+            "type": "image-to-video",
+            "requires_image": True,
+            "cost_480p": 0.25,  # standard: $0.05/s * 5s
+            "cost_720p": 0.25,  # standard mode is 720p
+            "cost_1080p": 0.45,  # pro: $0.09/s * 5s
+        },
+        "kling-v1.6-standard": {
+            "id": "kwaivgi/kling-v1.6-standard",
+            "type": "image-to-video",
+            "requires_image": True,
+            "cost_480p": 0.20,
+            "cost_720p": 0.20,
+        },
+        "veo-3.1": {
+            "id": "google/veo-3.1",
+            "type": "text-to-video",  # Also supports image-to-video with 'image' param
+            "requires_image": False,
+            "cost_720p": 0.75,
+            "cost_1080p": 1.00,
+            "durations": [4, 6, 8],  # Supported durations
+            "default_duration": 8,
         },
     }
 
@@ -125,6 +152,10 @@ class ReplicateClient:
             if not model_info:
                 raise ValueError(f"Unknown model: {model_name}. Available: {list(self.MODELS.keys())}")
 
+        # Validate image requirement for models that need it
+        if model_info.get("requires_image") and not input_image:
+            raise ValueError(f"Model {model_name} requires an input image (--input-image)")
+
         model_id = model_info["id"]
 
         # Calculate num_frames based on duration (16 fps default)
@@ -146,25 +177,59 @@ class ReplicateClient:
                     effective_prompt = f"{prompt}, cinematic motion, smooth camera movement"
                     logger.info(f"Enhanced i2v prompt: {effective_prompt}")
 
-            # Prepare input parameters
-            input_params = {
-                "prompt": effective_prompt,
-                "num_frames": num_frames,
-                "aspect_ratio": aspect_ratio,
-                "resolution": resolution,
-                "frames_per_second": fps,
-                "go_fast": True,
-                "sample_shift": kwargs.get("sample_shift", 8),  # Lower value = more prompt adherence
-                "interpolate_output": True,
-            }
+            # Handle Kling models separately (different API structure)
+            if model_name in ["kling-v2.1", "kling-v1.6-standard"]:
+                input_params = self._prepare_kling_params(
+                    prompt=effective_prompt,
+                    input_image=input_image,
+                    duration=duration,
+                    resolution=resolution,
+                    negative_prompt=kwargs.get("negative_prompt", ""),
+                    end_image=kwargs.get("end_image"),
+                    seed=kwargs.get("seed"),
+                )
+            elif model_name == "wan-2.5-i2v-fast":
+                input_params = self._prepare_wan25_i2v_params(
+                    prompt=effective_prompt,
+                    input_image=input_image,
+                    duration=duration,
+                    resolution=resolution,
+                    negative_prompt=kwargs.get("negative_prompt", ""),
+                    seed=kwargs.get("seed"),
+                )
+            elif model_name == "veo-3.1":
+                input_params = self._prepare_veo_params(
+                    prompt=effective_prompt,
+                    input_image=input_image,
+                    duration=duration,
+                    aspect_ratio=aspect_ratio,
+                    resolution=resolution,
+                    negative_prompt=kwargs.get("negative_prompt", ""),
+                    end_image=kwargs.get("end_image"),
+                    generate_audio=kwargs.get("generate_audio", True),
+                    reference_images=kwargs.get("reference_images"),
+                    seed=kwargs.get("seed"),
+                )
+            else:
+                # Prepare input parameters for Wan models
+                input_params = {
+                    "prompt": effective_prompt,
+                    "num_frames": num_frames,
+                    "aspect_ratio": aspect_ratio,
+                    "resolution": resolution,
+                    "frames_per_second": fps,
+                    "go_fast": True,
+                    "sample_shift": kwargs.get("sample_shift", 8),  # Lower value = more prompt adherence
+                    "interpolate_output": True,
+                }
 
-            # Add image input for i2v models
-            if input_image and model_info["type"] == "image-to-video":
-                # Read image file and pass to replicate
-                if input_image.startswith("http"):
-                    input_params["image"] = input_image
-                else:
-                    input_params["image"] = open(input_image, "rb")
+                # Add image input for i2v models
+                if input_image and model_info["type"] == "image-to-video":
+                    # Read image file and pass to replicate
+                    if input_image.startswith("http"):
+                        input_params["image"] = input_image
+                    else:
+                        input_params["image"] = open(input_image, "rb")
 
             # Add seed if provided
             if kwargs.get("seed"):
@@ -266,6 +331,219 @@ class ReplicateClient:
             # Fallback to first frame if last frame extraction fails
             logger.warning("Falling back to first frame extraction")
             return self._extract_first_frame(video_path)
+
+    def _prepare_kling_params(
+        self,
+        prompt: str,
+        input_image: Optional[str],
+        duration: int = 5,
+        resolution: str = "720p",
+        negative_prompt: str = "",
+        end_image: Optional[str] = None,
+        seed: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Prepare input parameters for Kling v2.1 model
+
+        Args:
+            prompt: Text prompt for video generation
+            input_image: Path or URL to start image (required for Kling)
+            duration: Video duration (5 or 10 seconds)
+            resolution: "720p" for standard mode, "1080p" for pro mode
+            negative_prompt: Things to avoid in the video
+            end_image: Optional end frame (requires pro mode)
+            seed: Random seed for reproducible generation
+
+        Returns:
+            Dictionary of input parameters for Kling API
+        """
+        if not input_image:
+            raise ValueError("Kling v2.1 requires an input image (--input-image)")
+
+        # Determine mode based on resolution
+        if resolution == "1080p":
+            mode = "pro"
+        else:
+            mode = "standard"
+
+        # Kling only supports 5 or 10 second durations
+        kling_duration = 10 if duration >= 8 else 5
+
+        input_params = {
+            "prompt": prompt,
+            "duration": kling_duration,
+            "mode": mode,
+        }
+
+        # Add start image
+        if input_image.startswith("http"):
+            input_params["start_image"] = input_image
+        else:
+            input_params["start_image"] = open(input_image, "rb")
+
+        # Add optional parameters
+        if negative_prompt:
+            input_params["negative_prompt"] = negative_prompt
+
+        if end_image:
+            if end_image.startswith("http"):
+                input_params["end_image"] = end_image
+            else:
+                input_params["end_image"] = open(end_image, "rb")
+
+        if seed is not None:
+            input_params["seed"] = seed
+
+        logger.info(f"Kling params: mode={mode}, duration={kling_duration}s, seed={seed}")
+        return input_params
+
+    def _prepare_wan25_i2v_params(
+        self,
+        prompt: str,
+        input_image: Optional[str],
+        duration: int = 5,
+        resolution: str = "720p",
+        negative_prompt: str = "",
+        seed: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Prepare input parameters for Wan 2.5 I2V Fast model
+
+        Args:
+            prompt: Text prompt for video generation
+            input_image: Path or URL to input image (required)
+            duration: Video duration (5 or 10 seconds)
+            resolution: "720p" or "1080p"
+            negative_prompt: Things to avoid in the video
+            seed: Random seed for reproducible generation
+
+        Returns:
+            Dictionary of input parameters for Wan 2.5 I2V API
+        """
+        if not input_image:
+            raise ValueError("Wan 2.5 I2V requires an input image (--input-image)")
+
+        # Wan 2.5 I2V only supports 5 or 10 second durations
+        wan_duration = 10 if duration >= 8 else 5
+
+        # Validate resolution
+        if resolution not in ["720p", "1080p"]:
+            resolution = "720p"
+
+        input_params = {
+            "prompt": prompt,
+            "duration": wan_duration,
+            "resolution": resolution,
+            "enable_prompt_expansion": True,
+        }
+
+        # Add image
+        if input_image.startswith("http"):
+            input_params["image"] = input_image
+        else:
+            input_params["image"] = open(input_image, "rb")
+
+        # Add negative prompt if provided
+        if negative_prompt:
+            input_params["negative_prompt"] = negative_prompt
+
+        # Add seed if provided
+        if seed is not None:
+            input_params["seed"] = seed
+
+        logger.info(f"Wan 2.5 I2V params: duration={wan_duration}s, resolution={resolution}, seed={seed}")
+        return input_params
+
+    def _prepare_veo_params(
+        self,
+        prompt: str,
+        input_image: Optional[str] = None,
+        duration: int = 8,
+        aspect_ratio: str = "16:9",
+        resolution: str = "1080p",
+        negative_prompt: str = "",
+        end_image: Optional[str] = None,
+        generate_audio: bool = True,
+        reference_images: Optional[list] = None,
+        seed: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Prepare input parameters for Google Veo 3.1 model
+
+        Args:
+            prompt: Text prompt for video generation
+            input_image: Optional start image (ideal: 1280x720 or 720x1280)
+            duration: Video duration (4, 6, or 8 seconds)
+            aspect_ratio: "16:9" or "9:16"
+            resolution: "720p" or "1080p"
+            negative_prompt: Things to avoid in the video
+            end_image: Optional end frame for interpolation
+            generate_audio: Generate audio with video (default True)
+            reference_images: 1-3 reference images for subject consistency (R2V)
+            seed: Random seed for reproducible generation
+
+        Returns:
+            Dictionary of input parameters for Veo 3.1 API
+        """
+        # Veo 3.1 only supports 4, 6, or 8 second durations
+        valid_durations = [4, 6, 8]
+        veo_duration = min(valid_durations, key=lambda x: abs(x - duration))
+
+        # Validate aspect ratio
+        if aspect_ratio not in ["16:9", "9:16"]:
+            logger.warning(f"Invalid aspect ratio {aspect_ratio}, defaulting to 16:9")
+            aspect_ratio = "16:9"
+
+        # Validate resolution
+        if resolution not in ["720p", "1080p"]:
+            resolution = "1080p"
+
+        input_params = {
+            "prompt": prompt,
+            "duration": veo_duration,
+            "aspect_ratio": aspect_ratio,
+            "resolution": resolution,
+            "generate_audio": generate_audio,
+        }
+
+        # Add start image if provided
+        if input_image:
+            if input_image.startswith("http"):
+                input_params["image"] = input_image
+            else:
+                input_params["image"] = open(input_image, "rb")
+
+        # Add end image for interpolation (last_frame)
+        if end_image:
+            if end_image.startswith("http"):
+                input_params["last_frame"] = end_image
+            else:
+                input_params["last_frame"] = open(end_image, "rb")
+
+        # Add negative prompt if provided
+        if negative_prompt:
+            input_params["negative_prompt"] = negative_prompt
+
+        # Add reference images for subject consistency (R2V)
+        # Note: Only works with 16:9 aspect ratio and 8-second duration
+        if reference_images:
+            if aspect_ratio != "16:9" or veo_duration != 8:
+                logger.warning("Reference images only work with 16:9 aspect ratio and 8s duration")
+            else:
+                # Handle up to 3 reference images
+                ref_images = []
+                for ref_img in reference_images[:3]:
+                    if ref_img.startswith("http"):
+                        ref_images.append(ref_img)
+                    else:
+                        ref_images.append(open(ref_img, "rb"))
+                input_params["reference_images"] = ref_images
+
+        if seed is not None:
+            input_params["seed"] = seed
+
+        logger.info(f"Veo 3.1 params: duration={veo_duration}s, resolution={resolution}, aspect={aspect_ratio}, audio={generate_audio}, seed={seed}")
+        return input_params
 
     def wait_for_completion(
         self,

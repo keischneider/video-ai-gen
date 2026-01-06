@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows1",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows1/brows1_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows1/brows1_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "The camera moves in on the brows.",
+    "input_video": "projects/kate-post/gaze/gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2025-12-31 23:54:42"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video appears to be a beauty or makeup tutorial/showcase featuring a close-up portrait sequence of a young woman. The video follows a simple yet effective format of showcasing detailed facial features, particularly emphasizing the eyebrow area as suggested by the original prompt \"The camera moves in on the brows.\"\n\n### Visual Elements\nThe video employs professional beauty photography lighting with soft, even illumination that eliminates harsh shadows and creates a flattering glow on the subject's skin. The color palette is warm and natural, dominated by peachy-pink skin tones, rich brown hair, and subtle makeup in complementary earth tones. The composition maintains a consistent close-up framing that keeps the focus squarely on the subject's face, particularly the upper facial features. The lighting appears to be front-lit with possible ring lighting or softbox setup, creating the characteristic beauty lighting often seen in makeup content.\n\n### Subjects\nThe video features a young woman with long, straight brown hair and expertly applied makeup. Her eyebrows are particularly well-groomed and defined, which aligns with the camera's focus on this feature. She's wearing a polished makeup look including winged eyeliner, well-defined lashes, neutral-toned eyeshadow, and glossy pink lips. Her expression varies between frames, sometimes with eyes closed in a serene pose and other times with eyes open, looking directly at the camera with an engaging gaze.\n\n### Mood/Tone\nThe video conveys a polished, aspirational mood typical of beauty content. There's an intimate yet professional atmosphere that suggests this is designed to showcase makeup artistry or serve as inspiration for viewers interested in beauty techniques. The tone is confident and sophisticated, with the subject's serene expressions contributing to a calming, aesthetically pleasing viewing experience.\n\n### Technical Quality\nThe video demonstrates high production quality with crisp, clear imagery and professional-grade lighting. The style is consistent with contemporary beauty content found on social media platforms, featuring the clean, minimalist aesthetic popular in makeup tutorials and beauty showcases. The camera work appears steady with subtle movements that highlight different angles of the subject's features, particularly drawing attention to the eyebrow area as intended by the original prompt.",
+    "short_description": "This video shows a young woman with professional makeup posing for the camera, displaying different facial expressions and angles to showcase her polished makeup look featuring defined eyebrows, eye makeup, and glossy lips.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2025-12-31 23:56:14"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "scene_id": "4_gaze",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/4_gaze/4_gaze_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/4_gaze/4_gaze_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Slow dolly forward into a tight close-up. Focus pulls to the eyes and holds. Shallow depth of field. The camera settles, lingering on the gaze.",
+    "input_video": "projects/kate-post/--1_move-in-new_3/move-in-new_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 19:13:59"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video captures an intimate portrait sequence featuring a young woman in what appears to be an indoor setting with soft, natural lighting. The sequence follows a deliberate dolly movement that gradually moves closer to the subject, transitioning from a medium close-up to an extreme close-up focused on her eyes, before pulling back slightly. The final frame shows her with closed eyes, suggesting a moment of contemplation or serenity.\n\n### Visual Elements\nThe video employs warm, golden-hour lighting that creates a soft, flattering glow across the subject's face. The color palette is predominantly warm with peachy and golden skin tones contrasted against the cooler background tones. The shallow depth of field technique keeps the background consistently blurred, creating beautiful bokeh that isolates the subject. The composition is centered and symmetrical, maintaining focus on facial features throughout. The camera movement is smooth and deliberate, creating a cinematic dolly-in effect that draws the viewer into an increasingly intimate perspective.\n\n### Subject\nThe subject is a young woman with striking hazel-green eyes, well-defined dark eyebrows, and glossy coral-pink lips. She has long, straight dark hair that frames her face. Her makeup appears professionally applied with emphasis on her eyes (featuring long lashes) and lips. She maintains direct eye contact with the camera throughout most of the sequence, creating an engaging and somewhat intense connection with the viewer. Her expression is serene yet captivating, shifting to peaceful in the final frame where her eyes are closed.\n\n### Mood/Tone\nThe video conveys an intimate, contemplative, and slightly mysterious mood. There's a sense of quiet intensity created by the sustained eye contact and gradual camera movement. The overall tone is sophisticated and cinematic, evoking feelings of beauty, serenity, and human connection. The final moment with closed eyes adds a peaceful, almost meditative quality to the sequence.\n\n### Technical Quality\nThis is a high-quality, cinematic production with professional lighting and camera work. The video demonstrates excellent technical execution with smooth camera movement, precise focus pulling, and consistent exposure. The shallow depth of field is expertly maintained throughout, and the color grading enhances the warm, golden aesthetic. The production style is reminiscent of beauty commercials or artistic portrait films, with careful attention to flattering the subject while maintaining artistic integrity.",
+    "short_description": "This video shows a close-up of a young woman's face as she poses for the camera, displaying her makeup look which features defined eyebrows, long eyelashes, and glossy pink lips. The video captures her making various facial expressions and movements, including closing her eyes and slightly opening her mouth to show her teeth.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 19:15:00"
+  }
+}

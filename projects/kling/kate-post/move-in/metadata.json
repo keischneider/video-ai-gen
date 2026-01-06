@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/kate-post/move-in/move-in_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/kate-post/move-in/move-in_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. subtle, restrained facial expression \u2014 feminine, mysterious, understated",
+    "input_video": null,
+    "input_image": "projects/wan/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "kling-v2.1",
+    "dialogue": null,
+    "generated_at": "2026-01-03 00:52:07"
+  },
+  "video_analysis": {
+    "description": "Based on these video frames, this appears to be a portrait-style video featuring a young woman in what looks like a professional or semi-professional headshot session.\n\n## Scene Description\nThe video captures a static portrait session with minimal movement, focusing entirely on the subject's face and upper torso. The woman appears to be posing for the camera with subtle variations in her facial expression and eye direction across the frames, suggesting gentle, natural movements rather than dramatic actions.\n\n## Visual Elements\nThe composition follows classic portrait photography principles with the subject centered in frame. The lighting is soft and even, creating a gentle, flattering illumination that minimizes harsh shadows. The color palette is muted and warm, dominated by the soft mint green of the subject's sweater against a neutral, off-white background. The framing is consistent throughout, maintaining a medium close-up shot that extends from roughly chest-level upward.\n\n## Subjects\nThe subject is a young woman with long, straight brown hair that falls past her shoulders. She has well-defined eyebrows, long eyelashes, and is wearing natural-looking makeup that enhances her features. She's dressed in a mint green knit sweater and wears layered necklaces - including a black cord with a small pendant and what appears to be a delicate gold chain. Her expression remains composed and serene throughout the frames.\n\n## Mood/Tone\nThe video conveys a calm, introspective mood with an air of quiet confidence. The subject's restrained expressions and direct gaze create a sense of mystery and understated elegance. There's an intimate, contemplative quality to the piece that suggests thoughtfulness rather than overt emotion.\n\n## Technical Quality\nThe video demonstrates high production values with excellent image clarity and professional-grade lighting setup. The soft key lighting mentioned in the original prompt is evident, creating dimension without harsh contrasts. The static camera work and consistent framing suggest this was shot with professional equipment, likely for portfolio, commercial, or artistic purposes. The overall aesthetic is clean and polished, with a cinematic quality that emphasizes the subject's natural beauty through understated presentation.",
+    "short_description": "This video shows a young woman with long brown hair and makeup posing for a series of portrait-style photos while wearing a light green sweater and layered necklaces. She maintains a neutral facial expression while looking directly at the camera in what appears to be multiple similar shots taken in sequence.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-03 00:52:29"
+  }
+}

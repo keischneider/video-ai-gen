@@ -1,0 +1,31 @@
+{
+  "scene_id": "pull-back",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/pull-back/pull-back_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/pull-back/pull-back_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Camera pulls away gradually, revealing the full face from the brows. Final shot \u2014 a calm look into the camera.",
+    "input_video": "projects/kate-post/--3_brows-new_2/brows-new_2_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:03:20"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video features a slow, intimate camera pull-back shot that begins with a close-up focus on a woman's eye area and gradually reveals her complete face. The sequence follows the cinematographic technique of starting tight and slowly widening the frame to show more of the subject, creating a sense of revelation and intimacy.\n\n### Visual Elements\nThe video employs warm, soft lighting that creates a natural, flattering glow on the subject's skin. The color palette is dominated by warm flesh tones, rich browns from her hair and eyebrows, and subtle pink hues from her lips. The composition maintains perfect center framing throughout the sequence, with the subject's face consistently positioned as the focal point. The lighting appears to be professional studio lighting or high-quality natural light, creating even illumination without harsh shadows. The gradual camera movement is smooth and controlled, suggesting professional cinematography equipment.\n\n### Subject\nThe subject is a young woman with striking features including well-defined, dark eyebrows, long eyelashes, and hazel-green eyes. Her hair is dark brown and appears sleek, framing her face naturally. She's wearing subtle, professional makeup that enhances her natural features - defined brows, mascara, and glossy pink lips. Throughout the sequence, she maintains direct eye contact with the camera, creating an engaging and intimate connection with the viewer.\n\n### Mood/Tone\nThe video conveys a calm, serene, and intimate atmosphere. There's a sense of quiet confidence and tranquility in the subject's steady gaze. The slow camera movement and sustained eye contact create a meditative, almost hypnotic quality. The overall tone is peaceful and contemplative, with an underlying sense of beauty and self-assurance.\n\n### Technical Quality\nThis appears to be a high-quality, professionally produced video with excellent technical specifications. The image is sharp and detailed, with smooth gradations in skin tones and excellent color reproduction. The camera movement is perfectly controlled and steady, suggesting the use of professional cinematography equipment. The style is reminiscent of beauty or portrait cinematography, possibly for commercial or artistic purposes. The consistent lighting and flawless focus throughout the sequence indicates careful planning and professional execution.",
+    "short_description": "This video shows a close-up beauty shot of a woman with professional makeup featuring defined eyebrows, dramatic eyelashes, and glossy lips, with the camera slowly zooming in on her face to highlight the makeup details.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:04:19"
+  }
+}

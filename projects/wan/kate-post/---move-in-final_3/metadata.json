@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final_3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final_3/move-in-final_3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final_3/move-in-final_3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. A woman's face holds completely motionless \u2014 no flicker of emotion, no twitch of muscle. Her expression is blank, serene, utterly static.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:48:23"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate portrait session featuring a young woman maintaining an almost perfectly still pose against a neutral backdrop. The scene unfolds as a study in stillness, with the subject holding a serene, composed expression throughout most of the sequence. The setting appears to be an indoor environment with soft, controlled lighting that creates a gentle, professional portrait aesthetic.\n\n**Visual Elements:**\nThe composition centers on a medium close-up framing that captures the subject from roughly the chest up. The lighting scheme employs soft, diffused illumination that creates even coverage across the subject's face, minimizing harsh shadows and creating a flattering, professional look. The color palette is dominated by warm, muted tones - the subject's mint green sweater provides a gentle pop of color against the neutral beige/cream background. The camera remains static throughout, maintaining a fixed frame that emphasizes the stillness of the scene.\n\n**Subjects:**\nThe video features a young woman with shoulder-length brown hair and carefully applied makeup, including defined eyebrows and glossy lips. She wears a soft mint green knitted sweater and a delicate necklace with what appears to be a small pendant. Her expression remains remarkably consistent - calm, neutral, and directly engaging with the camera. Only in the final frame does she break the stillness with a subtle hand gesture, raising her hand slightly toward the camera.\n\n**Mood/Tone:**\nThe overall mood is contemplative and serene, with an almost meditative quality created by the sustained stillness. There's a sense of quiet confidence and poise in the subject's demeanor. The atmosphere feels controlled and intentional, suggesting themes of patience, composure, and perhaps the tension between motion and stillness.\n\n**Technical Quality:**\nThe video demonstrates high production quality with professional-level lighting and composition. The image is sharp and well-exposed, suggesting the use of quality equipment and careful setup. The style leans toward contemporary portrait photography, with a clean, minimalist aesthetic that focuses attention entirely on the subject. The consistency of the framing and lighting throughout the sequence indicates thoughtful technical execution designed to emphasize the concept of absolute stillness breaking into subtle movement.",
+    "short_description": "This video shows a young woman with brown hair and a mint green sweater looking directly at the camera with a neutral expression. She appears to be posing for photos or recording content, maintaining consistent eye contact and facial positioning throughout the sequence.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:49:22"
+  }
+}

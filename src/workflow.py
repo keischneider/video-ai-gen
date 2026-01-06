@@ -28,9 +28,10 @@ def get_video_client():
         - "veo": Google Veo API (expensive, high quality)
         - "replicate": Replicate API with Wan models (cheap, good quality)
         - "sora": OpenAI Sora API (medium cost, excellent quality)
+        - "kling": Kling AI API (medium cost, good quality)
 
     Returns:
-        VeoClient, ReplicateClient, or SoraClient based on configuration
+        VeoClient, ReplicateClient, SoraClient, or KlingClient based on configuration
     """
     provider = os.getenv("VIDEO_PROVIDER", "veo").lower()
 
@@ -42,6 +43,10 @@ def get_video_client():
         from src.clients.sora_client import SoraClient
         logger.info("Using OpenAI Sora API (~$0.50-2.50/video)")
         return SoraClient()
+    elif provider == "kling":
+        from src.clients.kling_client import KlingClient
+        logger.info("Using Kling AI API")
+        return KlingClient()
     else:
         from src.clients.veo_client import VeoClient
         logger.info("Using Google Veo API (expensive - ~$1.75/video)")
@@ -90,7 +95,11 @@ class VideoProductionWorkflow:
         voice_id: Optional[str] = None,
         skip_lipsync: bool = False,
         input_video: Optional[str] = None,
-        input_image: Optional[str] = None
+        input_image: Optional[str] = None,
+        end_image: Optional[str] = None,
+        negative_prompt: Optional[str] = None,
+        duration: int = 5,
+        seed: Optional[int] = None
     ) -> dict:
         """
         Process a complete scene through the pipeline
@@ -101,6 +110,10 @@ class VideoProductionWorkflow:
             skip_lipsync: Skip lip-sync step if True
             input_video: Optional path to input video for extension or GCS URI
             input_image: Optional path to input image for image-to-video (first frame)
+            end_image: Optional path to end image for interpolation (Kling pro mode)
+            negative_prompt: Optional negative prompt for things to avoid (Kling)
+            duration: Video duration in seconds (Kling: 5/10, Veo: 4/6/8)
+            seed: Random seed for reproducible generation
 
         Returns:
             Dictionary with paths to generated files
@@ -114,28 +127,8 @@ class VideoProductionWorkflow:
         scene_path = self.scene_manager.create_scene(scene_id)
         self.scene_manager.update_scene_status(scene_id, "generating_video")
 
-        # Get provider and model info
+        # Get provider info (model will be determined after generation)
         provider = os.getenv("VIDEO_PROVIDER", "veo")
-        model = None
-        if provider == "replicate":
-            model = os.getenv("REPLICATE_MODEL", "wan-2.2-t2v-fast")
-        elif provider == "sora":
-            model = os.getenv("SORA_MODEL", "sora-2")
-        elif provider == "veo":
-            model = os.getenv("VEO_MODEL", "veo-2.0-generate-001")
-
-        # Save generation info to metadata
-        veo_prompt = prompt.to_veo_prompt()
-        dialogue = prompt.get_dialogue()
-        self.scene_manager.save_generation_info(
-            scene_id=scene_id,
-            prompt=veo_prompt,
-            input_video=input_video,
-            input_image=input_image,
-            provider=provider,
-            model=model,
-            dialogue=dialogue if dialogue and dialogue.strip() else None
-        )
 
         result = {
             "scene_id": scene_id,
@@ -158,12 +151,29 @@ class VideoProductionWorkflow:
 
             job = self.video_client.generate_video(
                 prompt=veo_prompt,
+                duration=duration,
                 input_video=input_video,
-                input_image=input_image
+                input_image=input_image,
+                end_image=end_image,
+                negative_prompt=negative_prompt,
+                seed=seed
             )
             job_status = self.video_client.wait_for_completion(job["job_id"])
 
             logger.info(f"Video generated successfully")
+
+            # Save generation info to metadata (after generation so we have the actual model used)
+            dialogue = prompt.get_dialogue()
+            actual_model = job.get("model")  # Get actual model from job result
+            self.scene_manager.save_generation_info(
+                scene_id=scene_id,
+                prompt=veo_prompt,
+                input_video=input_video,
+                input_image=input_image,
+                provider=provider,
+                model=actual_model,
+                dialogue=dialogue if dialogue and dialogue.strip() else None
+            )
 
             # Step 2: Save video and convert to ProRes
             logger.info(f"Step 2: Saving video and converting to ProRes")

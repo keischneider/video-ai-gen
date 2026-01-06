@@ -1,0 +1,31 @@
+{
+  "scene_id": "gaze5",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/gaze5/gaze5_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/gaze5/gaze5_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Pause. The camera holds the gaze.",
+    "input_video": "projects/kate-post/movie-in/movie-in_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2025-12-31 23:40:57"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate, contemplative moment featuring a close-up portrait sequence of a young woman. The scene unfolds as a series of subtle facial expressions and eye movements, creating a meditative, almost cinematic quality that aligns perfectly with the prompt \"Pause. The camera holds the gaze.\" The primary action involves the subject maintaining direct eye contact with the camera, with a notable moment where she closes her eyes before reopening them, creating a brief but impactful pause in the visual narrative.\n\n**Visual Elements:**\nThe video employs a warm, soft lighting setup that creates a gentle, golden-hour aesthetic. The lighting appears to be natural or carefully mimicked natural light, casting a flattering glow across the subject's face. The composition is tightly framed, focusing entirely on the face and upper shoulders against a clean, neutral background. The color palette is predominantly warm with peachy, coral, and golden tones dominating the frame. The camera remains static throughout, creating a stable, portrait-like presentation that emphasizes the stillness and intimacy of the moment.\n\n**Subjects:**\nThe video features a young woman with striking hazel-green eyes and well-defined eyebrows. Her makeup is professionally applied, featuring long eyelashes, subtle contouring, and glossy coral-pink lips. Her dark brown hair frames her face naturally, and her overall appearance suggests careful attention to beauty and presentation. Her expression is serene yet engaging, with a slight, knowing quality that draws the viewer in.\n\n**Mood/Tone:**\nThe video conveys a deeply contemplative and intimate mood. There's a sense of quiet confidence and introspection, enhanced by the direct gaze and the moment of closed eyes. The overall tone is peaceful, meditative, and slightly mysterious, inviting viewers to pause and reflect along with the subject. The sustained eye contact creates an almost conversational intimacy despite the absence of dialogue.\n\n**Technical Quality:**\nThe video demonstrates high production quality with sharp, crisp imagery and professional-grade lighting. The style is reminiscent of contemporary portrait photography or beauty cinematography, with its soft focus background and emphasis on facial features. The stable camera work and consistent lighting suggest careful technical execution, likely shot with professional equipment. The overall aesthetic falls somewhere between commercial beauty content and artistic portraiture, with a clean, polished finish that emphasizes the subject's natural beauty while maintaining an authentic, unposed quality.",
+    "short_description": "This video shows a woman demonstrating eye makeup looks, alternating between opening her eyes to display the finished makeup and closing them to show the eyeshadow application and technique.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2025-12-31 23:41:58"
+  }
+}

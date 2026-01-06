@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final-second_2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final-second_2/move-in-final-second_2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final-second_2/move-in-final-second_2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. A woman's face holds completely motionless \u2014 no flicker of emotion, no twitch of muscle. Her expression is blank, serene, utterly static.",
+    "input_video": "projects/kate-post/---move-in-final_3/move-in-final_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 22:02:22"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video presents an intimate portrait study featuring a single subject in what appears to be a controlled studio or indoor environment. The sequence captures subtle variations in facial expression and eye movement, creating a contemplative character study that shifts between moments of direct engagement and introspective withdrawal.\n\n**Visual Elements:**\nThe video employs soft, diffused lighting that creates gentle shadows and highlights, giving the subject's skin a natural, luminous quality. The color palette is dominated by warm flesh tones contrasted against a neutral, light-colored background with subtle text or pattern elements. The composition maintains a consistent medium close-up framing, focusing on the subject from approximately the chest up. The lighting appears to come from the front-left, creating dimensional modeling on the face while avoiding harsh shadows.\n\n**Subjects:**\nThe video features a young woman with shoulder-length brown hair and professionally applied makeup, including defined eyebrows and glossy lips. She wears a mint green knitted sweater and a delicate necklace with what appears to be a small pendant. Her positioning remains consistent throughout, suggesting this was filmed with the subject maintaining a relatively static pose.\n\n**Mood/Tone:**\nThe video conveys a serene, meditative quality that oscillates between engagement and introspection. There's a sense of quiet contemplation, with moments that feel almost portrait-like in their stillness. The overall tone is peaceful and somewhat ethereal, enhanced by the soft lighting and gentle color palette.\n\n**Technical Quality:**\nThe video demonstrates high production values with excellent image quality and professional lighting setup. The style is reminiscent of contemporary portrait photography or beauty cinematography, with crisp detail and smooth tonal transitions. The consistent framing and lighting suggest careful technical planning, while the subtle variations in expression indicate this may have been captured as a series of takes or a continuous shoot with natural moments of blinking and slight expression changes.",
+    "short_description": "This video shows a young woman with long brown hair and a mint green sweater posing for the camera, displaying different facial expressions including neutral looks, slight smiles, and closing her eyes in one frame.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 22:03:20"
+  }
+}

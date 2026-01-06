@@ -1,0 +1,31 @@
+{
+  "scene_id": "twelveth",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/twelveth/twelveth_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/twelveth/twelveth_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the monument gradually.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/tens/1.png",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-05 19:12:48"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis: \"Monument in Bloom\"\n\n### Scene Description\nThis video captures a mesmerizing transformation of a monumental statue against a dramatic sunset sky. The sequence shows flowers gradually appearing and blooming across the monument's surface, creating a stunning juxtaposition between the solemnity of commemoration and the vibrant beauty of nature. The statue appears to be the Motherland Monument in Kyiv, Ukraine, recognizable by its distinctive pose with raised sword and shield bearing the Ukrainian trident symbol.\n\n### Visual Elements\nThe video is dominated by a breathtaking color palette of soft pinks, purples, and golden hues that paint the sky in classic sunset tones. The lighting is cinematic and dramatic, with warm golden light illuminating the metallic surface of the monument while the sky transitions through various shades of twilight. The composition is expertly framed, showing the full majesty of the towering statue against the expansive sky, with silhouetted foliage at the base providing depth and scale.\n\nThe camera maintains a steady, low-angle perspective that emphasizes the monument's imposing stature while allowing viewers to witness the gradual floral transformation across its entire form.\n\n### Subjects\nThe central subject is the colossal statue depicting a figure holding a sword aloft in one hand and a shield in the other. As the sequence progresses, delicate pink and white flowers\u2014appearing to be cherry blossoms or similar spring blooms\u2014materialize and cascade across the monument's chest, arms, and torso. The flowers appear naturally integrated, as if the statue itself is blooming, creating an organic garland effect that softens the monument's stern military bearing.\n\n### Mood/Tone\nThe video conveys a profoundly moving and hopeful emotional tone. There's a sense of renewal, resilience, and beauty emerging from strength. The gentle emergence of flowers suggests themes of peace blooming from conflict, life growing from memorial, and nature's ability to bring beauty and hope to even the most solemn spaces. The golden hour lighting adds a sense of reverence and transcendence to the scene.\n\n### Technical Quality\nThe video demonstrates high production value with excellent image quality and smooth, seamless transitions between frames. The visual effects showing the gradual appearance of flowers are expertly executed, appearing natural and organic rather than artificial. The cinematographic approach is distinctly artistic and cinematic, reminiscent of high-end commercial or art film production. The steady camera work and consistent lighting suggest professional equipment and careful planning to capture the optimal lighting conditions during the golden hour.\n\nThis appears to be a piece of visual poetry that transforms a symbol of national defense into a monument to hope, renewal, and the enduring power of beauty to emerge even in the most unlikely places.",
+    "short_description": "This video shows the iconic \"Motherland Monument\" statue in Kyiv, Ukraine, adorned with pink flower garlands during golden hour, with the massive figure holding a sword and shield bearing Ukraine's national trident symbol against a dramatic sunset sky. The monument appears to be decorated as a tribute or memorial, creating a powerful and emotional scene as the warm light illuminates both the flowers and the towering statue.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 19:13:21"
+  }
+}

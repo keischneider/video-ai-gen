@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows-new",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows-new/brows-new_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows-new/brows-new_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "face held still, a subtle side turn of the head ",
+    "input_video": "projects/kate-post/--2_gaze/2_gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 20:55:38"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video features a close-up beauty portrait sequence showing a young woman's face as she performs a subtle head movement. The action follows the original prompt of keeping the face relatively still while executing a gentle side turn of the head, creating an intimate and elegant visual flow.\n\n**Visual Elements:**\nThe video employs warm, soft lighting that creates a golden, flattering glow across the subject's skin. The composition maintains a tight close-up framing that fills the screen with the subject's face, emphasizing facial features and makeup details. The lighting appears to be natural or professionally diffused, creating gentle shadows that add dimension without harsh contrasts. The camera movement is minimal and smooth, primarily tracking the subject's subtle head rotation from a more frontal angle to a slight side profile and back.\n\n**Subjects:**\nThe video centers on a young woman with striking features including well-defined, dark eyebrows, long eyelashes, and warm brown eyes. Her makeup is professionally applied with a natural yet polished aesthetic - featuring neutral eyeshadow tones, defined eyeliner, and glossy pink-toned lips. Her dark brown hair frames her face with some loose strands visible. Throughout the sequence, her expression remains serene and confident, with moments where her eyes are closed in a peaceful manner and others where she gazes directly at the camera.\n\n**Mood/Tone:**\nThe video conveys a calm, intimate, and aspirational mood typical of beauty and lifestyle content. There's a sense of quiet confidence and natural elegance, with the subtle movements creating a meditative, almost hypnotic quality. The overall tone is warm, inviting, and sophisticated.\n\n**Technical Quality:**\nThe video demonstrates high production quality with excellent focus and clarity that captures fine details like individual eyelashes and skin texture. The style is reminiscent of contemporary beauty cinematography often seen in cosmetics advertising or social media beauty content. The smooth transitions between angles and the consistent lighting suggest professional equipment and careful attention to technical execution. The frame rate appears optimized for capturing the fluid, subtle movement without any jarring cuts or abrupt changes.",
+    "short_description": "This video shows a close-up of a woman's face as she demonstrates different facial expressions and eye movements, showcasing her makeup look with well-defined eyebrows, long eyelashes, and glossy lips.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 20:56:43"
+  }
+}

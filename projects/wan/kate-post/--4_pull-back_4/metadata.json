@@ -1,0 +1,31 @@
+{
+  "scene_id": "pull-back_4",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/pull-back_4/pull-back_4_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/pull-back_4/pull-back_4_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Camera pulls away gradually, revealing the full face from the brows. Final shot \u2014 a calm look into the camera.",
+    "input_video": "projects/kate-post/--3_brows-new_2/brows-new_2_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:07:59"
+  },
+  "video_analysis": {
+    "description": "## Scene Description\n\nThis video features a gradual camera pullback revealing a young woman's face in what appears to be a beauty or portrait-focused sequence. The movement follows the original prompt precisely, starting with a close-up view from approximately the eyebrow level and slowly expanding to show her complete face in a direct, engaging final shot.\n\n## Visual Elements\n\nThe composition utilizes warm, soft lighting that creates an intimate, professional beauty photography aesthetic. The color palette is dominated by warm skin tones, rich browns from her hair, and subtle pink hues from her lips. The lighting appears to be carefully controlled, likely using ring lights or softbox lighting to achieve even illumination across her face without harsh shadows. The camera movement is smooth and deliberate, creating a cinematic quality as it gradually pulls back to reveal more of her features.\n\n## Subjects\n\nThe sole subject is a young woman with distinctive, well-groomed features. She has perfectly shaped, full eyebrows, long dark eyelashes (likely enhanced with mascara or extensions), and hazel-green eyes with subtle makeup highlighting. Her straight, brown hair with lighter highlights frames her face, and she wears natural-toned makeup with glossy pink lips. Small beauty marks or freckles are visible on her face, adding to her natural charm. Throughout the sequence, she maintains direct eye contact with the camera.\n\n## Mood/Tone\n\nThe video conveys a serene, confident, and intimate mood. There's a sense of calm beauty and self-assurance as she gazes directly into the lens. The overall tone is peaceful and contemplative, with an underlying sense of connection between subject and viewer. The atmosphere feels professional yet personal, suggesting themes of natural beauty and quiet confidence.\n\n## Technical Quality\n\nThe video demonstrates high production quality with excellent focus, smooth camera movement, and professional lighting setup. The style is reminiscent of high-end beauty content, cosmetics advertising, or artistic portraiture. The image quality is crisp and clear, with good color reproduction and skin texture detail. The gradual zoom-out technique is executed smoothly, creating a cinematic reveal that builds visual interest while maintaining the subject's engaging presence throughout the sequence.",
+    "short_description": "This video shows a close-up sequence of a young woman's face with professionally applied makeup, featuring bold, well-defined eyebrows, long eyelashes, and glossy lips, as the camera slowly transitions between slightly different angles and lighting to showcase the makeup look.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:09:00"
+  }
+}

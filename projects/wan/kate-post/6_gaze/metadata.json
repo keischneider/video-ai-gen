@@ -1,0 +1,31 @@
+{
+  "scene_id": "6_gaze",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/6_gaze/6_gaze_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/6_gaze/6_gaze_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Slow dolly forward into a tight close-up. Focus pulls to the eyes and holds. Shallow depth of field. The camera settles, lingering on the gaze.",
+    "input_video": "projects/kate-post/--1_move-in-new_3/move-in-new_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 19:16:03"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video depicts an intimate, cinematic close-up shot that slowly moves inward toward a young woman's face, culminating in an extreme close-up focused on her eyes. The sequence follows the classic film technique of a slow dolly movement, creating a sense of drawing the viewer deeper into the subject's gaze.\n\n### Visual Elements\nThe cinematography employs a shallow depth of field that creates a beautifully blurred background, keeping the focus entirely on the subject's facial features. The lighting is soft and flattering, with warm, natural tones that enhance the skin's luminosity. The color palette consists of warm peachy and pink tones in the skin, rich brown hair, and subtle pink lips. The composition is perfectly centered, with the camera maintaining a straight-on angle throughout the movement. The progressive framing moves from a medium close-up showing the full face down to an extreme close-up that isolates the eye area.\n\n### Subjects\nThe subject is a young woman with striking features: well-defined eyebrows, long dark eyelashes, hazel-green eyes with distinctive light-colored rings around the pupils, and glossy pink lips. Her dark brown hair frames her face, and her makeup appears professionally applied with emphasis on the eyes and a natural, dewy complexion. She maintains direct eye contact with the camera throughout, creating an intense, engaging connection with the viewer.\n\n### Mood/Tone\nThe video conveys an intimate, contemplative, and slightly mysterious mood. The direct gaze creates a sense of connection and vulnerability, while the slow camera movement builds anticipation and draws the viewer into a more personal space. There's a cinematic quality that suggests drama, romance, or introspection.\n\n### Technical Quality\nThe video demonstrates high production value with excellent image quality, professional lighting, and smooth camera movement. The cinematographic style is distinctly cinematic rather than documentary or casual, suggesting professional equipment and careful planning. The focus pulling is precise, maintaining sharp detail on the eyes throughout the movement, and the shallow depth of field is expertly controlled to create visual separation from the background.",
+    "short_description": "This video shows a close-up beauty shot of a young woman with well-defined eyebrows, long eyelashes, and glossy lips, with the camera slowly zooming in on her face to highlight her makeup and facial features.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 19:17:33"
+  }
+}

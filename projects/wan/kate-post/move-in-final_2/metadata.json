@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final_2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final_2/move-in-final_2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final_2/move-in-final_2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. A woman's face holds completely motionless \u2014 no flicker of emotion, no twitch of muscle. Her expression is blank, serene, utterly static.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:47:25"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video presents an extremely minimalist portrait study featuring a young woman maintaining complete stillness against a plain backdrop. The scene is deliberately static and controlled, with no narrative action or movement\u2014the focus is entirely on capturing a moment of perfect repose.\n\n### Visual Elements\nThe video employs soft, even lighting that creates a gentle, professional portrait aesthetic. The lighting appears to be a key light setup that flatters the subject's features without creating harsh shadows. The color palette is muted and warm, dominated by the subject's mint green sweater against a neutral beige/cream background. The composition is a classic medium close-up portrait framing, centered and symmetrical. The camera remains completely static throughout all frames, maintaining the exact same angle and distance.\n\n### Subjects\nThe subject is a young woman with shoulder-length brown hair and well-applied makeup featuring defined eyebrows and lip color. She wears a mint green knitted sweater and a black cord necklace with what appears to be a small circular pendant. Her expression remains consistently neutral and serene throughout the sequence\u2014neither smiling nor frowning, with a calm, almost meditative quality. Her gaze appears to be directed straight toward the camera.\n\n### Mood/Tone\nThe video conveys a sense of stillness, meditation, and controlled serenity. There's an almost hypnotic quality to the complete lack of movement or expression change. The mood is contemplative and peaceful, with an undertone that could be interpreted as either zen-like calm or slightly unsettling in its perfect motionlessness.\n\n### Technical Quality\nThe video demonstrates high production values with professional portrait lighting and sharp image quality. The style is decidedly cinematic in its deliberate framing and lighting setup, resembling a carefully composed photograph brought to life (or deliberately kept static). The technical execution perfectly serves the artistic concept of absolute stillness, creating an almost gallery-like or art installation quality to the piece.",
+    "short_description": "This video shows a young woman with brown hair wearing a mint green sweater and gold circular pendant necklace, looking directly at the camera with a slight smile while appearing to speak or pose for what looks like a selfie-style video or photo sequence.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:48:23"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "scene_id": "third",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/third/third_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/third/third_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Pale pink flowers slowly bloom from cracks in her back, spreading organically to cover her chest and abdomen. The flowers spread without stems, tightly against the surface of the monument.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/1.jpeg",
+    "provider": "kling",
+    "model": "kling-v2-1",
+    "dialogue": null,
+    "generated_at": "2026-01-04 21:55:57"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video depicts a remarkable time-lapse transformation of the Motherland Monument in Kyiv, Ukraine. The sequence shows pale pink flowers mysteriously emerging and blooming across the iconic statue's surface, creating a stunning metamorphosis from cold stone to organic beauty. The flowers begin as small buds appearing through cracks in the monument's back and gradually spread to completely cover the chest, torso, and abdomen areas.\n\n**Visual Elements:**\nThe video is bathed in warm, golden-hour lighting that creates a dramatic contrast between the monument's metallic surfaces and the soft pink blooms. The consistent camera angle maintains focus on the upper portion of the statue, allowing viewers to witness the gradual floral transformation. The color palette shifts from the monument's natural steel-gray tones to increasingly dominant soft pink hues as more flowers appear. Some blossoms appear to float away from the statue, adding a dreamlike quality to the sequence.\n\n**Subjects:**\nThe central subject is the towering Motherland Monument (Rodina-Mat), a Soviet-era statue depicting a female figure holding a sword and shield bearing Ukraine's trident symbol. The monument's powerful, stoic pose contrasts beautifully with the delicate pink flowers that gradually envelop her form. The flowers appear stemless and grow directly from the statue's surface, creating an organic pattern that follows the monument's contours.\n\n**Mood/Tone:**\nThe video conveys a deeply poetic and hopeful atmosphere, suggesting themes of rebirth, resilience, and the triumph of life over hardship. There's something both melancholic and beautiful about this transformation - perhaps symbolizing how beauty and growth can emerge from difficult circumstances. The floating petals add an ethereal, almost magical quality to the scene.\n\n**Technical Quality:**\nThis appears to be a high-quality digital composition combining real footage of the monument with sophisticated visual effects. The seamless integration of the blooming flowers suggests skilled post-production work, likely involving motion graphics and particle systems to create the organic spread of blossoms and floating petals. The cinematic quality and smooth progression between frames indicate professional-level video production, possibly created as an artistic statement or symbolic representation.",
+    "short_description": "This video shows the Motherland Monument in Kyiv, Ukraine being decorated with pink flowers that cascade down from the statue's head and chest area, with some flower petals floating through the air around the monument. The massive Soviet-era statue, holding a sword and shield with the Ukrainian trident symbol, is transformed into a more peaceful, memorial-like display against the evening sky.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 21:56:34"
+  }
+}

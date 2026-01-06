@@ -1,0 +1,31 @@
+{
+  "scene_id": "pull-back_2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/pull-back_2/pull-back_2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/pull-back_2/pull-back_2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Camera pulls away gradually, revealing the full face from the brows. Final shot \u2014 a calm look into the camera.",
+    "input_video": "projects/kate-post/--3_brows-new_2/brows-new_2_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:05:21"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video presents an intimate beauty portrait sequence that follows a gradual camera pullback movement, starting with an extreme close-up of a woman's eye and brow area and slowly revealing her complete face. The sequence takes place in what appears to be a bright, well-lit indoor setting, creating a clean and polished beauty shot aesthetic.\n\n### Visual Elements\nThe video showcases exceptional lighting quality with soft, even illumination that enhances the subject's natural features without creating harsh shadows. The color palette is warm and natural, dominated by peachy skin tones, rich brown hair, and subtle pink lip color. The composition maintains perfect center framing throughout the sequence, with the camera executing a smooth, controlled zoom-out movement that gradually expands the field of view. The background transitions from completely out of focus to revealing glimpses of what appears to be a modern interior space with white cabinetry or architectural elements.\n\n### Subject\nThe subject is a young woman with striking hazel-green eyes and meticulously groomed, full dark eyebrows. Her makeup is expertly applied, featuring long, defined eyelashes, smooth complexion, and glossy pink lips. Her brunette hair is styled sleek and straight, framing her face elegantly. She maintains direct eye contact with the camera throughout the sequence, creating an engaging and confident presence.\n\n### Mood/Tone\nThe video conveys a serene, confident, and polished mood. There's an aspirational quality typical of beauty and lifestyle content, with the subject's steady gaze and subtle expression suggesting calm assurance. The overall tone is sophisticated yet approachable, with an emphasis on natural beauty enhanced by professional makeup artistry.\n\n### Technical Quality\nThis appears to be professionally shot content with high production values. The video quality is crisp and clear, likely shot in high definition with professional lighting equipment. The camera movement is exceptionally smooth, suggesting the use of professional stabilization equipment. The style is reminiscent of high-end beauty photography and commercial work, with perfect focus maintenance throughout the zoom sequence. The consistent lighting and color grading indicate careful post-production work, resulting in a polished, commercial-quality beauty video suitable for cosmetics advertising or social media beauty content.",
+    "short_description": "This video shows a close-up of a woman's face with natural makeup, featuring well-defined eyebrows, long eyelashes, and glossy lips, as the camera slowly zooms in on her facial features.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:06:25"
+  }
+}

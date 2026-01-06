@@ -1,0 +1,31 @@
+{
+  "scene_id": "thirteenth",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/thirteenth/thirteenth_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/thirteenth/thirteenth_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the monument gradually.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/1.jpeg",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-05 19:18:36"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis: Blooming Monument\n\n### Scene Description\nThis video captures a magical transformation of the iconic Motherland Monument (Rodina-Mat) in Kyiv, Ukraine, during what appears to be golden hour or sunset. The sequence shows beautiful flowers gradually appearing and blooming across the monument's raised sword arm, creating a striking juxtaposition between the stern memorial and delicate natural beauty.\n\n### Visual Elements\nThe video is bathed in warm, golden sunlight that creates a dramatic side-lighting effect on the monument's metallic surface. The color palette transitions from cool grays and blues in the sky to warm amber and orange tones on the statue, with vibrant pink and white flowers providing a soft contrast. The composition maintains a consistent low-angle perspective that emphasizes the monument's imposing scale and heroic stance. The Ukrainian trident emblem on the shield remains prominently visible throughout.\n\n### Subjects\nThe central subject is the massive Soviet-era monument depicting a female figure holding a sword aloft in one hand and a shield bearing Ukraine's coat of arms in the other. As the sequence progresses, lush floral arrangements appear to grow organically along the sword arm and torso, featuring predominantly pink and white blooms that could be cherry blossoms, roses, or similar flowering plants.\n\n### Mood/Tone\nThe video conveys a profoundly hopeful and transformative mood. There's a sense of renewal and beauty emerging from solemnity, suggesting themes of peace, growth, and the triumph of life and beauty over conflict. The gentle, gradual appearance of the flowers creates a dreamlike, almost mystical atmosphere that feels both reverent and uplifting.\n\n### Technical Quality\nThe video demonstrates high production quality with excellent color grading that enhances the golden hour lighting. The transformation appears to be achieved through sophisticated digital effects, with the flowers appearing naturally integrated into the scene. The cinematography maintains a steady, contemplative pace that allows viewers to absorb the gradual transformation. The style feels cinematic and artistic, with careful attention to lighting and composition that elevates this beyond documentary footage into the realm of visual poetry.",
+    "short_description": "This video shows the Motherland Monument in Kyiv, Ukraine - a massive statue holding a sword and shield with the Ukrainian trident symbol - adorned with a large floral wreath around its extended arm during what appears to be sunset or sunrise. The monument, which commemorates World War II, is bathed in warm golden light as the camera captures it from multiple angles with the decorative flowers creating a striking contrast against the metallic statue.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 19:19:04"
+  }
+}

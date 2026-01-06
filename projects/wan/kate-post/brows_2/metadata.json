@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows_2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows_2/brows_2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows_2/brows_2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Extreme close-up push in. Camera glides forward to frame the eyebrows. Macro lens effect.",
+    "input_video": "projects/kate-post/--2_gaze/2_gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 19:34:18"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate, extreme close-up shot that gradually pushes in on a woman's face, ultimately focusing on the eye and eyebrow area. The sequence follows a smooth, forward camera movement that creates an increasingly macro-lens effect, drawing the viewer's attention to intricate facial details.\n\n**Visual Elements:**\nThe video employs warm, natural lighting that beautifully illuminates the subject's skin, creating a soft, golden glow. The composition is tightly framed, starting with a close-up that includes the full face and progressively narrowing to focus primarily on the upper facial features. The camera movement is fluid and steady, creating a hypnotic push-in effect that transforms the viewing experience from portrait-style to macro photography. The color palette is dominated by warm skin tones, rich brown eyebrows and hair, and subtle pink lip color.\n\n**Subjects:**\nThe subject is a young woman with strikingly well-groomed features. She has perfectly shaped, full dark brown eyebrows, long curved eyelashes, and bright hazel-green eyes with distinctive white circular reflections (likely ring lights). Her skin appears smooth and luminous with natural texture visible in the extreme close-up shots. Her lips have a natural pink tint with glossy finish, and loose strands of brown hair frame her face.\n\n**Mood/Tone:**\nThe video conveys an intimate, beauty-focused atmosphere with a sense of elegance and sophistication. There's something mesmerizing and almost meditative about the gradual zoom, creating a feeling of getting closer to perfection or examining fine artistry. The mood is serene and contemplative, with an underlying sense of luxury associated with high-end beauty content.\n\n**Technical Quality:**\nThe video demonstrates exceptional technical quality with sharp, high-definition imagery that maintains clarity even at extreme magnification levels. The production style is distinctly cinematic and professional, likely shot with high-end camera equipment capable of macro photography. The smooth camera movement and consistent lighting suggest professional videography techniques. This appears to be beauty or cosmetic content, possibly for social media, advertising, or artistic purposes, with the technical execution matching commercial beauty industry standards.",
+    "short_description": "This video shows a close-up of a woman's face as she blinks and makes subtle facial expressions, highlighting her makeup including well-defined eyebrows, long eyelashes, and glossy lips.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 19:35:21"
+  }
+}

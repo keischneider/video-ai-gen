@@ -1,0 +1,31 @@
+{
+  "scene_id": "second",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/second/second_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/second/second_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Pale pink flowers slowly bloom from cracks in her back, spreading organically to cover her chest and abdomen. The flowers spread without stems, tightly against the surface of the monument.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/1.jpeg",
+    "provider": "replicate",
+    "model": "kling-v2.1",
+    "dialogue": null,
+    "generated_at": "2026-01-04 20:58:38"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures a striking surreal transformation of the Motherland Monument (Rodina-Mat) in Kyiv, Ukraine. The sequence shows pale pink flowers mysteriously blooming and spreading across the massive Soviet-era statue, creating a powerful juxtaposition between the monument's stern military symbolism and delicate natural beauty. The flowers appear to emerge organically from cracks in the statue's metallic surface, gradually covering the figure's torso and chest area.\n\n**Visual Elements:**\nThe video is bathed in the warm, golden light of either sunrise or sunset, casting dramatic shadows and creating a cinematic atmosphere. The lighting enhances the contrast between the statue's cold metallic gray surface and the soft pink blooms. The composition maintains a consistent low-angle perspective that emphasizes the monument's imposing scale while allowing viewers to witness the gradual floral transformation. The camera appears stable, focusing attention on the evolving details of the flower growth rather than movement.\n\n**Subjects:**\nThe central subject is the iconic Motherland Monument, a towering female figure holding a sword aloft in one hand and a shield bearing Ukraine's trident symbol in the other. The statue represents the allegorical figure of the Soviet Motherland, but the addition of Ukrainian national symbols reflects post-independence modifications. The pale pink flowers that bloom across her form appear to be cherry blossoms or similar delicate blooms, spreading without visible stems and adhering directly to the statue's surface.\n\n**Mood/Tone:**\nThe video conveys a deeply poetic and contemplative mood, suggesting themes of renewal, hope, and transformation. There's a sense of gentle defiance as natural beauty overtakes militant symbolism. The imagery evokes resilience and rebirth, with the flowers representing life emerging from hardship or conflict. The serene progression creates an almost meditative quality that contrasts with the monument's originally intended imposing presence.\n\n**Technical Quality:**\nThe video demonstrates high production quality with crisp detail and smooth transitions between frames. The cinematographic style is artistic and symbolic rather than documentary, employing the golden hour lighting to maximum effect. The sequence appears digitally enhanced to create the fantastical element of the blooming flowers, blending realistic photography with surreal digital artistry. The pacing is deliberate and contemplative, allowing viewers to absorb the symbolic transformation gradually.\n\nThis powerful visual metaphor transforms a symbol of military might into something beautiful and life-affirming, creating a compelling narrative about transformation, hope, and the power of nature to reclaim and beautify even the most imposing human constructions.",
+    "short_description": "This video shows the famous \"Motherland Monument\" statue in Kyiv, Ukraine, captured during what appears to be cherry blossom season, with pink flowering branches naturally growing around and adorning the massive Soviet-era monument. The sequence captures the striking contrast between the delicate pink blossoms and the imposing metallic figure holding a sword and shield with Ukraine's trident symbol.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 20:59:32"
+  }
+}

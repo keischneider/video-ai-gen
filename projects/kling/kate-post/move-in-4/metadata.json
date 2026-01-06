@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-4",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/kate-post/move-in-4/move-in-4_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/kate-post/move-in-4/move-in-4_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Extreme close-up push in. Camera glides over the eyebrows from left to right",
+    "input_video": null,
+    "input_image": "projects/kling/kate-post/2.png",
+    "provider": "replicate",
+    "model": "kling-v2.1",
+    "dialogue": null,
+    "generated_at": "2026-01-04 13:06:33"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video presents an intimate, extreme close-up portrait shot of a young woman's face. The sequence appears to be a slow, deliberate camera movement that glides horizontally across her facial features, particularly emphasizing the eyebrow area as specified in the original prompt. The setting appears to be indoors with professional lighting setup.\n\n**Visual Elements:**\nThe cinematography features exceptional clarity and detail, with soft, even lighting that creates a luminous, almost ethereal quality to the subject's skin. The color palette is dominated by warm, natural flesh tones contrasted against a clean white background. The lighting appears to be professionally diffused, eliminating harsh shadows while maintaining dimensional depth. The composition maintains perfect focus on facial features, with a very shallow depth of field that keeps the background completely neutral.\n\n**Subjects:**\nThe subject is a young woman with striking hazel-green eyes and well-defined, natural eyebrows. Her complexion appears flawless with a natural, dewy finish. She has long, dark brown wavy hair that frames her face, and her makeup is subtle yet polished - featuring defined lashes, natural-toned eyeshadow, and glossy pink lips. Her expression remains serene and direct, maintaining steady eye contact with the camera throughout the sequence.\n\n**Mood/Tone:**\nThe video conveys an intimate, contemplative atmosphere with undertones of beauty and serenity. There's a sense of quiet confidence and natural elegance. The extreme close-up creates an almost meditative quality, inviting viewers to appreciate subtle details and natural beauty. The mood is calm, sophisticated, and gently mesmerizing.\n\n**Technical Quality:**\nThis appears to be shot with high-end professional equipment, likely in 4K resolution given the exceptional detail visible in skin texture, individual eyelashes, and hair strands. The production values suggest commercial or cinematic quality work, possibly for beauty, fashion, or portrait purposes. The camera movement is perfectly smooth, indicating the use of professional stabilization equipment or post-production stabilization. The overall aesthetic is polished and contemporary, with a style reminiscent of high-end beauty campaigns or artistic portraiture.",
+    "short_description": "This video shows a close-up of a woman's face as she demonstrates different facial expressions or poses, showcasing her natural makeup look with defined eyebrows, eyelashes, and glossy lips.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 13:06:55"
+  }
+}

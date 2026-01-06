@@ -1,0 +1,31 @@
+{
+  "scene_id": "eights",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/mother-homeland/eights/eights_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/mother-homeland/eights/eights_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the monument.",
+    "input_video": null,
+    "input_image": "projects/kling/mother-homeland/1.jpeg",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-04 23:45:12"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video depicts a dramatic transformation of the Motherland Monument (Rodina-Mat) in Kyiv, Ukraine, where vibrant pink and white flowers gradually bloom and spread across the massive statue. The sequence begins with the monument in its original state during golden hour, then shows an enchanting metamorphosis as colorful blooms appear to \"pop\" onto the statue's surface, eventually covering much of the figure in cascading floral arrangements.\n\n### Visual Elements\nThe video is characterized by warm, romantic lighting that transitions from golden hour to a stunning pink and purple sunset sky. The color palette evolves from the monument's original steel gray to incorporate vibrant pinks, soft whites, and warm coral tones from both the flowers and the dramatic sky. The composition maintains a low-angle perspective that emphasizes the monument's imposing scale and heroic stature. The lighting creates beautiful contrast between the metallic surfaces and the organic, delicate flowers.\n\n### Subjects\nThe central subject is the iconic Motherland Monument, a towering female figure holding a sword raised high in one hand and a shield bearing the Ukrainian trident (coat of arms) in the other. As the sequence progresses, the statue becomes adorned with an abundance of flowers - primarily pink and white blooms that appear to be cherry blossoms or similar spring flowers. The flowers create flowing, organic patterns across the statue's torso, arms, and even crown the figure's head like a floral wreath.\n\n### Mood/Tone\nThe video conveys a deeply poetic and hopeful mood, transforming a symbol of strength and defense into something that celebrates beauty, renewal, and life. There's a sense of gentle magic and reverence in how the flowers appear to naturally bloom across the monument. The warm, dreamy lighting and the contrast between the hard metal and soft organic flowers creates an atmosphere of peaceful transformation and spring-like rebirth.\n\n### Technical Quality\nThe video demonstrates high production quality with smooth transitions between frames and excellent color grading that enhances the warm, golden tones. The style is cinematic and artistic, with careful attention to lighting and timing to capture the monument during the most flattering light conditions. The transformation effect appears seamlessly integrated, creating a dreamlike quality that feels both magical and organic. The consistent framing and perspective suggest professional camera work, possibly using a tripod or stabilized setup to maintain the monument's positioning throughout the sequence.\n\nThis artistic interpretation transforms a symbol of national defense into a celebration of natural beauty and renewal, creating a powerful visual metaphor for hope and peaceful transformation.",
+    "short_description": "This video shows the Motherland Monument in Kyiv, Ukraine being decorated with pink flowers during sunset, creating a striking contrast between the massive Soviet-era statue and the delicate floral arrangements against a beautiful pink sky. The sequence captures the monument from multiple angles as it's adorned with flowers, transforming the imposing war memorial into something more peaceful and artistic.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 23:45:46"
+  }
+}

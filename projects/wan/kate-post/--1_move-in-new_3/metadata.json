@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-new_3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-new_3/move-in-new_3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-new_3/move-in-new_3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Smooth forward dolly on face. Soft key light. Gradual zoom into close-up framing.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 01:18:30"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate portrait session featuring a gradual camera movement that slowly zooms in on a young woman's face. The sequence progresses from a medium shot to an extreme close-up, creating an increasingly personal and focused viewing experience. The woman remains stationary throughout, serving as the sole subject against a neutral backdrop.\n\n**Visual Elements:**\nThe video employs sophisticated cinematographic techniques with soft, even lighting that creates a professional studio quality. The color palette is warm and natural, dominated by peachy skin tones, rich brown hair, and a subtle mint green garment. The lighting setup appears to use a key light from the front, creating gentle shadows that sculpt the subject's features without harsh contrasts. The background features a white or cream-colored wall with subtle text or design elements that become increasingly blurred as the camera moves closer. The composition maintains perfect centering throughout the zoom progression.\n\n**Subjects:**\nThe subject is a young woman with long, straight brown hair and professionally applied makeup featuring defined eyebrows, enhanced eyelashes, and glossy pink lips. She wears a mint green knitted sweater and a delicate necklace with what appears to be a small pendant. Her expression is serene and contemplative, with direct eye contact with the camera that creates an engaging connection with the viewer. Notably, she closes her eyes briefly in one of the later frames, adding a moment of vulnerability to the sequence.\n\n**Mood/Tone:**\nThe video conveys a calm, intimate, and slightly ethereal mood. There's a sense of quiet confidence and natural beauty being celebrated. The gradual zoom creates building intimacy, while the soft lighting and the subject's serene expression contribute to a peaceful, almost meditative atmosphere. The overall tone is sophisticated and gentle.\n\n**Technical Quality:**\nThe video demonstrates high production value with professional-grade cinematography. The camera movement is exceptionally smooth, indicating the use of proper dolly equipment or stabilization technology as specified in the original prompt. The image quality is sharp with excellent color grading that enhances the warm, natural tones. The lighting setup is expertly executed, providing flattering illumination without overexposure. The video style is distinctly cinematic rather than casual or documentary, with careful attention to framing, composition, and visual aesthetics throughout the zoom sequence.",
+    "short_description": "This video shows a young woman with long brown hair wearing a mint green sweater and a necklace, posing for close-up portrait shots against a white background with text. The sequence captures her making subtle facial expressions and movements, including closing her eyes briefly, while maintaining a natural makeup look throughout.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 01:19:33"
+  }
+}

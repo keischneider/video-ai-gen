@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/kate-post/move-in-3/move-in-3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/kate-post/move-in-3/move-in-3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Extreme close-up push in. Camera glides forward to frame the eyebrows. Macro lens effect.",
+    "input_video": null,
+    "input_image": "projects/kling/kate-post/2.png",
+    "provider": "replicate",
+    "model": "kling-v2.1",
+    "dialogue": null,
+    "generated_at": "2026-01-04 13:01:38"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video depicts an extreme close-up camera movement that gradually pushes in on a woman's face, starting from a full facial view and ending with an intimate focus on her eye and eyebrow area. The sequence demonstrates a classic cinematic \"push in\" technique, creating an increasingly intimate and detailed perspective of the subject.\n\n**Visual Elements:**\nThe video features excellent lighting with soft, natural illumination that evenly lights the subject's face without harsh shadows. The color palette is warm and natural, with peachy skin tones, rich brown hair, and striking hazel-green eyes. The composition maintains perfect center framing throughout the zoom sequence. The camera movement is smooth and controlled, creating a seamless macro lens effect that reveals increasingly fine details of the subject's features, particularly the eyebrows and skin texture.\n\n**Subjects:**\nThe sole subject is a young woman with naturally beautiful features. She has dark brown, wavy hair that frames her face, well-groomed eyebrows with a natural arch, and captivating hazel-green eyes with long, dark eyelashes. Her skin appears smooth and naturally radiant, with subtle natural makeup that enhances rather than masks her features. She maintains a calm, neutral expression throughout the sequence, with her gaze directed toward the camera.\n\n**Mood/Tone:**\nThe video conveys an intimate, contemplative mood. The gradual zoom creates a sense of drawing the viewer closer to the subject, establishing an almost hypnotic connection. The overall tone is serene and beauty-focused, with an emphasis on natural elegance and the intricate details of human features.\n\n**Technical Quality:**\nThe video demonstrates high production quality with sharp, crisp imagery that maintains clarity even at extreme magnification levels. The macro lens effect is expertly executed, revealing fine details like individual eyebrow hairs and skin texture without losing focus. The smooth camera movement and professional lighting setup suggest this was shot with quality equipment, possibly for beauty, fashion, or artistic purposes. The cinematographic style is clean and minimalist, focusing entirely on the natural beauty of the subject.",
+    "short_description": "This video shows a close-up view of a woman's face, focusing on her eyes, eyebrows, and natural makeup as she blinks and makes subtle facial expressions.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-04 13:02:00"
+  }
+}

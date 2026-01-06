@@ -1,0 +1,31 @@
+{
+  "scene_id": "sixth",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/vienna-cathedral/sixth/sixth_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/vienna-cathedral/sixth/sixth_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Slowly blooms gently pop on the cathedral gradually from down to up.",
+    "input_video": null,
+    "input_image": "projects/kling/vienna-cathedral/1.webp",
+    "provider": "replicate",
+    "model": "veo-3.1",
+    "dialogue": null,
+    "generated_at": "2026-01-05 22:10:24"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures a stunning Gothic cathedral undergoing a magical floral transformation. The sequence begins with the imposing stone structure in its original state and gradually shows pink flowers materializing and blooming across its surface, moving from the lower portions upward. The transformation creates an enchanting juxtaposition between ancient religious architecture and delicate natural beauty.\n\n**Visual Elements:**\nThe video features a dramatic low-angle composition that emphasizes the cathedral's towering height and Gothic grandeur. The color palette evolves from cool blue skies and warm beige stone tones to include vibrant pink blooms that become increasingly prominent. The lighting transitions from bright daylight to a romantic golden hour atmosphere with pink and purple hues painting the sky. The camera maintains a steady, upward-angled perspective that showcases the intricate architectural details including flying buttresses, pointed arches, ornate stonework, and the distinctive geometric roof pattern.\n\n**Subjects:**\nThe primary subject is an elaborate Gothic cathedral with multiple spires and towers, featuring classic medieval architectural elements. The secondary subject consists of pink cosmos flowers and various flowering vines that gradually appear and spread across the building's facade. These blooms range from small delicate flowers to large, prominent cosmos with yellow centers that seem to float magically in front of the structure.\n\n**Mood/Tone:**\nThe video conveys a dreamy, romantic, and almost mystical atmosphere. There's a sense of wonder and transformation as nature reclaims or adorns the ancient stone structure. The mood is uplifting and fantastical, suggesting themes of renewal, beauty emerging from stoicism, and the harmony between human creation and natural beauty.\n\n**Technical Quality:**\nThe video appears to be high-quality digital content with smooth transitions and excellent detail retention. The style is cinematic and artistic, likely created using digital effects or specialized animation techniques to achieve the gradual flower blooming effect. The production demonstrates sophisticated visual effects work, with realistic lighting changes and seamless integration of the floral elements onto the architectural surfaces. The overall aesthetic is polished and professionally executed, creating a magical realism effect that feels both fantastical and believable.",
+    "short_description": "This video shows a Gothic cathedral with ornate spires and detailed stonework, gradually transitioning from a clear blue sky to a pink sunset sky while pink flowers progressively appear and multiply in the foreground, creating a dreamy, romantic atmosphere.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 22:11:01"
+  }
+}

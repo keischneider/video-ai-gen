@@ -1,0 +1,31 @@
+{
+  "scene_id": "5_gaze",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/5_gaze/5_gaze_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/5_gaze/5_gaze_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Slow dolly forward into a tight close-up. Focus pulls to the eyes and holds. Shallow depth of field. The camera settles, lingering on the gaze.",
+    "input_video": "projects/kate-post/--1_move-in-new_3/move-in-new_3_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 19:15:00"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video presents an intimate cinematographic portrait sequence featuring a gradual camera movement toward a young woman's face. The sequence follows the described dolly technique, beginning with a medium close-up and slowly advancing to an extreme close-up that centers on the subject's eyes. The movement is deliberate and controlled, creating a sense of intimacy and connection with the viewer.\n\n**Visual Elements:**\nThe cinematography employs professional lighting techniques with soft, even illumination that flatters the subject's features without harsh shadows. The color palette is warm and natural, dominated by peachy skin tones, rich brown hair, and subtle pink lip color. The background maintains a consistent soft blur throughout, appearing to be a neutral, light-colored surface that ensures the subject remains the sole focus. The shallow depth of field is expertly maintained, with razor-sharp focus on the eyes while everything else falls into a pleasing bokeh. The camera movement is smooth and steady, suggesting professional equipment and technique.\n\n**Subjects:**\nThe sole subject is a young woman with striking hazel-green eyes that serve as the focal point of the entire sequence. She has long, straight brown hair that frames her face, well-defined eyebrows, and long eyelashes that appear to be enhanced with makeup. Her makeup is naturally applied with emphasis on a glossy pink lip color. Her expression remains calm and direct throughout the sequence, maintaining steady eye contact with the camera, which creates an engaging and almost hypnotic effect.\n\n**Mood/Tone:**\nThe video conveys an intimate, contemplative, and slightly mysterious atmosphere. The sustained eye contact and gradual camera approach create a sense of connection and vulnerability. There's a cinematic quality that suggests this could be part of a dramatic scene, perhaps a moment of realization, confession, or emotional intensity. The overall tone is serious and engaging, with an undercurrent of quiet confidence.\n\n**Technical Quality:**\nThis is clearly a high-production-value piece shot with professional equipment. The video quality is exceptionally sharp with excellent color reproduction and dynamic range. The camera movement is executed with precision, likely using a professional dolly or slider system. The focus pulling is seamless and expertly timed. The shallow depth of field suggests the use of a high-end camera with a fast lens, possibly shot in 4K resolution. The overall aesthetic aligns with contemporary commercial or cinematic standards, demonstrating sophisticated understanding of portrait cinematography and the technical execution to match the artistic vision outlined in the original prompt.",
+    "short_description": "This video shows a close-up of a woman's face with professional makeup, featuring well-defined eyebrows, long eyelashes, and glossy pink lips, as the camera slowly pans or the subject makes subtle movements to showcase the makeup look from different angles.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 19:16:03"
+  }
+}

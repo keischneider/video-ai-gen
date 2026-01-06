@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-new",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-new/move-in-new_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-new/move-in-new_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Smooth forward dolly on face. Soft key light. Gradual zoom into close-up framing.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 01:14:58"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate portrait sequence of a young woman in what appears to be an indoor setting. The footage follows the original cinematographic direction with a smooth forward dolly movement that gradually brings the viewer closer to the subject, transitioning from a medium shot to an extreme close-up of her face.\n\n**Visual Elements:**\nThe video is beautifully lit with soft, diffused key lighting that creates a gentle, flattering illumination across the subject's features. The lighting setup eliminates harsh shadows while maintaining dimensional depth. The background features a white or cream-colored wall with subtle decorative text or lettering that remains softly out of focus throughout the sequence. The camera work is exceptionally smooth, executing a precise forward dolly movement combined with a gradual zoom that creates an increasingly intimate framing as the sequence progresses.\n\n**Subjects:**\nThe video centers on a young woman with long, straight brown hair and professionally applied makeup featuring defined eyebrows, dramatic eyelashes, and glossy pink-toned lips. She's wearing a mint green or seafoam colored top and delicate jewelry including what appears to be a layered necklace with a pendant. Her expression evolves subtly throughout the sequence - beginning with direct eye contact with the camera, then showing slight mouth movements as if beginning to speak, and concluding with her eyes gently closed in a peaceful, contemplative expression.\n\n**Mood/Tone:**\nThe video conveys a serene, intimate, and professional atmosphere. There's a sense of quiet confidence and natural beauty emphasized by the gentle camera movement and soft lighting. The overall tone is warm, inviting, and slightly dreamy, with an emphasis on capturing authentic, subtle emotional moments.\n\n**Technical Quality:**\nThis appears to be high-quality digital cinematography with excellent technical execution. The video demonstrates professional-grade production values with precise camera control, consistent lighting, and sharp image quality. The style is cinematic and polished, suggesting this could be promotional content, a beauty campaign, or artistic portrait work. The smooth camera movement and gradual zoom are executed flawlessly, creating a seamless viewing experience that draws the audience into an increasingly personal connection with the subject.",
+    "short_description": "This video shows a young woman with brown hair and natural makeup posing for the camera, displaying various facial expressions including looking directly at the viewer and closing her eyes in the final frame.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 01:16:05"
+  }
+}

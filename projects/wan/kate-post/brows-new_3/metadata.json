@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows-new_3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows-new_3/brows-new_3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows-new_3/brows-new_3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "face held still, a subtle side turn of the head ",
+    "input_video": "projects/kate-post/--2_gaze/2_gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 20:59:26"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video presents an intimate beauty portrait sequence featuring a close-up view of a young woman's face. The action follows a subtle progression from direct eye contact to gentle head movements, culminating in moments of closed eyes and serene expressions. The setting appears to be indoors with controlled lighting, creating a professional beauty or makeup demonstration atmosphere.\n\n**Visual Elements:**\nThe video employs warm, golden lighting that creates a soft, luminous glow across the subject's skin. The color palette is dominated by natural flesh tones, complemented by rich brown eyebrows and hair, with coral-pink lips providing a gentle pop of color. The composition maintains a consistent close-up framing that fills the screen with the subject's face, from approximately the forehead to just below the lips. The lighting setup appears professional, with even illumination that highlights the skin's texture and makeup details without harsh shadows.\n\n**Subject:**\nThe video features a young woman with meticulously applied makeup, including perfectly groomed, full eyebrows, long eyelashes (likely extensions or false lashes), subtle eye makeup with winged eyeliner, and glossy coral-pink lips. Her dark hair frames her face, and she has warm, brown eyes. Her skin appears flawless with a natural, dewy finish that suggests professional makeup application or digital enhancement.\n\n**Mood/Tone:**\nThe video conveys a serene, contemplative, and luxurious mood. There's an intimate quality to the close-up framing that creates a sense of beauty and tranquility. The subject's expressions range from direct engagement (when looking at the camera) to peaceful introspection (when eyes are closed), contributing to an overall atmosphere of calm sophistication and beauty appreciation.\n\n**Technical Quality:**\nThe video demonstrates high production quality with professional-grade lighting and camera work. The image is sharp and well-focused, suggesting use of quality equipment. The style is reminiscent of high-end beauty advertising or social media beauty content, with the kind of polished aesthetic typical of makeup tutorials or cosmetic brand promotions. The consistent framing and smooth transitions between expressions indicate careful direction and possibly multiple takes edited together seamlessly.",
+    "short_description": "This video shows a close-up beauty sequence of a young woman with well-defined eyebrows and glossy lips, alternating between different facial expressions including eyes open, eyes closed with winged eyeliner visible, and smiling to show her teeth.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:00:31"
+  }
+}

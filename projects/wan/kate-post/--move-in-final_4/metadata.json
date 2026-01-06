@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-final_4",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-final_4/move-in-final_4_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-final_4/move-in-final_4_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Static camera, fixed frame.  Soft key light. subtle, restrained facial expression \u2014 feminine, mysterious, understated",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:37:48"
+  },
+  "video_analysis": {
+    "description": "## Video Frame Analysis\n\n### Scene Description\nThis appears to be a static portrait video featuring a young woman maintaining consistent positioning throughout the sequence. The scene is set against what looks like a step-and-repeat backdrop or event wall with subtle text/branding visible but out of focus in the background. The subject remains centered in frame with minimal to no movement, creating an intimate, headshot-style presentation.\n\n### Visual Elements\nThe video employs soft, professional lighting that creates gentle illumination across the subject's face, consistent with the prompt's \"soft key light\" specification. The lighting is even and flattering, avoiding harsh shadows. The color palette is warm and muted, dominated by peachy skin tones and the soft mint green of the subject's sweater. The background maintains a neutral white/cream tone with subtle pink text elements that remain deliberately out of focus. The composition follows classic portrait framing, with the subject positioned centrally in what appears to be a medium close-up shot.\n\n### Subjects\nThe video features a young woman with shoulder-length dark brown hair styled in a sleek, straight fashion. She wears a soft mint green knitted sweater and layered jewelry including a black cord necklace with what appears to be a small gold or light-colored pendant, along with a delicate chain necklace. Her makeup is professionally applied with defined eyebrows, subtle eye makeup, and a natural-toned lip color. Throughout the frames, she maintains direct eye contact with the camera while displaying very subtle variations in her facial expression - primarily small changes in her smile intensity.\n\n### Mood/Tone\nThe video conveys a serene, contemplative, and subtly mysterious atmosphere as specified in the original prompt. The subject's expression remains understated and restrained, with a gentle, knowing quality that suggests depth beneath the surface. There's an intimate, professional quality to the presentation that feels both approachable and enigmatic. The overall tone is calm, sophisticated, and quietly engaging.\n\n### Technical Quality\nThe video demonstrates high production value with professional-grade image quality. The footage appears to be shot with a static camera setup, maintaining consistent framing throughout the sequence. The lighting setup is expertly executed, providing soft, even illumination that enhances the subject's features without creating harsh contrasts. The video style is cinematic and polished, resembling professional headshot photography or high-end commercial work. The focus remains sharp on the subject while maintaining appropriate background separation, and the overall technical execution successfully achieves the \"understated\" and \"restrained\" aesthetic called for in the original prompt.",
+    "short_description": "This video shows a young woman with long brown hair wearing a mint green sweater and a necklace with a circular pendant, looking directly at the camera with a slight smile in what appears to be a series of nearly identical portrait shots.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:39:21"
+  }
+}

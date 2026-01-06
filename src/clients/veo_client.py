@@ -190,6 +190,7 @@ class VeoClient:
             job_data = {
                 "job_id": job_id,
                 "status": "PROCESSING",  # Operation is async
+                "model": self.model_name,
                 "prompt": prompt,
                 "duration": duration,
                 "aspect_ratio": aspect_ratio,

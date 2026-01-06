@@ -1,0 +1,24 @@
+{
+  "scene_id": "brow-zoom",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brow-zoom/brow-zoom_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brow-zoom/brow-zoom_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Extreme close-up push in. Camera glides forward to frame the eyebrows. Macro lens effect.",
+    "input_video": "projects/kate-post/movie-in/movie-in_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2025-12-31 23:59:15"
+  }
+}

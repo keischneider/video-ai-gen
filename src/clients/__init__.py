@@ -1,5 +1,7 @@
 from .veo_client import VeoClient
 from .tts_client import TTSClient
 from .lipsync_client import LipSyncClient
+from .replicate_client import ReplicateClient
+from .kling_client import KlingClient
 
-__all__ = ['VeoClient', 'TTSClient', 'LipSyncClient']
+__all__ = ['VeoClient', 'TTSClient', 'LipSyncClient', 'ReplicateClient', 'KlingClient']

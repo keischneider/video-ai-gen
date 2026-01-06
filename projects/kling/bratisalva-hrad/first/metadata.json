@@ -1,0 +1,24 @@
+{
+  "scene_id": "first",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/project/bratislava-hrad/first/first_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/project/bratislava-hrad/first/first_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the castle gradually.",
+    "input_video": null,
+    "input_image": "projects/kling/bratisalva-hrad/start.jpg",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-05 19:35:40"
+  }
+}

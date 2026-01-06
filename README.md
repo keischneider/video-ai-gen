@@ -229,6 +229,30 @@ python cli.py generate \
 - Replicate: Uses Wan i2v models automatically
 - OpenAI Sora: Image input support
 
+### Generate Multiple Variations
+
+Generate multiple scenes with the same prompt, automatically incrementing scene IDs:
+
+```bash
+# Generate 5 variations: scene_01, scene_02, scene_03, scene_04, scene_05
+python cli.py generate \
+  --scene-id scene_01 \
+  --prompt "A woman walks through a futuristic city at sunset" \
+  --project-name my-film \
+  --count 5
+```
+
+**Scene ID incrementing examples:**
+- `scene_01` → `scene_01`, `scene_02`, `scene_03`, ...
+- `shot_5` → `shot_5`, `shot_6`, `shot_7`, ...
+- `my_scene_001` → `my_scene_001`, `my_scene_002`, `my_scene_003`, ...
+
+**Use this when:**
+- Generating multiple takes to pick the best one
+- Creating variations of the same scene
+- Batch generating content for A/B testing
+- Building a library of similar clips
+
 ### Generate Video Without Lip-Sync
 
 Skip the lip-sync step (dialogue audio is still generated):
@@ -319,7 +343,14 @@ python cli.py analyze \
 
 ### Download from YouTube
 
-Download videos from YouTube using yt-dlp for use as input or reference material:
+Download videos from YouTube using yt-dlp for use as input or reference material.
+
+**Prerequisites:** yt-dlp is installed automatically with project dependencies (`pip install -r requirements.txt`).
+
+**Supported URL formats:**
+- Standard: `https://www.youtube.com/watch?v=VIDEO_ID`
+- Short: `https://youtu.be/VIDEO_ID`
+- With timestamp: `https://youtube.com/watch?v=VIDEO_ID&t=30`
 
 ```bash
 # Basic download
@@ -336,6 +367,13 @@ python cli.py download-youtube \
   --to-prores \
   --project-name my-film
 
+# Download with specific max resolution
+python cli.py download-youtube \
+  --url "https://youtube.com/watch?v=VIDEO_ID" \
+  --scene-id hd_clip \
+  --max-height 1080 \
+  --project-name my-film
+
 # Download only audio (WAV format)
 python cli.py download-youtube \
   --url "https://youtube.com/watch?v=VIDEO_ID" \
@@ -349,20 +387,69 @@ python cli.py download-youtube \
   --scene-id analyzed_clip \
   --analyze \
   --project-name my-film
+
+# Full workflow: download, convert to ProRes, and analyze
+python cli.py download-youtube \
+  --url "https://youtube.com/watch?v=VIDEO_ID" \
+  --scene-id final_ref \
+  --quality 1080p \
+  --to-prores \
+  --analyze \
+  --project-name my-film
 ```
 
 **Options:**
-- `--quality`: Video quality preset (best, 1080p, 720p, 480p, worst)
-- `--max-height`: Maximum video height in pixels
-- `--audio-only`: Download only audio in WAV format
-- `--to-prores`: Convert to ProRes 422 after download
-- `--analyze`: Analyze video with Claude after download
+| Option | Description |
+|--------|-------------|
+| `--url` | YouTube video URL (required) |
+| `--scene-id` | Scene identifier for organizing the download (required) |
+| `--project-name` | Project name for folder organization |
+| `--quality` | Video quality preset: `best`, `1080p`, `720p`, `480p`, `worst` |
+| `--max-height` | Maximum video height in pixels (e.g., 720, 1080) |
+| `--audio-only` | Download only audio in WAV format |
+| `--to-prores` | Convert to ProRes 422 after download for FCP compatibility |
+| `--analyze` | Analyze video with Claude after download |
+
+**Output files:**
+```
+projects/my-film/yt_clip_01/
+├── yt_clip_01_raw.mp4           # Downloaded video
+├── yt_clip_01_prores.mov        # ProRes version (if --to-prores)
+├── yt_clip_01_audio.wav         # Audio only (if --audio-only)
+└── metadata.json                # Video info + AI analysis (if --analyze)
+```
 
 **Use this when:**
 - Downloading reference footage for your project
-- Getting source material for video extension
-- Extracting audio from YouTube videos
+- Getting source material for video extension with Veo
+- Extracting audio from YouTube videos for voiceover reference
 - Building a clip library with AI-generated descriptions
+- Importing YouTube content into Final Cut Pro (use `--to-prores`)
+
+**Python API usage:**
+```python
+from src.clients.youtube_client import YouTubeClient
+
+client = YouTubeClient()
+
+# Get video info without downloading
+info = client.get_video_info("https://youtube.com/watch?v=VIDEO_ID")
+print(f"Title: {info['title']}, Duration: {info['duration']}s")
+
+# Download video
+video_path = client.download_video(
+    url="https://youtube.com/watch?v=VIDEO_ID",
+    output_path="./downloads/my_video",
+    quality="720p"
+)
+
+# Download audio only
+audio_path = client.download_audio(
+    url="https://youtube.com/watch?v=VIDEO_ID",
+    output_path="./downloads/my_audio",
+    audio_format="wav"
+)
+```
 
 ### View All Commands
 ```bash

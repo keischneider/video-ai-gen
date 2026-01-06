@@ -1,0 +1,31 @@
+{
+  "scene_id": "pull-back_1",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/pull-back_1/pull-back_1_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/pull-back_1/pull-back_1_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Camera pulls away gradually, revealing the full face from the brows. Final shot \u2014 a calm look into the camera.",
+    "input_video": "projects/kate-post/--3_brows-new_2/brows-new_2_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:04:19"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n### Scene Description\nThis video features a gradual camera pull-back sequence that starts with an extreme close-up of a woman's eyes and brow area, then slowly reveals her complete face over the course of nine frames. The sequence follows the original prompt precisely, beginning with an intimate view of her facial features and culminating in a full-face portrait where she maintains direct eye contact with the camera.\n\n### Visual Elements\nThe video employs warm, natural lighting that creates a soft, flattering illumination across the subject's face. The color palette is predominantly warm with peachy skin tones, rich brown hair, and subtle makeup in earth tones. The composition is centered and symmetrical, with the camera movement being smooth and deliberate as it pulls back to reveal more of the subject. The lighting appears to be professional portrait lighting, creating gentle shadows that enhance facial contours without being dramatic.\n\n### Subjects\nThe video features a young woman with long, straight brown hair with subtle highlights. She has well-defined, professionally groomed eyebrows, long eyelashes (likely enhanced with mascara or extensions), and is wearing natural-looking makeup including what appears to be foundation, subtle eye makeup, and glossy lip color. Her eyes are a light brown or hazel color, and she maintains a calm, pleasant expression throughout the sequence.\n\n### Mood/Tone\nThe video conveys a serene, intimate, and professional atmosphere. There's a sense of calm confidence as the subject maintains steady eye contact with the camera. The gradual reveal creates a gentle, almost meditative quality, and her subtle smile in the later frames adds warmth and approachability. The overall tone is sophisticated yet accessible, suggesting this could be for beauty, lifestyle, or portrait content.\n\n### Technical Quality\nThis appears to be high-quality digital video with excellent clarity and professional production values. The style is reminiscent of beauty or fashion videography, with crisp focus, smooth camera movement, and consistent lighting throughout. The framing is precise and the gradual zoom-out is executed smoothly, suggesting professional equipment and skilled cinematography. The video quality appears to be commercial or professional grade, suitable for advertising, social media, or portfolio work.",
+    "short_description": "This video shows a close-up sequence of a young woman with well-groomed eyebrows and natural makeup, transitioning from having her eyes open to gradually closing them while maintaining a gentle smile throughout.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:05:21"
+  }
+}

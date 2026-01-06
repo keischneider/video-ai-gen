@@ -1,0 +1,31 @@
+{
+  "scene_id": "brows-new_4",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/brows-new_4/brows-new_4_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/brows-new_4/brows-new_4_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "face held still, a subtle side turn of the head ",
+    "input_video": "projects/kate-post/--2_gaze/2_gaze_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:00:31"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate beauty portrait sequence featuring a young woman in what appears to be a controlled indoor setting. The footage shows a close-up facial study that transitions through different expressions and eye movements, creating a gentle, contemplative mood piece.\n\n**Visual Elements:**\nThe video employs warm, soft lighting that creates a golden-hour aesthetic with beautiful skin tones. The composition is tightly framed on the subject's face, utilizing shallow depth of field that keeps the background softly blurred in neutral brown tones. The lighting appears to be professionally set up, creating even illumination across the face while highlighting the subject's features naturally. The camera remains relatively stable with subtle movements that suggest handheld filming or gentle camera adjustments.\n\n**Subjects:**\nThe video features a young woman with striking features including well-defined eyebrows, long eyelashes, and glossy pink lips. Her makeup is expertly applied with neutral earth tones on the eyes, featuring precise winged eyeliner that becomes more prominent when her eyes are closed. Her dark hair frames her face naturally with some loose strands visible. Throughout the sequence, she transitions between having her eyes open (revealing dark eyes with circular light reflections) and closed, creating different moods and showcasing her makeup artistry.\n\n**Mood/Tone:**\nThe video conveys a serene, intimate, and contemplative atmosphere. There's a sense of quiet confidence and natural beauty being celebrated. The gentle transitions between open and closed eyes create a dreamy, almost meditative quality that feels both personal and professionally polished.\n\n**Technical Quality:**\nThe production quality is high, with sharp focus, excellent color grading, and professional lighting setup. The style is reminiscent of beauty and fashion videography, with cinematic qualities in its composition and lighting. The video maintains consistent exposure and color temperature throughout, suggesting careful attention to technical details during filming and post-production.",
+    "short_description": "This video shows a close-up beauty shot of a woman showcasing her makeup look, featuring well-defined eyebrows, winged eyeliner, long eyelashes, and glossy pink lips. She alternates between looking directly at the camera with her eyes open and closing them to display the eyeshadow and eyeliner application.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:01:34"
+  }
+}

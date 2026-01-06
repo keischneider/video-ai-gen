@@ -1,0 +1,31 @@
+{
+  "scene_id": "movie-in",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/movie-in/movie-in_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/movie-in/movie-in_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Shot: close-up of the face. Soft light. The camera slowly moves in.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2025-12-31 23:06:24"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video features an intimate portrait sequence of a young woman filmed against a neutral backdrop. The sequence captures a slow, contemplative moment that appears to transition from alertness to peaceful rest and back again. The static setting and controlled environment suggest this is likely a professional portrait or beauty shoot.\n\n**Visual Elements:**\nThe video employs soft, even lighting that creates a gentle, flattering illumination across the subject's face without harsh shadows. The color palette is warm and natural, dominated by peachy skin tones, rich brown hair, and a soft mint green garment. The composition maintains a consistent close-up framing focused on the face and upper shoulders. True to the original prompt, there's a subtle camera movement that gradually moves closer to the subject throughout the sequence, creating an increasingly intimate viewing experience.\n\n**Subjects:**\nThe subject is a young woman with shoulder-length brown hair and striking features. She's wearing what appears to be a mint green knitted sweater or cardigan and a delicate necklace with a small pendant. Her makeup is professionally applied, featuring defined eyebrows, enhanced eyelashes, and glossy lips in a natural pink tone. The background shows cursive text or signage that's intentionally blurred to keep focus on the subject.\n\n**Mood/Tone:**\nThe video conveys a serene, contemplative mood with an air of quiet intimacy. The sequence progresses through different emotional states - from gentle alertness to peaceful tranquility during the closed-eye moments, concluding with a sense of renewed awareness. There's a dreamlike, almost meditative quality to the pacing and transitions.\n\n**Technical Quality:**\nThe video demonstrates high production value with professional-grade image quality, consistent color grading, and smooth frame transitions. The cinematographic style is clean and minimalist, focusing entirely on capturing natural beauty and subtle emotional nuances. The soft lighting technique and gradual camera movement create a polished, commercial-quality aesthetic typical of beauty or portrait photography work.",
+    "short_description": "A young woman poses for the camera while showcasing different facial expressions and lip movements, appearing to demonstrate makeup looks with defined eyebrows, eyelashes, and glossy lips while wearing a mint green top.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2025-12-31 23:08:09"
+  }
+}

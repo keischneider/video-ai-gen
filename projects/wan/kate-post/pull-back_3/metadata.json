@@ -1,0 +1,31 @@
+{
+  "scene_id": "pull-back_3",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/pull-back_3/pull-back_3_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/pull-back_3/pull-back_3_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Camera pulls away gradually, revealing the full face from the brows. Final shot \u2014 a calm look into the camera.",
+    "input_video": "projects/kate-post/--3_brows-new_2/brows-new_2_raw.mp4",
+    "input_image": null,
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 21:06:25"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video presents an intimate portrait sequence featuring a gradual camera pullback that reveals progressively more of a young woman's face. The sequence follows the original prompt perfectly, starting with a close-up focus on the eye and brow area and slowly expanding to show the complete face in a direct, engaging final composition.\n\n**Visual Elements:**\nThe video employs warm, natural lighting that creates a soft, flattering glow across the subject's skin. The color palette is dominated by warm peachy and golden skin tones contrasted against rich brown hair. The lighting appears to be professionally diffused, creating gentle shadows that enhance facial contours without harsh contrasts. The camera movement is smooth and deliberate, executing a slow zoom-out that maintains perfect focus throughout. The background remains consistently neutral and slightly blurred, keeping attention firmly on the subject.\n\n**Subjects:**\nThe subject is a young woman with striking features including well-defined, dark eyebrows, long eyelashes, and green/hazel eyes with distinctive light reflections. Her hair is dark brown with subtle highlights, styled sleekly and parted to frame her face. She wears natural-looking makeup that enhances her features - particularly notable are her shaped eyebrows and glossy lips with a coral-pink tone. Her expression remains calm and composed throughout, with direct eye contact that creates an intimate connection with the viewer.\n\n**Mood/Tone:**\nThe video conveys a serene, contemplative mood with an undertone of quiet confidence. The subject's steady gaze and composed expression create a sense of intimacy and authenticity. There's a professional yet approachable quality to the piece - it feels both polished and genuine, suggesting themes of beauty, self-assurance, and direct communication.\n\n**Technical Quality:**\nThe video demonstrates high production values with excellent image quality, sharp focus, and smooth camera movement. The style is clean and contemporary, reminiscent of high-end beauty or portrait photography. The gradual reveal technique is executed with precision, maintaining consistent lighting and exposure throughout the zoom transition. The overall aesthetic suggests this could be promotional content for beauty, fashion, or lifestyle brands, with a cinematic quality that elevates it above typical social media content.",
+    "short_description": "This video shows a close-up sequence of a young woman's face with professionally done makeup, featuring perfectly shaped eyebrows, long eyelashes, and glossy lips, as the camera captures different angles and lighting of her beauty look.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 21:07:59"
+  }
+}

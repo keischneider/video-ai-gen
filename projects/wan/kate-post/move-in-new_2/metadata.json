@@ -1,0 +1,31 @@
+{
+  "scene_id": "move-in-new_2",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kate-post/move-in-new_2/move-in-new_2_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kate-post/move-in-new_2/move-in-new_2_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Smooth forward dolly on face. Soft key light. Gradual zoom into close-up framing.",
+    "input_video": null,
+    "input_image": "projects/kate-post/1.jpeg",
+    "provider": "replicate",
+    "model": "wan-2.2-t2v-fast",
+    "dialogue": null,
+    "generated_at": "2026-01-01 01:17:12"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video captures an intimate portrait sequence of a young woman in what appears to be an indoor setting. The sequence shows a gradual zoom-in effect, moving from a medium shot to an extreme close-up of her face. Throughout the progression, her mouth gradually opens, suggesting she may be speaking or reacting to something off-camera.\n\n**Visual Elements:**\nThe video employs professional cinematography techniques with soft, diffused lighting that creates a warm, flattering illumination on the subject's face. The background features a neutral, cream-colored wall with subtle decorative elements or text visible but out of focus. The camera work demonstrates a smooth forward dolly movement combined with a gradual zoom, exactly as specified in the original prompt. The composition maintains the subject centered throughout the sequence, with the framing tightening progressively from showing her shoulders to focusing solely on her facial features.\n\n**Subjects:**\nThe video features a young woman with long, straight brown hair and carefully applied makeup, including defined eyebrows, mascara, and glossy pink lip color. She's wearing a mint green or turquoise colored top and a delicate necklace with what appears to be a small pendant. Her expression evolves throughout the sequence, starting with a neutral, composed look and gradually transitioning to a more open, possibly surprised or expressive state as her mouth opens wider in the later frames.\n\n**Mood/Tone:**\nThe video conveys an intimate, professional atmosphere reminiscent of beauty content, vlogs, or testimonial-style footage. The mood is warm and engaging, with the soft lighting and gradual zoom creating a sense of drawing the viewer closer to the subject. There's a sense of anticipation or revelation as her expression changes throughout the sequence.\n\n**Technical Quality:**\nThe video demonstrates high production value with excellent technical execution. The lighting setup uses what appears to be professional key lighting that eliminates harsh shadows and creates an even, flattering exposure across the subject's face. The camera movement is extremely smooth and controlled, suggesting the use of professional equipment such as a dolly or gimbal system. The image quality is crisp and clear, with good color reproduction and proper white balance. The shallow depth of field keeps the subject in sharp focus while maintaining an attractive background blur, typical of professional portrait videography.",
+    "short_description": "A young woman with long brown hair and well-defined makeup demonstrates different facial expressions, transitioning from a neutral pose to opening her mouth in what appears to be a surprised or shocked expression.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-01 01:18:30"
+  }
+}

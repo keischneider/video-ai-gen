@@ -1,0 +1,31 @@
+{
+  "scene_id": "second",
+  "created_at": null,
+  "status": "completed",
+  "files": {
+    "raw_video": {
+      "path": "projects/kling/vienna-cathedral/second/second_raw.mp4",
+      "metadata": {}
+    },
+    "prores_video": {
+      "path": "projects/kling/vienna-cathedral/second/second_prores.mov",
+      "metadata": {}
+    }
+  },
+  "generation": {
+    "prompt": "Blooms gently pop on the cathedral gradually from down to up.",
+    "input_video": null,
+    "input_image": "projects/kling/vienna-cathedral/1.webp",
+    "provider": "kling",
+    "model": "kling-v1-6",
+    "dialogue": null,
+    "generated_at": "2026-01-05 20:31:37"
+  },
+  "video_analysis": {
+    "description": "## Video Analysis\n\n**Scene Description:**\nThis video depicts a stunning Gothic cathedral (appears to be St. Stephen's Cathedral in Vienna) undergoing a magical transformation as flowers gradually bloom across its stone facade. The sequence begins with the pristine cathedral against a clear blue sky and progresses through a dreamlike metamorphosis where vibrant pink and white blossoms emerge from the bottom of the structure and cascade upward, eventually enveloping the entire building in a sea of flowers.\n\n**Visual Elements:**\nThe video showcases a dramatic upward camera angle that emphasizes the cathedral's imposing twin spires and intricate Gothic architecture. The color palette evolves from cool blues and neutral stone tones to warm pinks, purples, and sunset hues. The lighting transforms from bright daylight to a golden hour ambiance, with the sky shifting from clear blue to soft pink and purple clouds. The ornate details of the cathedral - including its distinctive diamond-patterned roof tiles, flying buttresses, and elaborate stone tracery - remain visible throughout the floral transformation.\n\n**Subjects:**\nThe cathedral itself is the sole subject, featuring classic Gothic elements: soaring pointed spires, ribbed vaulting, large stained glass windows, and intricate stone carvings. The flowers appear to be cosmos, cherry blossoms, and other delicate pink and white blooms that create a romantic, ethereal covering over the ancient stonework.\n\n**Mood/Tone:**\nThe video conveys a sense of wonder, romance, and spiritual transcendence. There's a dreamlike quality that blends the sacred and natural worlds, creating an atmosphere of magical realism. The gentle progression from architectural grandeur to floral abundance suggests themes of renewal, beauty emerging from permanence, and the harmony between human creation and nature.\n\n**Technical Quality:**\nThis appears to be a high-quality digital composition combining real cathedral footage with sophisticated visual effects. The blooming flowers are rendered with remarkable detail and realistic physics, suggesting professional-grade CGI or advanced AI video generation. The seamless integration of the floral elements with the architectural details demonstrates excellent technical execution, creating a cinematic, fantasy-like aesthetic that maintains photorealistic quality throughout the transformation.",
+    "short_description": "This video shows a Gothic cathedral with two tall spires being gradually overtaken by blooming pink flowers and foliage, creating a dreamy transformation from stark stone architecture to a flower-covered fantasy structure against a sky that shifts from blue to sunset colors.",
+    "tags": [],
+    "analyzed_by": "claude",
+    "analyzed_at": "2026-01-05 20:32:10"
+  }
+}

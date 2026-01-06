@@ -5,6 +5,7 @@ CLI interface for VEO-FCP video generation pipeline
 import os
 import sys
 import json
+import re
 import click
 from pathlib import Path
 from dotenv import load_dotenv
@@ -19,6 +20,29 @@ from src.models.prompt import VideoPrompt, SceneConfig
 load_dotenv()
 
 console = Console()
+
+
+def increment_scene_id(scene_id: str, increment: int = 1) -> str:
+    """
+    Increment the numeric portion of a scene ID.
+    Examples:
+        scene_01 + 1 -> scene_02
+        scene_99 + 1 -> scene_100
+        shot_5 + 3 -> shot_8
+        my_scene_001 + 1 -> my_scene_002
+    """
+    # Find the last sequence of digits in the scene_id
+    match = re.search(r'(\d+)(?!.*\d)', scene_id)
+    if match:
+        num_str = match.group(1)
+        num = int(num_str) + increment
+        # Preserve leading zeros (use original width as minimum)
+        new_num_str = str(num).zfill(len(num_str))
+        # Replace the matched number with the incremented one
+        return scene_id[:match.start()] + new_num_str + scene_id[match.end():]
+    else:
+        # No number found, append the increment
+        return f"{scene_id}_{increment}"
 
 
 @click.group()
@@ -38,114 +62,158 @@ def cli():
 @click.option('--voice-id', help='ElevenLabs voice ID')
 @click.option('--input-video', help='Path to input video for extension (1-30s) or GCS URI (gs://...)')
 @click.option('--input-image', help='Path to input image for image-to-video (first frame)')
+@click.option('--end-image', help='Path to end image for video interpolation (Kling pro mode)')
+@click.option('--negative-prompt', help='Things to avoid in the video (Kling)')
+@click.option('--duration', type=int, default=5, help='Video duration in seconds (Kling: 5/10, Veo: 4/6/8)')
+@click.option('--seed', type=int, help='Random seed for reproducible generation')
 @click.option('--skip-lipsync', is_flag=True, help='Skip lip-sync step')
 @click.option('--analyze', is_flag=True, help='Analyze video with Claude after generation')
 @click.option('--projects-root', default='./projects', help='Root directory for all projects')
 @click.option('--project-name', default='default', help='Project name (e.g., kremlin, sveta-running-kherson)')
+@click.option('--count', type=int, default=1, help='Number of times to run generation, incrementing scene ID each time')
 def generate(scene_id, prompt, character, camera, lighting, emotion, dialogue,
-             voice_id, input_video, input_image, skip_lipsync, analyze, projects_root, project_name):
+             voice_id, input_video, input_image, end_image, negative_prompt, duration, seed, skip_lipsync, analyze, projects_root, project_name, count):
     """Generate a video scene with optional TTS and lip-sync"""
 
     console.print(f"\n[bold cyan]VEO-FCP Video Generation Pipeline[/bold cyan]")
     console.print(f"Project: [yellow]{project_name}[/yellow]")
-    console.print(f"Scene: [yellow]{scene_id}[/yellow]\n")
+    if count > 1:
+        console.print(f"Generating [yellow]{count}[/yellow] scenes starting from [yellow]{scene_id}[/yellow]\n")
+    else:
+        console.print(f"Scene: [yellow]{scene_id}[/yellow]\n")
 
-    # Create video prompt
-    video_prompt = VideoPrompt(
-        cinematic_description=prompt,
-        character_consistency=character,
-        camera_movement=camera,
-        lighting_style=lighting,
-        emotion_performance=emotion,
-        dialogue_text=dialogue
-    )
-
-    # Create scene config
-    scene_config = SceneConfig(
-        scene_id=scene_id,
-        prompt=video_prompt
-    )
-
-    # Initialize workflow
+    # Initialize workflow once
     workflow = VideoProductionWorkflow(projects_root=projects_root, project_name=project_name)
 
-    # Process scene
-    try:
-        with Progress(
-            SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
-            console=console
-        ) as progress:
-            task = progress.add_task("Processing scene...", total=None)
+    # Track results for summary when count > 1
+    all_results = []
+    failed_scenes = []
 
-            result = workflow.process_scene(
-                scene_config,
-                voice_id=voice_id,
-                skip_lipsync=skip_lipsync,
-                input_video=input_video,
-                input_image=input_image
-            )
+    for i in range(count):
+        # Calculate current scene ID
+        current_scene_id = increment_scene_id(scene_id, i) if i > 0 else scene_id
 
-        # Display results
-        console.print("\n[bold green]✓ Scene generated successfully![/bold green]\n")
+        if count > 1:
+            console.print(f"\n[bold blue]{'─' * 50}[/bold blue]")
+            console.print(f"[bold cyan]Processing scene {i + 1}/{count}:[/bold cyan] [yellow]{current_scene_id}[/yellow]")
 
-        table = Table(show_header=True, header_style="bold magenta")
-        table.add_column("File Type", style="cyan")
-        table.add_column("Path", style="yellow")
+        # Create video prompt
+        video_prompt = VideoPrompt(
+            cinematic_description=prompt,
+            character_consistency=character,
+            camera_movement=camera,
+            lighting_style=lighting,
+            emotion_performance=emotion,
+            dialogue_text=dialogue
+        )
 
-        for key, value in result.items():
-            if key not in ['scene_id', 'scene_path'] and value:
-                table.add_row(key.replace('_', ' ').title(), value)
+        # Create scene config
+        scene_config = SceneConfig(
+            scene_id=current_scene_id,
+            prompt=video_prompt
+        )
 
-        console.print(table)
-        console.print(f"\nFinal ProRes video: [green]{result.get('final_prores')}[/green]\n")
+        # Process scene
+        try:
+            with Progress(
+                SpinnerColumn(),
+                TextColumn("[progress.description]{task.description}"),
+                console=console
+            ) as progress:
+                task = progress.add_task("Processing scene...", total=None)
 
-        # Run video analysis if requested
-        if analyze:
-            console.print("[bold cyan]Running video analysis with Claude...[/bold cyan]\n")
-            try:
-                from src.clients.claude_client import ClaudeClient
-                from src.utils.scene_manager import SceneManager
+                result = workflow.process_scene(
+                    scene_config,
+                    voice_id=voice_id,
+                    skip_lipsync=skip_lipsync,
+                    input_video=input_video,
+                    input_image=input_image,
+                    end_image=end_image,
+                    negative_prompt=negative_prompt,
+                    duration=duration,
+                    seed=seed
+                )
 
-                claude_client = ClaudeClient()
-                scene_manager = SceneManager(projects_root=projects_root, project_name=project_name)
+            all_results.append(result)
 
-                # Find the video to analyze (prefer raw, then prores)
-                video_to_analyze = result.get('raw_video') or result.get('final_prores')
+            # Display results
+            console.print("\n[bold green]✓ Scene generated successfully![/bold green]\n")
 
-                if video_to_analyze and os.path.exists(video_to_analyze):
-                    with Progress(
-                        SpinnerColumn(),
-                        TextColumn("[progress.description]{task.description}"),
-                        console=console
-                    ) as progress:
-                        task = progress.add_task("Analyzing video with Claude...", total=None)
+            table = Table(show_header=True, header_style="bold magenta")
+            table.add_column("File Type", style="cyan")
+            table.add_column("Path", style="yellow")
 
-                        description = claude_client.analyze_video(
-                            video_to_analyze,
-                            include_generation_prompt=prompt
+            for key, value in result.items():
+                if key not in ['scene_id', 'scene_path'] and value:
+                    table.add_row(key.replace('_', ' ').title(), value)
+
+            console.print(table)
+            console.print(f"\nFinal ProRes video: [green]{result.get('final_prores')}[/green]\n")
+
+            # Run video analysis if requested
+            if analyze:
+                console.print("[bold cyan]Running video analysis with Claude...[/bold cyan]\n")
+                try:
+                    from src.clients.claude_client import ClaudeClient
+                    from src.utils.scene_manager import SceneManager
+
+                    claude_client = ClaudeClient()
+                    scene_manager = SceneManager(projects_root=projects_root, project_name=project_name)
+
+                    # Find the video to analyze (prefer raw, then prores)
+                    video_to_analyze = result.get('raw_video') or result.get('final_prores')
+
+                    if video_to_analyze and os.path.exists(video_to_analyze):
+                        with Progress(
+                            SpinnerColumn(),
+                            TextColumn("[progress.description]{task.description}"),
+                            console=console
+                        ) as progress:
+                            task = progress.add_task("Analyzing video with Claude...", total=None)
+
+                            description = claude_client.analyze_video(
+                                video_to_analyze,
+                                include_generation_prompt=prompt
+                            )
+                            short_desc = claude_client.generate_short_description(video_to_analyze)
+
+                        # Save to metadata
+                        scene_manager.save_video_description(
+                            scene_id=current_scene_id,
+                            description=description,
+                            short_description=short_desc
                         )
-                        short_desc = claude_client.generate_short_description(video_to_analyze)
 
-                    # Save to metadata
-                    scene_manager.save_video_description(
-                        scene_id=scene_id,
-                        description=description,
-                        short_description=short_desc
-                    )
+                        console.print("[bold green]✓ Video analysis complete![/bold green]\n")
+                        console.print("[bold magenta]Short Description:[/bold magenta]")
+                        console.print(f"{short_desc}\n")
+                    else:
+                        console.print("[yellow]Warning: Could not find video file for analysis[/yellow]\n")
 
-                    console.print("[bold green]✓ Video analysis complete![/bold green]\n")
-                    console.print("[bold magenta]Short Description:[/bold magenta]")
-                    console.print(f"{short_desc}\n")
-                else:
-                    console.print("[yellow]Warning: Could not find video file for analysis[/yellow]\n")
+                except Exception as e:
+                    console.print(f"[yellow]Warning: Video analysis failed: {str(e)}[/yellow]\n")
 
-            except Exception as e:
-                console.print(f"[yellow]Warning: Video analysis failed: {str(e)}[/yellow]\n")
+        except Exception as e:
+            failed_scenes.append((current_scene_id, str(e)))
+            console.print(f"\n[bold red]✗ Error generating {current_scene_id}:[/bold red] {str(e)}\n")
+            if count == 1:
+                sys.exit(1)
+            # Continue with next scene if count > 1
 
-    except Exception as e:
-        console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
-        sys.exit(1)
+    # Print summary if multiple scenes were processed
+    if count > 1:
+        console.print(f"\n[bold blue]{'═' * 50}[/bold blue]")
+        console.print(f"[bold cyan]Generation Summary[/bold cyan]")
+        console.print(f"  Successful: [green]{len(all_results)}[/green]")
+        console.print(f"  Failed: [red]{len(failed_scenes)}[/red]")
+
+        if failed_scenes:
+            console.print("\n[bold red]Failed scenes:[/bold red]")
+            for scene, error in failed_scenes:
+                console.print(f"  • {scene}: {error}")
+
+        if failed_scenes:
+            sys.exit(1)
 
 
 @cli.command()
