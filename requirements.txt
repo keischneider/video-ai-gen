@@ -19,7 +19,7 @@ aiohttp>=3.8.0,<4.0.0
 ffmpeg-python>=0.2.0
 
 # YouTube downloading
-yt-dlp>=2024.0.0
+pytubefix>=10.0.0
 
 # TTS - ElevenLabs API
 elevenlabs>=0.2.27,<1.0.0

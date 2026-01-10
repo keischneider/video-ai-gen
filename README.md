@@ -12,7 +12,7 @@ Complete automated pipeline for generating cinematic videos with dialogue using 
 - **Text-to-Speech**: ElevenLabs integration for natural-sounding dialogue
 - **AI Lip-Sync**: D-ID Creative Reality Studio for realistic lip-syncing
 - **Video Analysis with Claude**: AI-powered video description and metadata generation
-- **YouTube Download**: Download videos from YouTube using yt-dlp for use as input or reference
+- **YouTube Download**: Download videos from YouTube using pytubefix with OAuth support for age-restricted content
 - **Scene Management**: Organized folder structure for multi-scene projects
 - **Batch Processing**: Process multiple scenes from JSON config files
 - **CLI Interface**: Easy-to-use command-line interface
@@ -102,7 +102,7 @@ veo-fcp/
 │   │   ├── tts_client.py           # ElevenLabs TTS client
 │   │   ├── lipsync_client.py       # D-ID lip-sync client
 │   │   ├── claude_client.py        # Claude video analysis client
-│   │   └── youtube_client.py       # YouTube download client (yt-dlp)
+│   │   └── youtube_client.py       # YouTube download client (pytubefix)
 │   ├── utils/
 │   │   ├── video_processor.py  # Video download & ProRes conversion
 │   │   └── scene_manager.py    # Scene folder management
@@ -415,9 +415,16 @@ TOPAZ_UPSCALE_FPS=30            # Default target FPS
 
 ### Download from YouTube
 
-Download videos from YouTube using yt-dlp for use as input or reference material.
+Download videos from YouTube using pytubefix with OAuth support for age-restricted content.
 
-**Prerequisites:** yt-dlp is installed automatically with project dependencies (`pip install -r requirements.txt`).
+**Prerequisites:** pytubefix is installed automatically with project dependencies (`pip install -r requirements.txt`).
+
+**OAuth Authentication (required for age-restricted videos):**
+On first use with an age-restricted video, you'll be prompted to authenticate:
+1. A URL and code will be displayed (e.g., `https://www.google.com/device` with code `ABC-XYZ-123`)
+2. Open the URL in your browser and enter the code
+3. Sign in with your Google account
+4. The OAuth token is cached for future use
 
 **Supported URL formats:**
 - Standard: `https://www.youtube.com/watch?v=VIDEO_ID`
@@ -502,7 +509,11 @@ projects/my-film/yt_clip_01/
 ```python
 from src.clients.youtube_client import YouTubeClient
 
+# OAuth is enabled by default for age-restricted video support
 client = YouTubeClient()
+
+# Disable OAuth if not needed (faster for non-age-restricted videos)
+client = YouTubeClient(use_oauth=False)
 
 # Get video info without downloading
 info = client.get_video_info("https://youtube.com/watch?v=VIDEO_ID")

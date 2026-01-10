@@ -1,26 +1,39 @@
 """
-YouTube video downloading client using yt-dlp
+YouTube video downloading client using pytubefix with OAuth support
 """
 import os
 import logging
+import subprocess
 from pathlib import Path
 from typing import Optional
-import yt_dlp
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
 
 logger = logging.getLogger(__name__)
 
 
 class YouTubeClient:
-    """Client for downloading videos from YouTube using yt-dlp"""
+    """Client for downloading videos from YouTube using pytubefix"""
 
-    def __init__(self, output_format: str = "mp4"):
+    def __init__(self, output_format: str = "mp4", use_oauth: bool = True):
         """
         Initialize YouTube client
 
         Args:
             output_format: Preferred output format (mp4, webm, etc.)
+            use_oauth: Whether to use OAuth for age-restricted videos
         """
         self.output_format = output_format
+        self.use_oauth = use_oauth
+
+    def _get_youtube(self, url: str) -> YouTube:
+        """Get YouTube object with optional OAuth"""
+        return YouTube(
+            url,
+            on_progress_callback=on_progress,
+            use_oauth=self.use_oauth,
+            allow_oauth_cache=True
+        )
 
     def get_video_info(self, url: str) -> dict:
         """
@@ -32,27 +45,24 @@ class YouTubeClient:
         Returns:
             Dictionary with video metadata
         """
-        ydl_opts = {
-            'quiet': True,
-            'no_warnings': True,
-            'extract_flat': False,
-        }
-
         try:
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                info = ydl.extract_info(url, download=False)
-                return {
-                    'id': info.get('id'),
-                    'title': info.get('title'),
-                    'duration': info.get('duration'),
-                    'description': info.get('description'),
-                    'uploader': info.get('uploader'),
-                    'view_count': info.get('view_count'),
-                    'width': info.get('width'),
-                    'height': info.get('height'),
-                    'fps': info.get('fps'),
-                    'thumbnail': info.get('thumbnail'),
-                }
+            yt = self._get_youtube(url)
+
+            # Get the best video stream for resolution info
+            video_stream = yt.streams.filter(progressive=False, file_extension='mp4').order_by('resolution').desc().first()
+
+            return {
+                'id': yt.video_id,
+                'title': yt.title,
+                'duration': yt.length,
+                'description': yt.description,
+                'uploader': yt.author,
+                'view_count': yt.views,
+                'width': video_stream.width if video_stream else None,
+                'height': video_stream.height if video_stream else None,
+                'fps': video_stream.fps if video_stream else None,
+                'thumbnail': yt.thumbnail_url,
+            }
         except Exception as e:
             logger.error(f"Error getting video info: {str(e)}")
             raise
@@ -80,62 +90,92 @@ class YouTubeClient:
 
         # Create output directory
         output_dir = os.path.dirname(output_path)
+        output_filename = os.path.basename(output_path)
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
 
-        # Build format selector based on quality
-        if max_height:
-            format_selector = f'bestvideo[height<={max_height}]+bestaudio/best[height<={max_height}]'
-        elif quality == 'best':
-            format_selector = 'bestvideo+bestaudio/best'
-        elif quality == '1080p':
-            format_selector = 'bestvideo[height<=1080]+bestaudio/best[height<=1080]'
-        elif quality == '720p':
-            format_selector = 'bestvideo[height<=720]+bestaudio/best[height<=720]'
-        elif quality == '480p':
-            format_selector = 'bestvideo[height<=480]+bestaudio/best[height<=480]'
-        elif quality == 'worst':
-            format_selector = 'worstvideo+worstaudio/worst'
-        else:
-            format_selector = 'bestvideo+bestaudio/best'
-
-        ydl_opts = {
-            'format': format_selector,
-            'outtmpl': output_path,
-            'merge_output_format': self.output_format,
-            'quiet': False,
-            'no_warnings': False,
-            'progress_hooks': [self._progress_hook],
-            'postprocessors': [{
-                'key': 'FFmpegVideoConvertor',
-                'preferedformat': self.output_format,
-            }],
-        }
-
         try:
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
+            yt = self._get_youtube(url)
 
-            # Find the actual output file (yt-dlp adds extension)
+            # Determine target height based on quality
+            target_height = max_height
+            if not target_height:
+                if quality == '1080p':
+                    target_height = 1080
+                elif quality == '720p':
+                    target_height = 720
+                elif quality == '480p':
+                    target_height = 480
+                elif quality == 'worst':
+                    target_height = 144
+
+            # Get video stream
+            if quality == 'worst':
+                video_stream = yt.streams.filter(
+                    progressive=False,
+                    file_extension='mp4',
+                    type='video'
+                ).order_by('resolution').asc().first()
+            elif target_height:
+                video_stream = yt.streams.filter(
+                    progressive=False,
+                    file_extension='mp4',
+                    type='video',
+                    res=f"{target_height}p"
+                ).first()
+                # Fallback to best available if target not found
+                if not video_stream:
+                    video_stream = yt.streams.filter(
+                        progressive=False,
+                        file_extension='mp4',
+                        type='video'
+                    ).order_by('resolution').desc().first()
+            else:
+                video_stream = yt.streams.filter(
+                    progressive=False,
+                    file_extension='mp4',
+                    type='video'
+                ).order_by('resolution').desc().first()
+
+            # Get audio stream
+            audio_stream = yt.streams.get_audio_only()
+
+            if not video_stream or not audio_stream:
+                raise ValueError("Could not find suitable video/audio streams")
+
+            logger.info(f"Downloading video: {video_stream}")
+            logger.info(f"Downloading audio: {audio_stream}")
+
+            # Download video and audio separately
+            video_path = video_stream.download(
+                output_path=output_dir,
+                filename=f"{output_filename}_video.mp4"
+            )
+            audio_path = audio_stream.download(
+                output_path=output_dir,
+                filename=f"{output_filename}_audio.webm"
+            )
+
+            # Merge with ffmpeg
             final_path = f"{output_path}.{self.output_format}"
-            if os.path.exists(final_path):
-                logger.info(f"Downloaded video to {final_path}")
-                return final_path
+            merge_cmd = [
+                'ffmpeg', '-y',
+                '-i', video_path,
+                '-i', audio_path,
+                '-c:v', 'copy',
+                '-c:a', 'aac',
+                final_path
+            ]
 
-            # Check if file exists without double extension
-            if os.path.exists(output_path):
-                logger.info(f"Downloaded video to {output_path}")
-                return output_path
+            logger.info("Merging video and audio...")
+            subprocess.run(merge_cmd, check=True, capture_output=True)
 
-            # Look for any file with the base name
-            output_base = Path(output_path)
-            for ext in ['mp4', 'webm', 'mkv', 'mov']:
-                check_path = str(output_base.parent / f"{output_base.name}.{ext}")
-                if os.path.exists(check_path):
-                    logger.info(f"Downloaded video to {check_path}")
-                    return check_path
+            # Clean up temp files
+            os.remove(video_path)
+            os.remove(audio_path)
 
-            raise FileNotFoundError(f"Downloaded file not found at expected path: {output_path}")
+            logger.info(f"Downloaded video to {final_path}")
+            return final_path
 
         except Exception as e:
             logger.error(f"Error downloading video: {str(e)}")
@@ -161,42 +201,64 @@ class YouTubeClient:
         logger.info(f"Downloading audio from YouTube: {url}")
 
         output_dir = os.path.dirname(output_path)
+        output_filename = os.path.basename(output_path)
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
 
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'outtmpl': output_path,
-            'quiet': False,
-            'no_warnings': False,
-            'progress_hooks': [self._progress_hook],
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': audio_format,
-                'preferredquality': '192',
-            }],
-        }
-
         try:
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
+            yt = self._get_youtube(url)
 
+            # Get best audio stream
+            audio_stream = yt.streams.get_audio_only()
+
+            if not audio_stream:
+                raise ValueError("Could not find audio stream")
+
+            logger.info(f"Downloading audio: {audio_stream}")
+
+            # Download audio
+            temp_path = audio_stream.download(
+                output_path=output_dir,
+                filename=f"{output_filename}_temp"
+            )
+
+            # Convert to desired format with ffmpeg
             final_path = f"{output_path}.{audio_format}"
-            if os.path.exists(final_path):
-                logger.info(f"Downloaded audio to {final_path}")
-                return final_path
+            convert_cmd = [
+                'ffmpeg', '-y',
+                '-i', temp_path,
+                '-vn',
+                final_path
+            ]
 
-            raise FileNotFoundError(f"Downloaded audio file not found: {final_path}")
+            if audio_format == 'mp3':
+                convert_cmd = [
+                    'ffmpeg', '-y',
+                    '-i', temp_path,
+                    '-vn',
+                    '-acodec', 'libmp3lame',
+                    '-q:a', '2',
+                    final_path
+                ]
+            elif audio_format == 'wav':
+                convert_cmd = [
+                    'ffmpeg', '-y',
+                    '-i', temp_path,
+                    '-vn',
+                    '-acodec', 'pcm_s16le',
+                    '-ar', '44100',
+                    final_path
+                ]
+
+            logger.info(f"Converting to {audio_format}...")
+            subprocess.run(convert_cmd, check=True, capture_output=True)
+
+            # Clean up temp file
+            os.remove(temp_path)
+
+            logger.info(f"Downloaded audio to {final_path}")
+            return final_path
 
         except Exception as e:
             logger.error(f"Error downloading audio: {str(e)}")
             raise
-
-    def _progress_hook(self, d: dict):
-        """Progress callback for download status"""
-        if d['status'] == 'downloading':
-            percent = d.get('_percent_str', 'N/A')
-            speed = d.get('_speed_str', 'N/A')
-            logger.debug(f"Download progress: {percent} at {speed}")
-        elif d['status'] == 'finished':
-            logger.info("Download finished, processing...")
