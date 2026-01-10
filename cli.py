@@ -595,6 +595,84 @@ def download_youtube(url, scene_id, projects_root, project_name, quality, max_he
 
 
 @cli.command()
+@click.option('--input', '-i', 'input_path', required=True, help='Input video path or URL')
+@click.option('--output', '-o', help='Output video path (default: input_upscaled_<resolution>.mp4)')
+@click.option('--resolution', '-r', default='1080p', type=click.Choice(['720p', '1080p', '4k']),
+              help='Target resolution (default: 1080p)')
+@click.option('--fps', '-f', type=int, default=30, help='Target FPS, 15-60 (default: 30)')
+@click.option('--estimate', is_flag=True, help='Estimate cost before processing')
+def upscale(input_path, output, resolution, fps, estimate):
+    """Upscale video with Topaz Labs AI"""
+
+    console.print(f"\n[bold cyan]Topaz Video Upscale[/bold cyan]")
+    console.print(f"Input: [yellow]{input_path}[/yellow]")
+    console.print(f"Target: [yellow]{resolution} @ {fps}fps[/yellow]\n")
+
+    try:
+        from src.clients.topaz_upscale_client import TopazUpscaleClient
+
+        client = TopazUpscaleClient()
+
+        # Estimate cost if requested
+        if estimate:
+            try:
+                import ffmpeg
+                probe = ffmpeg.probe(input_path)
+                duration = float(probe['format']['duration'])
+            except Exception:
+                duration = 10  # Default estimate
+                console.print(f"[yellow]Could not determine duration, using {duration}s estimate[/yellow]")
+
+            cost = client.estimate_cost(
+                video_duration_seconds=duration,
+                target_resolution=resolution,
+                target_fps=fps
+            )
+            console.print(f"[bold]Estimated cost:[/bold] [green]${cost:.3f}[/green] for {duration:.1f}s video\n")
+
+            if not click.confirm("Proceed with upscaling?"):
+                console.print("[yellow]Cancelled[/yellow]\n")
+                return
+
+        # Upscale
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task(f"Upscaling to {resolution} @ {fps}fps...", total=None)
+
+            result = client.upscale_video(
+                video_path=input_path,
+                target_resolution=resolution,
+                target_fps=fps
+            )
+
+        # Determine output path
+        output_path = output
+        if not output_path:
+            base = input_path.rsplit('.', 1)[0]
+            output_path = f"{base}_upscaled_{resolution}.mp4"
+
+        # Save
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Downloading upscaled video...", total=None)
+            client.save_video(result["job_id"], output_path)
+
+        console.print(f"\n[bold green]✓ Upscale complete![/bold green]")
+        console.print(f"Output: [green]{output_path}[/green]")
+        console.print(f"Elapsed: [yellow]{result['elapsed_seconds']:.1f}s[/yellow]\n")
+
+    except Exception as e:
+        console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
+        sys.exit(1)
+
+
+@cli.command()
 def setup():
     """Setup wizard for configuration"""
 

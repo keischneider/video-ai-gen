@@ -195,6 +195,7 @@ class ReplicateClient:
                     duration=duration,
                     resolution=resolution,
                     negative_prompt=kwargs.get("negative_prompt", ""),
+                    end_image=kwargs.get("end_image"),
                     seed=kwargs.get("seed"),
                 )
             elif model_name == "veo-3.1":
@@ -230,6 +231,14 @@ class ReplicateClient:
                         input_params["image"] = input_image
                     else:
                         input_params["image"] = open(input_image, "rb")
+
+                # Add last_image for i2v models (end frame for interpolation)
+                end_image = kwargs.get("end_image")
+                if end_image and model_info["type"] == "image-to-video":
+                    if end_image.startswith("http"):
+                        input_params["last_image"] = end_image
+                    else:
+                        input_params["last_image"] = open(end_image, "rb")
 
             # Add seed if provided
             if kwargs.get("seed"):
@@ -404,6 +413,7 @@ class ReplicateClient:
         duration: int = 5,
         resolution: str = "720p",
         negative_prompt: str = "",
+        end_image: Optional[str] = None,
         seed: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
@@ -415,6 +425,7 @@ class ReplicateClient:
             duration: Video duration (5 or 10 seconds)
             resolution: "720p" or "1080p"
             negative_prompt: Things to avoid in the video
+            end_image: Optional end frame for interpolation (last_image)
             seed: Random seed for reproducible generation
 
         Returns:
@@ -443,6 +454,13 @@ class ReplicateClient:
         else:
             input_params["image"] = open(input_image, "rb")
 
+        # Add end image (last_image) for interpolation
+        if end_image:
+            if end_image.startswith("http"):
+                input_params["last_image"] = end_image
+            else:
+                input_params["last_image"] = open(end_image, "rb")
+
         # Add negative prompt if provided
         if negative_prompt:
             input_params["negative_prompt"] = negative_prompt
@@ -451,7 +469,7 @@ class ReplicateClient:
         if seed is not None:
             input_params["seed"] = seed
 
-        logger.info(f"Wan 2.5 I2V params: duration={wan_duration}s, resolution={resolution}, seed={seed}")
+        logger.info(f"Wan 2.5 I2V params: duration={wan_duration}s, resolution={resolution}, end_image={end_image is not None}, seed={seed}")
         return input_params
 
     def _prepare_veo_params(

@@ -7,6 +7,7 @@ Complete automated pipeline for generating cinematic videos with dialogue using 
 - **Google Veo API Integration**: Generate high-quality videos from text prompts
 - **Image-to-Video**: Use an input image as the first frame for video generation
 - **Replicate & Sora Support**: Alternative video generation providers (cheaper options)
+- **Topaz Labs Video Upscaling**: Upscale videos to 720p, 1080p, or 4K with FPS enhancement (15-60fps)
 - **Automatic ProRes Conversion**: Converts all videos to Apple ProRes 422 for seamless FCP import
 - **Text-to-Speech**: ElevenLabs integration for natural-sounding dialogue
 - **AI Lip-Sync**: D-ID Creative Reality Studio for realistic lip-syncing
@@ -93,13 +94,15 @@ Import this file directly into Final Cut Pro!
 veo-fcp/
 ├── src/
 │   ├── clients/
-│   │   ├── veo_client.py       # Google Veo API client
-│   │   ├── replicate_client.py # Replicate API client (cheap alternative)
-│   │   ├── sora_client.py      # OpenAI Sora API client
-│   │   ├── tts_client.py       # ElevenLabs TTS client
-│   │   ├── lipsync_client.py   # D-ID lip-sync client
-│   │   ├── claude_client.py    # Claude video analysis client
-│   │   └── youtube_client.py   # YouTube download client (yt-dlp)
+│   │   ├── veo_client.py           # Google Veo API client
+│   │   ├── replicate_client.py     # Replicate API client (cheap alternative)
+│   │   ├── sora_client.py          # OpenAI Sora API client
+│   │   ├── kling_client.py         # Kling AI video generation client
+│   │   ├── topaz_upscale_client.py # Topaz Labs video upscaling (via Replicate)
+│   │   ├── tts_client.py           # ElevenLabs TTS client
+│   │   ├── lipsync_client.py       # D-ID lip-sync client
+│   │   ├── claude_client.py        # Claude video analysis client
+│   │   └── youtube_client.py       # YouTube download client (yt-dlp)
 │   ├── utils/
 │   │   ├── video_processor.py  # Video download & ProRes conversion
 │   │   └── scene_manager.py    # Scene folder management
@@ -341,6 +344,75 @@ python cli.py analyze \
 - Creating scene summaries for editing workflows
 - Documenting generated content
 
+### Upscale Video with Topaz Labs
+
+Upscale videos to higher resolution (720p, 1080p, 4K) and/or higher frame rate (15-120fps) using Topaz Labs AI via Replicate:
+
+**CLI usage:**
+```bash
+# Basic upscale to 1080p
+python cli.py upscale -i input.mp4
+
+# Upscale to 4K at 60fps
+python cli.py upscale -i input.mp4 -r 4k -f 60
+
+# With custom output path
+python cli.py upscale -i input.mp4 -o output_4k.mp4 -r 4k -f 60
+
+# Show cost estimate before processing
+python cli.py upscale -i input.mp4 -r 4k -f 60 --estimate
+
+# Upscale from URL
+python cli.py upscale -i "https://example.com/video.mp4" -r 1080p
+```
+
+**CLI options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--input` | `-i` | Input video path or URL (required) |
+| `--output` | `-o` | Output path (default: `input_upscaled_<resolution>.mp4`) |
+| `--resolution` | `-r` | `720p`, `1080p`, or `4k` (default: 1080p) |
+| `--fps` | `-f` | Target FPS 15-120 (default: 30) |
+| `--estimate` | | Show cost estimate and confirm before processing |
+
+**Python API:**
+```python
+from src.clients import TopazUpscaleClient
+
+client = TopazUpscaleClient()
+
+# Upscale a video to 4K at 60fps
+result = client.upscale_video(
+    video_path="input_video.mp4",
+    target_resolution="4k",
+    target_fps=60
+)
+
+# Save the upscaled video
+client.save_video(result["job_id"], "output_upscaled.mp4")
+
+# Estimate cost for a 30-second video at 4K/60fps
+cost = client.estimate_cost(30, "4k", 60)  # ~$4.48
+```
+
+**Pricing (per 5 seconds of output):**
+| Resolution | 30fps | 60fps |
+|------------|-------|-------|
+| 720p | $0.027 | $0.054 |
+| 1080p | $0.108 | $0.216 |
+| 4K | $0.374 | $0.747 |
+
+**Notes:**
+- Local files under 10MB are uploaded automatically via base64 encoding
+- For larger files, upload to a public URL first and pass the URL
+- Requires `REPLICATE_API_TOKEN` environment variable
+
+**Environment variables:**
+```bash
+TOPAZ_UPSCALE_RESOLUTION=1080p  # Default target resolution
+TOPAZ_UPSCALE_FPS=30            # Default target FPS
+```
+
 ### Download from YouTube
 
 Download videos from YouTube using yt-dlp for use as input or reference material.
@@ -500,6 +572,8 @@ python cli.py --help
 - **Google Veo**: https://cloud.google.com/vertex-ai/docs
 - **Replicate**: https://replicate.com/ (cheaper alternative ~$0.05/video)
 - **OpenAI Sora**: https://openai.com/sora (medium cost ~$0.50-2.50/video)
+- **Kling AI**: https://klingai.com/ (video generation)
+- **Topaz Labs**: https://replicate.com/topazlabs/video-upscale (video upscaling via Replicate)
 - **ElevenLabs**: https://elevenlabs.io/
 - **D-ID**: https://www.d-id.com/
 - **Anthropic Claude**: https://anthropic.com/ (video analysis)
