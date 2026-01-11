@@ -40,3 +40,7 @@ anthropic>=0.40.0
 # Fix for importlib.metadata compatibility with Python 3.9
 importlib-metadata>=4.0.0; python_version < "3.10"
 PyJWT>=2.10.0
+
+# TTS
+gTTS
+edge-tts

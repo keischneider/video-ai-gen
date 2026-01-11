@@ -364,6 +364,133 @@ def tts(text, output, voice_id):
         sys.exit(1)
 
 
+@cli.command('tts-multi')
+@click.option('--text', '-t', required=True, help='Text to convert to speech')
+@click.option('--output', '-o', required=True, help='Output audio file path')
+@click.option('--engine', '-e', required=True,
+              type=click.Choice(['gtts', 'edge-tts']),
+              help='TTS engine to use')
+@click.option('--voice', '-v', help='Voice/language ID (engine-specific)')
+@click.option('--rate', help='Speech rate for edge-tts (+/-%%)')
+@click.option('--lang', default='en', help='Language code for gTTS (default: en)')
+@click.option('--list-voices', is_flag=True, help='List available voices for engine')
+@click.option('--all', 'show_all', is_flag=True, help='Show all voices (no limit)')
+@click.option('--filter', 'voice_filter', help='Filter voices by name/locale (e.g., "en-US", "Neural")')
+def tts_multi(text, output, engine, voice, rate, lang, list_voices, show_all, voice_filter):
+    """Generate speech using multiple TTS engines (gTTS, edge-tts)"""
+
+    from src.clients.multi_tts_client import MultiTTSClient, TTSEngine
+
+    # Map CLI engine names to enum
+    engine_map = {
+        'gtts': TTSEngine.GTTS,
+        'edge-tts': TTSEngine.EDGE_TTS,
+    }
+    selected_engine = engine_map[engine]
+
+    console.print(f"\n[bold cyan]Multi-Engine TTS[/bold cyan]")
+    console.print(f"Engine: [yellow]{engine}[/yellow]\n")
+
+    try:
+        client = MultiTTSClient()
+
+        # List voices if requested
+        if list_voices:
+            console.print(f"[bold magenta]Available voices for {engine}:[/bold magenta]\n")
+
+            with Progress(
+                SpinnerColumn(),
+                TextColumn("[progress.description]{task.description}"),
+                console=console
+            ) as progress:
+                task = progress.add_task("Fetching voices...", total=None)
+                voices_list = client.list_voices(selected_engine)
+
+            # Apply filter if provided
+            if voice_filter:
+                filter_lower = voice_filter.lower()
+                voices_list = [
+                    v for v in voices_list
+                    if filter_lower in str(v.get('id', '')).lower()
+                    or filter_lower in str(v.get('name', '')).lower()
+                    or filter_lower in str(v.get('locale', '')).lower()
+                ]
+                console.print(f"[dim]Filtered by: {voice_filter}[/dim]\n")
+
+            from rich.table import Table
+            table = Table(show_header=True, header_style="bold magenta")
+            table.add_column("ID", style="cyan")
+            table.add_column("Name", style="yellow")
+            table.add_column("Details", style="green")
+
+            # Limit display unless --all is specified
+            total_voices = len(voices_list)
+            display_voices = voices_list if show_all else voices_list[:50]
+            for v in display_voices:
+                details = []
+                for k in ['locale', 'gender', 'type', 'languages']:
+                    if k in v and v[k]:
+                        details.append(f"{k}: {v[k]}")
+                table.add_row(
+                    str(v.get('id', '')),
+                    str(v.get('name', '')),
+                    ', '.join(details) if details else ''
+                )
+
+            console.print(table)
+            if not show_all and total_voices > 50:
+                console.print(f"\n[dim]Showing 50 of {total_voices} voices. Use --all to show all, or --filter to search.[/dim]")
+            else:
+                console.print(f"\n[dim]Total: {total_voices} voices[/dim]")
+            console.print()
+            return
+
+        # Synthesize speech
+        console.print(f"Text: [yellow]{text[:100]}{'...' if len(text) > 100 else ''}[/yellow]\n")
+
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task(f"Generating speech with {engine}...", total=None)
+
+            # Build engine-specific kwargs
+            kwargs = {}
+
+            if engine == 'gtts':
+                kwargs['lang'] = lang
+                if voice:  # Use voice as TLD for accent
+                    kwargs['tld'] = voice
+
+            elif engine == 'edge-tts':
+                if voice:
+                    kwargs['voice'] = voice
+                else:
+                    kwargs['voice'] = 'en-US-AriaNeural'  # Good default
+                if rate:
+                    kwargs['rate'] = rate
+
+            result = client.synthesize(
+                text=text,
+                output_path=output,
+                engine=selected_engine,
+                **kwargs
+            )
+
+        console.print(f"\n[bold green]✓ Speech generated successfully![/bold green]")
+        console.print(f"Engine: [cyan]{engine}[/cyan]")
+        console.print(f"Output: [green]{result}[/green]\n")
+
+    except ImportError as e:
+        console.print(f"\n[bold red]✗ Missing dependency:[/bold red] {str(e)}\n")
+        console.print("[yellow]Install the required package and try again.[/yellow]\n")
+        sys.exit(1)
+    except Exception as e:
+        console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
+        sys.exit(1)
+
+
 @cli.command()
 @click.option('--scene-id', required=True, help='Scene identifier to analyze')
 @click.option('--projects-root', default='./projects', help='Root directory for all projects')
@@ -665,6 +792,138 @@ def upscale(input_path, output, resolution, fps, estimate):
 
         console.print(f"\n[bold green]✓ Upscale complete![/bold green]")
         console.print(f"Output: [green]{output_path}[/green]")
+        console.print(f"Elapsed: [yellow]{result['elapsed_seconds']:.1f}s[/yellow]\n")
+
+    except Exception as e:
+        console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
+        sys.exit(1)
+
+
+@cli.command('lip-sync')
+@click.option('--video', '-v', 'video_path', help='Input video path or URL (MP4/MOV, 2-10s, 720p-1080p)')
+@click.option('--video-id', help='Kling video ID (alternative to --video)')
+@click.option('--audio', '-a', 'audio_path', help='Audio file path or URL (MP3/WAV/M4A/AAC, <5MB)')
+@click.option('--text', '-t', help='Text for TTS (alternative to --audio)')
+@click.option('--voice-id', default='en_AOT', help='Voice ID for TTS (default: en_AOT)')
+@click.option('--voice-speed', type=float, default=1.0, help='Voice speed 0.8-2.0 (default: 1.0)')
+@click.option('--output', '-o', required=True, help='Output video path')
+def lip_sync(video_path, video_id, audio_path, text, voice_id, voice_speed, output):
+    """Generate lip-synced video using Kling AI (via Replicate)"""
+
+    console.print(f"\n[bold cyan]Kling Lip Sync[/bold cyan]")
+    console.print(f"Video: [yellow]{video_path or video_id}[/yellow]")
+    # Display audio source
+    if audio_path:
+        audio_display = audio_path
+    elif text:
+        audio_display = f"TTS: {text[:50]}..." if len(text) > 50 else f"TTS: {text}"
+    else:
+        audio_display = "N/A"
+    console.print(f"Audio: [yellow]{audio_display}[/yellow]\n")
+
+    # Validate inputs
+    if not video_path and not video_id:
+        console.print("[bold red]✗ Error:[/bold red] Either --video or --video-id is required\n")
+        sys.exit(1)
+    if video_path and video_id:
+        console.print("[bold red]✗ Error:[/bold red] Cannot use both --video and --video-id\n")
+        sys.exit(1)
+    if not audio_path and not text:
+        console.print("[bold red]✗ Error:[/bold red] Either --audio or --text is required\n")
+        sys.exit(1)
+    if audio_path and text:
+        console.print("[bold red]✗ Error:[/bold red] Cannot use both --audio and --text\n")
+        sys.exit(1)
+
+    try:
+        from src.clients.replicate_client import ReplicateClient
+
+        client = ReplicateClient()
+
+        # Run lip sync
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Running lip sync...", total=None)
+
+            result = client.lip_sync(
+                video_path=video_path,
+                video_id=video_id,
+                audio_path=audio_path,
+                text=text,
+                voice_id=voice_id,
+                voice_speed=voice_speed,
+            )
+
+        # Save the output
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Downloading output video...", total=None)
+            client.save_video(result["job_id"], output)
+
+        console.print(f"\n[bold green]✓ Lip sync complete![/bold green]")
+        console.print(f"Output: [green]{output}[/green]")
+        console.print(f"Elapsed: [yellow]{result['elapsed_seconds']:.1f}s[/yellow]\n")
+
+    except Exception as e:
+        console.print(f"\n[bold red]✗ Error:[/bold red] {str(e)}\n")
+        sys.exit(1)
+
+
+@cli.command('speech-to-video')
+@click.option('--prompt', '-p', required=True, help='Text prompt describing the video')
+@click.option('--image', '-i', 'image_path', required=True, help='First frame image path or URL')
+@click.option('--audio', '-a', 'audio_path', required=True, help='Audio file path or URL to sync with')
+@click.option('--output', '-o', required=True, help='Output video path')
+@click.option('--num-frames', type=int, default=81, help='Frames per chunk, 1-121 (default: 81)')
+@click.option('--interpolate', is_flag=True, help='Interpolate to 25fps')
+@click.option('--seed', type=int, help='Random seed for reproducibility')
+def speech_to_video(prompt, image_path, audio_path, output, num_frames, interpolate, seed):
+    """Generate video from speech/audio using Wan 2.2 S2V model"""
+
+    console.print(f"\n[bold cyan]Wan 2.2 Speech-to-Video[/bold cyan]")
+    console.print(f"Prompt: [yellow]{prompt[:80]}{'...' if len(prompt) > 80 else ''}[/yellow]")
+    console.print(f"Image: [yellow]{image_path}[/yellow]")
+    console.print(f"Audio: [yellow]{audio_path}[/yellow]\n")
+
+    try:
+        from src.clients.replicate_client import ReplicateClient
+
+        client = ReplicateClient()
+
+        # Run speech-to-video
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Generating video from speech...", total=None)
+
+            result = client.speech_to_video(
+                prompt=prompt,
+                image_path=image_path,
+                audio_path=audio_path,
+                num_frames=num_frames,
+                interpolate=interpolate,
+                seed=seed,
+            )
+
+        # Save the output
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Downloading output video...", total=None)
+            client.save_video(result["job_id"], output)
+
+        console.print(f"\n[bold green]✓ Speech-to-video complete![/bold green]")
+        console.print(f"Output: [green]{output}[/green]")
         console.print(f"Elapsed: [yellow]{result['elapsed_seconds']:.1f}s[/yellow]\n")
 
     except Exception as e:

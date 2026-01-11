@@ -10,7 +10,7 @@ Complete automated pipeline for generating cinematic videos with dialogue using 
 - **Topaz Labs Video Upscaling**: Upscale videos to 720p, 1080p, or 4K with FPS enhancement (15-60fps)
 - **Automatic ProRes Conversion**: Converts all videos to Apple ProRes 422 for seamless FCP import
 - **Text-to-Speech**: ElevenLabs integration for natural-sounding dialogue
-- **AI Lip-Sync**: D-ID Creative Reality Studio for realistic lip-syncing
+- **AI Lip-Sync**: D-ID Creative Reality Studio or Kling Lip Sync (via Replicate) for realistic lip-syncing
 - **Video Analysis with Claude**: AI-powered video description and metadata generation
 - **YouTube Download**: Download videos from YouTube using pytubefix with OAuth support for age-restricted content
 - **Scene Management**: Organized folder structure for multi-scene projects
@@ -29,7 +29,7 @@ Text Prompt (+ optional Image) → Veo API → Video (MP4)
                                     ↓
                       Text → ElevenLabs TTS → Audio (WAV)
                                     ↓
-                  Video + Audio → D-ID Lip-sync → Synced Video
+                  Video + Audio → D-ID/Kling Lip-sync → Synced Video
                                     ↓
                       Convert to ProRes 422 → Final Cut Pro Ready
 ```
@@ -100,6 +100,7 @@ veo-fcp/
 │   │   ├── kling_client.py         # Kling AI video generation client
 │   │   ├── topaz_upscale_client.py # Topaz Labs video upscaling (via Replicate)
 │   │   ├── tts_client.py           # ElevenLabs TTS client
+│   │   ├── multi_tts_client.py     # Multi-engine TTS (gTTS, edge-tts)
 │   │   ├── lipsync_client.py       # D-ID lip-sync client
 │   │   ├── claude_client.py        # Claude video analysis client
 │   │   └── youtube_client.py       # YouTube download client (pytubefix)
@@ -299,6 +300,65 @@ python cli.py tts \
 - Testing different voices before video generation
 - Creating audio-only content
 
+### Multi-Engine TTS
+
+Generate speech using multiple TTS engines (gTTS, edge-tts):
+
+```bash
+# Using gTTS (Google TTS, online)
+python cli.py tts-multi -e gtts -t "Hello world" -o output.mp3
+python cli.py tts-multi -e gtts -t "Bonjour le monde" -o french.mp3 --lang fr
+
+# Using edge-tts (Microsoft Edge, online, high quality) - RECOMMENDED
+python cli.py tts-multi -e edge-tts -t "Hello world" -o output.mp3
+python cli.py tts-multi -e edge-tts -t "Hello" -o british.mp3 -v en-GB-SoniaNeural
+python cli.py tts-multi -e edge-tts -t "Hello" -o fast.mp3 --rate "+20%"
+
+# Russian voices with edge-tts
+python cli.py tts-multi -e edge-tts -t 'Привет мир' -o russian.mp3 -v ru-RU-SvetlanaNeural
+python cli.py tts-multi -e edge-tts -t 'Привет мир' -o russian_male.mp3 -v ru-RU-DmitryNeural
+
+# List available voices for any engine
+python cli.py tts-multi -e edge-tts -t "x" -o x.mp3 --list-voices
+
+# List ALL voices (no 50 limit)
+python cli.py tts-multi -e edge-tts -t "x" -o x.mp3 --list-voices --all
+
+# Filter voices by name/locale
+python cli.py tts-multi -e edge-tts -t "x" -o x.mp3 --list-voices --filter "ru-RU"
+python cli.py tts-multi -e edge-tts -t "x" -o x.mp3 --list-voices --filter "uk-UA"
+```
+
+**Options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--text` | `-t` | Text to convert to speech (required) |
+| `--output` | `-o` | Output audio file path (required) |
+| `--engine` | `-e` | TTS engine: `gtts`, `edge-tts` (required) |
+| `--voice` | `-v` | Voice/language ID (engine-specific) |
+| `--rate` | | Speech rate for edge-tts (+/-%) |
+| `--lang` | | Language code for gTTS (default: en) |
+| `--list-voices` | | List available voices for the selected engine |
+| `--all` | | Show all voices (default shows first 50) |
+| `--filter` | | Filter voices by name/locale (e.g., "ru-RU", "Neural") |
+
+**Engine comparison:**
+| Engine | Online | Quality | Speed | Languages | Notes |
+|--------|--------|---------|-------|-----------|-------|
+| gTTS | Yes | Medium | Fast | 50+ | Google Translate voices |
+| edge-tts | Yes | High | Fast | 300+ | Microsoft neural voices (recommended) |
+
+**Install engines as needed:**
+```bash
+pip install gTTS         # Google TTS
+pip install edge-tts     # Microsoft Edge TTS (recommended)
+```
+
+**Use this when:**
+- Testing different TTS engines to find the best voice
+- Want free high-quality neural voices (edge-tts)
+- Need multi-language support
+
 ### Batch Process Multiple Scenes
 ```bash
 python cli.py batch --config-file examples/multi_scene_story.json --project-name my-film
@@ -412,6 +472,157 @@ cost = client.estimate_cost(30, "4k", 60)  # ~$4.48
 TOPAZ_UPSCALE_RESOLUTION=1080p  # Default target resolution
 TOPAZ_UPSCALE_FPS=30            # Default target FPS
 ```
+
+### Lip Sync with Kling (via Replicate)
+
+Generate lip-synced videos using Kling AI's lip sync model via Replicate. Supports both audio files and text-to-speech.
+
+**CLI usage:**
+```bash
+# With audio file
+python cli.py lip-sync \
+  --video input_video.mp4 \
+  --audio speech.mp3 \
+  --output output_synced.mp4
+
+# With text-to-speech
+python cli.py lip-sync \
+  --video input_video.mp4 \
+  --text "Hello, this is a lip sync demonstration!" \
+  --voice-id en_AOT \
+  --output output_synced.mp4
+
+# Short form
+python cli.py lip-sync -v input.mp4 -a audio.mp3 -o output.mp4
+
+# From URL
+python cli.py lip-sync \
+  --video "https://example.com/video.mp4" \
+  --audio "https://example.com/audio.mp3" \
+  --output output_synced.mp4
+```
+
+**CLI options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--video` | `-v` | Input video path or URL (MP4/MOV, 2-10s, 720p-1080p) |
+| `--video-id` | | Kling video ID (alternative to --video) |
+| `--audio` | `-a` | Audio file path or URL (MP3/WAV/M4A/AAC, <5MB) |
+| `--text` | `-t` | Text for TTS (alternative to --audio) |
+| `--voice-id` | | Voice for TTS (default: en_AOT) |
+| `--voice-speed` | | Speed 0.8-2.0 (default: 1.0) |
+| `--output` | `-o` | Output video path (required) |
+
+**Python API:**
+```python
+from src.clients.replicate_client import ReplicateClient
+
+client = ReplicateClient()
+
+# With audio file
+result = client.lip_sync(
+    video_path="input_video.mp4",
+    audio_path="speech.mp3"
+)
+
+# With text-to-speech (40+ voices available)
+result = client.lip_sync(
+    video_path="input_video.mp4",
+    text="Hello, this is a lip sync demonstration!",
+    voice_id="en_AOT",  # Default English voice
+    voice_speed=1.0     # Speed: 0.8-2.0
+)
+
+# From URL
+result = client.lip_sync(
+    video_path="https://example.com/video.mp4",
+    audio_path="https://example.com/audio.mp3"
+)
+
+# Using Kling video ID (from previous Kling generation)
+result = client.lip_sync(
+    video_id="kling_video_abc123",
+    audio_path="speech.wav"
+)
+
+# Save the result
+client.save_video(result["job_id"], "output_lipsync.mp4")
+```
+
+**Input constraints:**
+| Input | Requirements |
+|-------|--------------|
+| Video | MP4/MOV, <100MB, 2-10 seconds, 720p-1080p |
+| Audio | MP3/WAV/M4A/AAC, <5MB |
+
+**Pricing:** ~$0.014 per second of output (~71 seconds for $1)
+
+**Use this when:**
+- You need high-quality lip sync for short clips
+- Using Kling-generated videos (can use video_id directly)
+- Want built-in TTS without separate audio generation
+- D-ID is not available or too expensive
+
+### Speech-to-Video with Wan 2.2 S2V
+
+Generate talking videos from an image + audio using Wan 2.2 S2V model. This is ideal for creating animated characters that speak or sing synchronized to audio.
+
+**CLI usage:**
+```bash
+# Basic usage
+python cli.py speech-to-video \
+  --prompt "A cartoon flower character speaking happily" \
+  --image first_frame.png \
+  --audio speech.mp3 \
+  --output talking_character.mp4
+
+# With options
+python cli.py speech-to-video \
+  -p "A 3D character singing expressively" \
+  -i character.png \
+  -a song.mp3 \
+  -o output.mp4 \
+  --num-frames 100 \
+  --interpolate \
+  --seed 42
+```
+
+**CLI options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--prompt` | `-p` | Text prompt describing the video (required) |
+| `--image` | `-i` | First frame image path or URL (required) |
+| `--audio` | `-a` | Audio file to sync with (required) |
+| `--output` | `-o` | Output video path (required) |
+| `--num-frames` | | Frames per chunk, 1-121 (default: 81) |
+| `--interpolate` | | Interpolate to 25fps |
+| `--seed` | | Random seed for reproducibility |
+
+**Python API:**
+```python
+from src.clients.replicate_client import ReplicateClient
+
+client = ReplicateClient()
+
+result = client.speech_to_video(
+    prompt="A cartoon character speaking",
+    image_path="character.png",
+    audio_path="speech.mp3",
+    num_frames=81,
+    interpolate=True,
+    seed=42
+)
+
+client.save_video(result["job_id"], "output.mp4")
+```
+
+**Pricing:** ~$0.10-0.15 per video (480p-720p)
+
+**Use this when:**
+- Creating talking cartoon/3D characters (better than lip-sync for non-human faces)
+- Generating singing or speaking animations from a single image
+- Need audio-synchronized video generation
+- Kling lip-sync doesn't work with your character type
 
 ### Download from YouTube
 

@@ -68,6 +68,20 @@ class ReplicateClient:
             "durations": [4, 6, 8],  # Supported durations
             "default_duration": 8,
         },
+        "kling-lip-sync": {
+            "id": "kwaivgi/kling-lip-sync",
+            "type": "lip-sync",
+            "requires_video": True,
+            "cost_per_second": 0.014,  # ~$0.014 per second of output
+        },
+        "wan-2.2-s2v": {
+            "id": "wan-video/wan-2.2-s2v",
+            "type": "speech-to-video",
+            "requires_image": True,
+            "requires_audio": True,
+            "cost_480p": 0.10,
+            "cost_720p": 0.15,
+        },
     }
 
     def __init__(self, api_token: Optional[str] = None):
@@ -562,6 +576,196 @@ class ReplicateClient:
 
         logger.info(f"Veo 3.1 params: duration={veo_duration}s, resolution={resolution}, aspect={aspect_ratio}, audio={generate_audio}, seed={seed}")
         return input_params
+
+    def lip_sync(
+        self,
+        video_path: Optional[str] = None,
+        video_id: Optional[str] = None,
+        audio_path: Optional[str] = None,
+        text: Optional[str] = None,
+        voice_id: str = "en_AOT",
+        voice_speed: float = 1.0,
+    ) -> Dict[str, Any]:
+        """
+        Generate lip-synced video using Kling Lip Sync model
+
+        Args:
+            video_path: Path or URL to input video (MP4/MOV, <100MB, 2-10s, 720p-1080p)
+            video_id: ID from a Kling-generated video (alternative to video_path)
+            audio_path: Path or URL to audio file (MP3/WAV/M4A/AAC, <5MB)
+            text: Text content for TTS (alternative to audio_path)
+            voice_id: Voice selection for TTS (default: "en_AOT")
+            voice_speed: Speech rate 0.8-2.0 (default: 1.0)
+
+        Returns:
+            Dictionary with job information and output URL
+        """
+        # Validate inputs
+        if not video_path and not video_id:
+            raise ValueError("Either video_path or video_id is required")
+        if video_path and video_id:
+            raise ValueError("Cannot use both video_path and video_id")
+        if not audio_path and not text:
+            raise ValueError("Either audio_path or text is required")
+        if audio_path and text:
+            raise ValueError("Cannot use both audio_path and text")
+
+        model_info = self.MODELS["kling-lip-sync"]
+        model_id = model_info["id"]
+
+        input_params = {}
+
+        # Add video input
+        if video_path:
+            if video_path.startswith("http"):
+                input_params["video_url"] = video_path
+            else:
+                input_params["video_url"] = open(video_path, "rb")
+        else:
+            input_params["video_id"] = video_id
+
+        # Add audio input
+        if audio_path:
+            if audio_path.startswith("http"):
+                input_params["audio_file"] = audio_path
+            else:
+                input_params["audio_file"] = open(audio_path, "rb")
+        else:
+            input_params["text"] = text
+            input_params["voice_id"] = voice_id
+            # Validate voice_speed
+            voice_speed = max(0.8, min(2.0, voice_speed))
+            input_params["voice_speed"] = voice_speed
+
+        logger.info(f"Running Kling Lip Sync...")
+        logger.info(f"Video: {video_path or video_id}")
+        logger.info(f"Audio: {audio_path or f'TTS: {text[:50]}...' if text and len(text) > 50 else text}")
+
+        try:
+            start_time = time.time()
+            output = self.replicate.run(model_id, input=input_params)
+            elapsed = time.time() - start_time
+
+            # Create job ID
+            job_id = f"replicate_lipsync_{int(time.time())}"
+
+            job_data = {
+                "job_id": job_id,
+                "status": "COMPLETED",
+                "model": "kling-lip-sync",
+                "video_input": video_path or video_id,
+                "audio_input": audio_path or "TTS",
+                "created_at": start_time,
+                "completed_at": time.time(),
+                "output_url": str(output) if isinstance(output, str) else output,
+                "elapsed_seconds": elapsed,
+            }
+
+            self.jobs[job_id] = output
+            self.job_data[job_id] = job_data
+
+            logger.info(f"Lip sync completed in {elapsed:.1f}s")
+            if isinstance(output, str):
+                logger.info(f"Output URL: {output}")
+
+            return job_data
+
+        except Exception as e:
+            logger.error(f"Error in lip sync: {str(e)}")
+            raise
+
+    def speech_to_video(
+        self,
+        prompt: str,
+        image_path: str,
+        audio_path: str,
+        num_frames: int = 81,
+        interpolate: bool = False,
+        seed: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Generate video from speech/audio using Wan 2.2 S2V model.
+        Creates talking head videos synchronized to audio.
+
+        Args:
+            prompt: Text prompt describing the video (e.g., "A woman singing expressively")
+            image_path: Path or URL to the first frame image
+            audio_path: Path or URL to the audio file to sync with
+            num_frames: Number of frames per chunk, 1-121 (default: 81)
+            interpolate: Whether to interpolate to 25fps (default: False)
+            seed: Random seed for reproducibility
+
+        Returns:
+            Dictionary with job information and output URL
+        """
+        if not image_path:
+            raise ValueError("image_path is required for speech-to-video")
+        if not audio_path:
+            raise ValueError("audio_path is required for speech-to-video")
+
+        model_info = self.MODELS["wan-2.2-s2v"]
+        model_id = model_info["id"]
+
+        input_params = {
+            "prompt": prompt,
+            "num_frames_per_chunk": max(1, min(121, num_frames)),
+            "interpolate": interpolate,
+        }
+
+        # Add image
+        if image_path.startswith("http"):
+            input_params["image"] = image_path
+        else:
+            input_params["image"] = open(image_path, "rb")
+
+        # Add audio
+        if audio_path.startswith("http"):
+            input_params["audio"] = audio_path
+        else:
+            input_params["audio"] = open(audio_path, "rb")
+
+        if seed is not None:
+            input_params["seed"] = seed
+
+        logger.info(f"Running Wan 2.2 Speech-to-Video...")
+        logger.info(f"Prompt: {prompt[:100]}...")
+        logger.info(f"Image: {image_path}")
+        logger.info(f"Audio: {audio_path}")
+        logger.info(f"Frames: {num_frames}, Interpolate: {interpolate}")
+
+        try:
+            start_time = time.time()
+            output = self.replicate.run(model_id, input=input_params)
+            elapsed = time.time() - start_time
+
+            # Create job ID
+            job_id = f"replicate_s2v_{int(time.time())}"
+
+            job_data = {
+                "job_id": job_id,
+                "status": "COMPLETED",
+                "model": "wan-2.2-s2v",
+                "prompt": prompt,
+                "image_input": image_path,
+                "audio_input": audio_path,
+                "created_at": start_time,
+                "completed_at": time.time(),
+                "output_url": str(output) if isinstance(output, str) else output,
+                "elapsed_seconds": elapsed,
+            }
+
+            self.jobs[job_id] = output
+            self.job_data[job_id] = job_data
+
+            logger.info(f"Speech-to-video completed in {elapsed:.1f}s")
+            if isinstance(output, str):
+                logger.info(f"Output URL: {output}")
+
+            return job_data
+
+        except Exception as e:
+            logger.error(f"Error in speech-to-video: {str(e)}")
+            raise
 
     def wait_for_completion(
         self,
