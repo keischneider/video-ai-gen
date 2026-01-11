@@ -25,6 +25,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.mp3
+*.mp4
 
 # Generated videos and audio
 projects/
